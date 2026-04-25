@@ -4,4 +4,4 @@ langchain_community
 langgraph
 pydantic
 langchain-google-genai
-langchain-core 
+langchain-core
