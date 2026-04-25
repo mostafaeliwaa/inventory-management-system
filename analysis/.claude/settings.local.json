@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where python3 *)",
+      "Bash(where python *)",
+      "Bash(ls /c/Python*/python.exe)",
+      "Read(//c/Users/**)",
+      "Bash(where conda *)",
+      "Read(//c/ProgramData/anaconda3/**)",
+      "Bash(py --list-paths)",
+      "Bash(py -3 --version)",
+      "Bash(/c/Users/Lenovo/anaconda3/python.exe -c ' *)",
+      "Bash(/c/Users/Lenovo/anaconda3/python.exe *)",
+      "Bash(python -c ' *)",
+      "Bash(C:/Users/Lenovo/anaconda3/python.exe -c ' *)",
+      "Bash(PYTHONUTF8=1 /c/Users/Lenovo/anaconda3/python.exe generate_dashboard.py)",
+      "Bash(start *)",
+      "Bash(python3 *)",
+      "Bash(python *)",
+      "Bash(pip list *)",
+      "Bash(pip install *)",
+      "mcp__ide__executeCode",
+      "Bash(curl *)"
+    ]
+  }
+}

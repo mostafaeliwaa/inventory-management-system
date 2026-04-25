@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Service - لوحة التحكم</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-2.35.0.min.js"></script>
+    <style>
+        :root {
+            --primary: #0f3460;
+            --accent: #e94560;
+            --success: #10b981;
+            --warning: #f97316;
+            --danger: #ef4444;
+            --sidebar-w: 240px;
+        }
+        * { font-family: 'Cairo', 'Tahoma', 'Arial', sans-serif; }
+        body { background: #f0f2f5; margin: 0; }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed; top: 0; right: 0; width: var(--sidebar-w); height: 100vh;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            padding: 0; z-index: 1000; display: flex; flex-direction: column;
+        }
+        .sidebar .brand {
+            color: #fff; font-size: 1.2rem; font-weight: 700;
+            padding: 20px 20px 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar .brand small { display: block; font-size: 0.7rem; color: rgba(255,255,255,0.5); font-weight: 400; margin-top: 2px; }
+        .sidebar .nav-section { padding: 15px 0; flex: 1; overflow-y: auto; }
+        .sidebar .nav-label { color: rgba(255,255,255,0.4); font-size: 0.7rem; padding: 5px 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.7); padding: 10px 20px; font-size: 0.9rem;
+            transition: all 0.2s; border-right: 3px solid transparent; cursor: pointer;
+            display: block; text-decoration: none;
+        }
+        .sidebar .nav-link:hover { color: #fff; background: rgba(255,255,255,0.06); }
+        .sidebar .nav-link.active { color: #fff; background: rgba(255,255,255,0.1); border-right-color: var(--accent); }
+
+        /* Main */
+        .main-content { margin-right: var(--sidebar-w); padding: 20px 25px 40px; min-height: 100vh; }
+
+        /* Tab panels */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* KPI Cards */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .kpi-card {
+            background: #fff; border-radius: 12px; padding: 20px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06); border-top: 4px solid var(--primary);
+            transition: transform 0.2s;
+        }
+        .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .kpi-card .value { font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+        .kpi-card .label { color: #6b7280; font-size: 0.85rem; }
+        .kpi-card.accent { border-top-color: var(--accent); }
+        .kpi-card.accent .value { color: var(--accent); }
+        .kpi-card.success { border-top-color: var(--success); }
+        .kpi-card.success .value { color: var(--success); }
+        .kpi-card.warning { border-top-color: var(--warning); }
+        .kpi-card.warning .value { color: var(--warning); }
+        .kpi-card.danger { border-top-color: var(--danger); }
+        .kpi-card.danger .value { color: var(--danger); }
+
+        /* Charts */
+        .chart-container {
+            background: #fff; border-radius: 12px; padding: 20px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06); margin-bottom: 20px;
+        }
+
+        /* Tables */
+        .table-container {
+            background: #fff; border-radius: 12px; padding: 20px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06); margin-bottom: 20px;
+            overflow-x: auto;
+        }
+        .table-container h5 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        table { direction: rtl; }
+
+        /* Section headers */
+        .section-title {
+            font-size: 1.2rem; font-weight: 700; color: #1a1a2e;
+            margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 3px solid var(--accent);
+        }
+
+        /* Alerts list */
+        .alerts-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .alert-item {
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            border-radius: 6px;
+            border-right: 4px solid #ccc;
+            background: white;
+            font-size: 0.85rem;
+        }
+        .alert-item.red { border-right-color: var(--danger); }
+        .alert-item.yellow { border-right-color: var(--warning); }
+        .alert-item.green { border-right-color: var(--success); }
+        .alert-item .product-name {
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        .alert-item .details {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        /* Drill-down controls */
+        .control-bar {
+            background: #fff; border-radius: 12px; padding: 20px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06); margin-bottom: 20px;
+        }
+        .control-bar label { font-weight: 600; color: var(--primary); margin-left: 12px; font-size: 0.95rem; }
+        .control-bar select, .control-bar input[type="text"] {
+            border: 2px solid #e5e7eb; border-radius: 8px; padding: 8px 14px;
+            font-size: 0.95rem; font-family: 'Cairo', sans-serif; min-width: 220px;
+            transition: border-color 0.2s;
+        }
+        .control-bar select:focus, .control-bar input[type="text"]:focus {
+            border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(15,52,96,0.1);
+        }
+        .control-bar .btn-search {
+            background: var(--primary); color: #fff; border: none; border-radius: 8px;
+            padding: 8px 20px; font-family: 'Cairo', sans-serif; font-weight: 600; cursor: pointer;
+            transition: background 0.2s;
+        }
+        .control-bar .btn-search:hover { background: #16213e; }
+
+        /* Risk badges */
+        .risk-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .risk-badge {
+            background: #fef2f2; color: var(--danger); border: 1px solid #fecaca;
+            border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600;
+        }
+        .risk-badge.safe { background: #f0fdf4; color: var(--success); border-color: #bbf7d0; }
+
+        /* Empty state */
+        .empty-state { text-align: center; padding: 60px 20px; color: #9ca3af; }
+        .empty-state .icon { font-size: 3rem; margin-bottom: 10px; }
+        .empty-state p { font-size: 1rem; }
+
+        .timestamp { color: #9ca3af; font-size: 0.75rem; margin-bottom: 16px; }
+        .loading { text-align: center; padding: 80px; color: #6b7280; font-size: 1.1rem; }
+
+        /* Fade-in animation for drill-down content */
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 992px) {
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main-content { margin-right: 0; padding: 15px; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        /* New styles for enhanced item drill-down */
+        .kpi-card .sub-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-top: 4px;
+        }
+        .kpi-card .sub-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+        
+        /* Info card for item details */
+        .info-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        .info-header {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .info-header h5 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+        }
+        .info-body {
+            padding: 0 5px;
+        }
+        .info-item {
+            margin-bottom: 10px;
+        }
+        .info-label {
+            display: block;
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 2px;
+        }
+        .info-value {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        /* Table legend */
+        .table-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            margin-left: 6px;
+        }
+        
+        /* Sell-through bar in table */
+        .sell-through-bar {
+            position: relative;
+            height: 24px;
+            background: #f3f4f6;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .sell-through-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #dbeafe 0%, #3b82f6 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .sell-through-text {
+            position: absolute;
+            top: 0;
+            right: 8px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        
+        /* Status badges */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-excellent {
+            background: #f0fdf4;
+            color: #059669;
+            border: 1px solid #bbf7d0;
+        }
+        .status-medium {
+            background: #fffbeb;
+            color: #d97706;
+            border: 1px solid #fde68a;
+        }
+        .status-poor {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+        
+        /* Enhanced risk badges */
+        .risk-badge.critical {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+        .risk-badge.warning {
+            background: #fffbeb;
+            color: #d97706;
+            border: 1px solid #fde68a;
+        }
+        
+        /* Column width fix for col-md1-6 */
+        .col-md1-6 {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+        
+        @media (max-width: 768px) {
+            .col-md1-6 {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+    <div class="brand">Second Service<small>لوحة تحليل الأداء</small></div>
+    <div class="nav-section">
+        <div class="nav-label">الرئيسية</div>
+        <a class="nav-link active" data-tab="overview">نظرة عامة</a>
+        <div class="nav-label" style="margin-top:10px">التحليل التفصيلى</div>
+        <a class="nav-link" data-tab="branch">أداء الفرع</a>
+        <a class="nav-link" data-tab="item">توزيع الصنف</a>
+    </div>
+</nav>
+
+<div class="main-content">
+    <div id="loading" class="loading">جارى تحميل البيانات...</div>
+
+    <!-- ===================== TAB 1: OVERVIEW ===================== -->
+    <div id="tab-overview" class="tab-panel">
+        <div id="timestamp" class="timestamp"></div>
+
+        <!-- 4 Key KPIs -->
+        <div id="kpi-cards" class="kpi-grid"></div>
+
+        <!-- Branch Performance -->
+        <h2 class="section-title">أداء الفروع</h2>
+        <div class="row g-3">
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-sales-by-branch"></div></div></div>
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-branch-treemap"></div></div></div>
+        </div>
+        <div class="table-container" id="table-branch-value"></div>
+
+        <!-- Products -->
+        <h2 class="section-title">تحليل المنتجات</h2>
+        <div class="row g-3">
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-top-products"></div></div></div>
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-product-scatter"></div></div></div>
+        </div>
+        <div class="table-container" id="table-top-sellers"></div>
+
+        <!-- Inventory Health -->
+        <h2 class="section-title">صحة المخزون</h2>
+        <div class="row g-3">
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-inventory-value"></div></div></div>
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-dead-stock"></div></div></div>
+        </div>
+        <div class="table-container" id="table-dead-stock"></div>
+
+    </div>
+
+    <!-- ===================== TAB 2: BRANCH DRILL-DOWN ===================== -->
+    <div id="tab-branch" class="tab-panel">
+        <h2 class="section-title">أداء الفرع التفصيلى</h2>
+
+        <div class="control-bar d-flex align-items-center flex-wrap gap-2">
+            <label for="branch-select">اختر الفرع:</label>
+            <select id="branch-select"><option value="">-- اختر فرع --</option></select>
+        </div>
+
+        <div id="branch-empty" class="empty-state">
+            <div class="icon">&#128202;</div>
+            <p>اختر فرع من القائمة أعلاه لعرض تحليل الأداء التفصيلى</p>
+        </div>
+
+        <div id="branch-content" style="display:none;">
+            <div id="branch-kpis" class="kpi-grid"></div>
+            
+            <!-- New KPIs for Branch Drill-Down -->
+            <h2 class="section-title">مؤشرات أداء الفرع</h2>
+            <div id="branch-detailed-kpis" class="kpi-grid"></div>
+            
+            <div class="chart-container"><div id="chart-branch-top10"></div></div>
+            <div class="table-container" id="table-branch-dead"></div>
+            
+            <!-- Branch Alerts -->
+            <h2 class="section-title">تنبيهات المخزون للفرع</h2>
+            <div class="row g-3">
+                <div class="col-lg-4">
+                    <div class="chart-container">
+                        <h5>🔴 نفد المخزون</h5>
+                        <div id="branch-alerts-out-of-stock" class="alerts-list"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="chart-container">
+                        <h5>🟡 قرب ينفد</h5>
+                        <div id="branch-alerts-low-stock" class="alerts-list"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="chart-container">
+                        <h5>🟢 متوفر</h5>
+                        <div id="branch-alerts-healthy-stock" class="alerts-list"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Branch Inventory Movement -->
+            <h2 class="section-title">حركة المخزون للفرع</h2>
+            <div class="row g-3">
+                <div class="col-lg-8">
+                    <div class="chart-container">
+                        <div id="chart-branch-inventory-movement"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="chart-container">
+                        <h5>ملخص الحركة</h5>
+                        <div id="branch-inventory-summary" class="table-container"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Branch Stock vs Sales Analysis -->
+            <h2 class="section-title">تحليل العلاقة بين المبيعات والمخزون للفرع</h2>
+            <div class="chart-container">
+                <div id="chart-branch-stock-vs-sales"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== TAB 3: ITEM DRILL-DOWN ===================== -->
+    <div id="tab-item" class="tab-panel">
+        <h2 class="section-title">توزيع الصنف على الفروع</h2>
+
+        <div class="control-bar d-flex align-items-center flex-wrap gap-2">
+            <label for="item-input">كود الصنف:</label>
+            <input type="text" id="item-input" placeholder="أدخل كود الصنف..." autocomplete="off">
+            <button class="btn-search" id="item-search-btn">بحث</button>
+        </div>
+
+        <div id="item-empty" class="empty-state">
+            <div class="icon">&#128270;</div>
+            <p>أدخل كود الصنف للبحث عن توزيعه على جميع الفروع</p>
+        </div>
+
+        <div id="item-not-found" class="empty-state" style="display:none;">
+            <div class="icon">&#10060;</div>
+            <p>لم يتم العثور على صنف بهذا الكود</p>
+        </div>
+
+        <div id="item-content" style="display:none;">
+            <div id="item-info" class="kpi-grid"></div>
+            
+            <!-- New KPIs for best/worst branch -->
+            <div class="row g-3 mb-4">
+                <div class="col-md1-6">
+                    <div id="item-best-branch" class="kpi-card success"></div>
+                </div>
+                <div class="col-md1-6">
+                    <div id="item-worst-branch" class="kpi-card danger"></div>
+                </div>
+            </div>
+            
+            <!-- Category and basic info -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="info-card">
+                        <div class="info-header">
+                            <h5>معلومات الصنف</h5>
+                        </div>
+                        <div class="info-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="info-item">
+                                        <span class="info-label">الفئة:</span>
+                                        <span id="item-category" class="info-value">غير محدد</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="info-item">
+                                        <span class="info-label">الكود:</span>
+                                        <span id="item-code" class="info-value">-</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="info-item">
+                                        <span class="info-label">إجمالي الفروع:</span>
+                                        <span id="item-total-branches" class="info-value">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chart -->
+            <div class="chart-container"><div id="chart-item-distribution"></div></div>
+            
+            <!-- Detailed Table -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h5>توزيع الأداء على الفروع</h5>
+                            <div class="table-legend">
+                                <span class="legend-item"><span class="legend-color" style="background-color:#10b981"></span> 🔥 ممتاز (≥70%)</span>
+                                <span class="legend-item"><span class="legend-color" style="background-color:#f59e0b"></span> ⚠️ متوسط (40-70%)</span>
+                                <span class="legend-item"><span class="legend-color" style="background-color:#ef4444"></span> ❌ ضعيف (<40%)</span>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>الفرع</th>
+                                        <th>المخزون</th>
+                                        <th>المبيعات</th>
+                                        <th>Sell-through</th>
+                                        <th>الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="item-branch-table">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Out of Stock Section -->
+            <div id="item-risk" class="table-container"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ============================================================
+// GLOBALS
+// ============================================================
+const CHART_FONT = 'Cairo, Tahoma, Arial, sans-serif';
+const CHART_LAYOUT = {
+    font: {family: CHART_FONT, size: 13},
+    paper_bgcolor: '#ffffff',
+    plot_bgcolor: '#f8f9fa',
+    margin: {l: 20, r: 20, t: 50, b: 20},
+    hoverlabel: {font: {family: CHART_FONT}},
+    xaxis: {gridcolor: '#e9ecef'},
+    yaxis: {gridcolor: '#e9ecef'},
+};
+const CFG = {displayModeBar: false};
+let DATA = null;
+
+function fmt(n) { return Number(n).toLocaleString('en'); }
+function pct(n) { return Number(n).toFixed(1) + '%'; }
+
+// ============================================================
+// TAB NAVIGATION
+// ============================================================
+document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+    link.addEventListener('click', function() {
+        document.querySelectorAll('.sidebar .nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        const tab = this.dataset.tab;
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('tab-' + tab).classList.add('active');
+        window.dispatchEvent(new Event('resize'));
+    });
+});
+
+// ============================================================
+// DATA LOAD
+// ============================================================
+fetch('dashboard_data.json')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => {
+        DATA = data;
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('tab-overview').classList.add('active');
+
+        if (data.metadata && data.metadata.generated_at) {
+            document.getElementById('timestamp').textContent =
+                '\u0622\u062e\u0631 \u062a\u062d\u062f\u064a\u062b: ' + new Date(data.metadata.generated_at).toLocaleString('ar-EG');
+        }
+
+        // --- Overview Tab ---
+        renderKPIs(data.summary);
+        renderSalesByBranch(data.branch_performance);
+        renderBranchTreemap(data.branch_performance);
+        renderBranchValueTable(data.branch_stock_value);
+        renderTopProducts(data.top_sellers);
+        renderProductScatter(data.scatter_data);
+        renderTopSellersTable(data.top_sellers);
+        renderInventoryValue(data.branch_stock_value);
+        renderDeadStockChart(data.dead_stock);
+        renderDeadStockTable(data.dead_stock);
+
+        // --- Populate branch dropdown ---
+        populateBranchDropdown(data.sales_branches);
+    })
+    .catch(err => {
+        document.getElementById('loading').innerHTML =
+            '<div class="alert alert-danger m-4">\u062e\u0637\u0623 \u0641\u064a \u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a: ' + err.message +
+            '<br>\u062a\u0623\u0643\u062f \u0645\u0646 \u062a\u0634\u063a\u064a\u0644 \u0627\u0644\u0645\u0644\u0641 \u0639\u0628\u0631 \u062e\u0627\u062f\u0645 HTTP</div>';
+    });
+
+// ============================================================
+// TAB 1: OVERVIEW — KPIs (4 Key Metrics)
+// ============================================================
+function renderKPIs(s) {
+    const cards = [
+        {key: 'اجمالى المبيعات_وحدة', label: 'اجمالى المبيعات', cls: '', suffix: ' وحدة', isText: false},
+        {key: 'اجمالى المخزون_وحدة', label: 'اجمالى المخزون', cls: 'warning', suffix: ' وحدة', isText: false},
+        {key: 'معدل البيع', label: 'معدل البيع (Sell-Through)', cls: 'success', suffix: '%', isText: false},
+        {key: 'عدد الراكد', label: 'أصناف راكدة (Dead Stock)', cls: 'danger', suffix: ' صنف', isText: false},
+        {key: 'اجمالى الربح', label: 'اجمالى الربح', cls: 'accent', suffix: ' جنيه', isText: false},
+        {key: 'أفضل فرع', label: 'أفضل فرع', cls: 'success', suffix: '', isText: true},
+        {key: 'أسوأ فرع', label: 'أسوأ فرع', cls: 'danger', suffix: '', isText: true},
+    ];
+    let html = '';
+    cards.forEach(c => {
+        let val = s[c.key];
+        if (c.suffix === '%') {
+            val = pct(val);
+        } else if (c.isText) {
+            // For text values (branch names), just display as-is
+            val = val || '';
+        } else {
+            val = fmt(val) + (c.suffix || '');
+        }
+        html += `<div class="kpi-card ${c.cls}"><div class="value">${val}</div><div class="label">${c.label}</div></div>`;
+    });
+    document.getElementById('kpi-cards').innerHTML = html;
+}
+
+// ============================================================
+// TAB 1: OVERVIEW — Charts (6 charts)
+// ============================================================
+function renderSalesByBranch(bp) {
+    const sorted = [...bp].sort((a,b) => a['\u0627\u0644\u0643\u0645\u064a\u0629 \u0627\u0644\u0645\u0628\u0627\u0639\u0629'] - b['\u0627\u0644\u0643\u0645\u064a\u0629 \u0627\u0644\u0645\u0628\u0627\u0639\u0629']);
+    Plotly.newPlot('chart-sales-by-branch', [{
+        type: 'bar', orientation: 'h',
+        x: sorted.map(d => d['\u0627\u0644\u0643\u0645\u064a\u0629 \u0627\u0644\u0645\u0628\u0627\u0639\u0629']),
+        y: sorted.map(d => d['\u0627\u0644\u0641\u0631\u0639']),
+        marker: {color: sorted.map(d => d['\u0627\u0644\u0643\u0645\u064a\u0629 \u0627\u0644\u0645\u0628\u0627\u0639\u0629'] < 0 ? '#ef4444' : '#0f3460')},
+        text: sorted.map(d => fmt(d['\u0627\u0644\u0643\u0645\u064a\u0629 \u0627\u0644\u0645\u0628\u0627\u0639\u0629'])),
+        textposition: 'outside',
+    }], {...CHART_LAYOUT, title: 'المبيعات حسب الفرع', xaxis: {...CHART_LAYOUT.xaxis, title: 'الكمية المباعة (وحدة)'}, height: 500}, CFG);
+}
+
+function renderBranchTreemap(bp) {
+    const filtered = bp.filter(d => d['\u0627\u0644\u0643\u0645\u064a\u0629 \u0627\u0644\u0645\u0628\u0627\u0639\u0629'] > 0);
+    Plotly.newPlot('chart-branch-treemap', [{
+        type: 'treemap',
+        labels: filtered.map(d => d['\u0627\u0644\u0641\u0631\u0639']),
+        parents: filtered.map(() => ''),
+        values: filtered.map(d => d['\u0627\u0644\u0643\u0645\u064a\u0629 \u0627\u0644\u0645\u0628\u0627\u0639\u0629']),
+        marker: {colorscale: 'Blues', colors: filtered.map(d => d['\u0627\u0644\u0643\u0645\u064a\u0629 \u0627\u0644\u0645\u0628\u0627\u0639\u0629'])},
+        textinfo: 'label+value+percent root',
+        textfont: {size: 14, family: CHART_FONT},
+    }], {...CHART_LAYOUT, title: 'توزيع المبيعات على الفروع', height: 500}, CFG);
+}
+
+function renderTopProducts(sellers) {
+    const sorted = [...sellers].sort((a,b) => a['\u0627\u062c\u0645\u0627\u0644\u0649 \u0645\u0628\u064a\u0639\u0627\u062a'] - b['\u0627\u062c\u0645\u0627\u0644\u0649 \u0645\u0628\u064a\u0639\u0627\u062a']);
+    Plotly.newPlot('chart-top-products', [{
+        type: 'bar', orientation: 'h',
+        x: sorted.map(d => d['\u0627\u062c\u0645\u0627\u0644\u0649 \u0645\u0628\u064a\u0639\u0627\u062a']),
+        y: sorted.map(d => d['\u0627\u0633\u0645 \u0627\u0644\u0635\u0646\u0641'].substring(0, 35)),
+        marker: {color: '#0f3460'},
+        text: sorted.map(d => fmt(d['\u0627\u062c\u0645\u0627\u0644\u0649 \u0645\u0628\u064a\u0639\u0627\u062a'])),
+        textposition: 'outside',
+    }], {...CHART_LAYOUT, title: 'أعلى 20 منتج مبيعاً', xaxis: {...CHART_LAYOUT.xaxis, title: 'اجمالى المبيعات (وحدة)'}, height: 600}, CFG);
+}
+
+function renderProductScatter(sd) {
+    const prods = sd.products;
+    const maxStock = Math.max(...prods.map(p => p.stock));
+    const maxSales = Math.max(...prods.map(p => p.sales));
+    Plotly.newPlot('chart-product-scatter', [{
+        type: 'scattergl', mode: 'markers',
+        x: prods.map(p => p.stock), y: prods.map(p => p.sales),
+        text: prods.map(p => p.name), hoverinfo: 'text+x+y',
+        marker: {size: 8, color: '#0f3460', opacity: 0.6},
+    }], {...CHART_LAYOUT, title: 'مخطط المبيعات مقابل المخزون',
+        xaxis: {...CHART_LAYOUT.xaxis, title: 'المخزون (وحدة)'},
+        yaxis: {...CHART_LAYOUT.yaxis, title: 'المبيعات (وحدة)'},
+        height: 550,
+        shapes: [
+            {type:'line', x0:0, x1:maxStock, y0:sd.median_sales, y1:sd.median_sales, line:{dash:'dash', color:'#9ca3af'}},
+            {type:'line', x0:sd.median_stock, x1:sd.median_stock, y0:0, y1:maxSales, line:{dash:'dash', color:'#9ca3af'}},
+        ],
+        annotations: [
+            {x: maxStock*0.1, y: maxSales*0.9, text:'نجوم', showarrow:false, font:{size:14, color:'#10b981'}},
+            {x: maxStock*0.9, y: maxSales*0.1, text:'مخزون راكد', showarrow:false, font:{size:14, color:'#ef4444'}},
+        ],
+    }, CFG);
+}
+
+function renderInventoryValue(bv) {
+    const sorted = [...bv].sort((a,b) => a['\u0642\u064a\u0645\u0629 \u0627\u0644\u0628\u064a\u0639'] - b['\u0642\u064a\u0645\u0629 \u0627\u0644\u0628\u064a\u0639']);
+    Plotly.newPlot('chart-inventory-value', [
+        {type:'bar', orientation:'h', name:'قيمة التكلفة', x: sorted.map(d=>d['\u0642\u064a\u0645\u0629 \u0627\u0644\u062a\u0643\u0644\u0641\u0629']), y: sorted.map(d=>d['\u0627\u0644\u0641\u0631\u0639']), marker:{color:'#e94560'}},
+        {type:'bar', orientation:'h', name:'قيمة البيع', x: sorted.map(d=>d['\u0642\u064a\u0645\u0629 \u0627\u0644\u0628\u064a\u0639']), y: sorted.map(d=>d['\u0627\u0644\u0641\u0631\u0639']), marker:{color:'#0f3460'}},
+    ], {...CHART_LAYOUT, title:'قيمة المخزون حسب الفرع (جنيه)', barmode:'group',
+        xaxis:{...CHART_LAYOUT.xaxis, title:'القيمة (جنيه)'}, height: 550}, CFG);
+}
+
+function renderDeadStockChart(ds) {
+    const top = ds.items.slice(0, 20);
+    const sorted = [...top].sort((a,b) => a['\u0627\u062c\u0645\u0627\u0644\u0649 \u0627\u0633\u062a\u0648\u0643'] - b['\u0627\u062c\u0645\u0627\u0644\u0649 \u0627\u0633\u062a\u0648\u0643']);
+    Plotly.newPlot('chart-dead-stock', [{
+        type:'bar', orientation:'h',
+        x: sorted.map(d=>d['\u0627\u062c\u0645\u0627\u0644\u0649 \u0627\u0633\u062a\u0648\u0643']),
+        y: sorted.map(d=>d['\u0627\u0633\u0645 \u0627\u0644\u0635\u0646\u0641'].substring(0, 30)),
+        marker:{color:'#ef4444'},
+        text: sorted.map(d=>fmt(d['\u0627\u062c\u0645\u0627\u0644\u0649 \u0627\u0633\u062a\u0648\u0643'])), textposition:'outside',
+    }], {...CHART_LAYOUT, title:'أعلى 20 صنف راكد (مخزون بدون مبيعات)',
+        xaxis:{...CHART_LAYOUT.xaxis, title:'الكمية في المخزون'}, height: 600}, CFG);
+}
+
+// ============================================================
+// TAB 1: OVERVIEW — Tables
+// ============================================================
+function renderBranchValueTable(bv) {
+    let totalQty=0, totalCost=0, totalRetail=0;
+    bv.forEach(r => { totalQty+=r['\u0627\u0644\u0643\u0645\u064a\u0629']; totalCost+=r['\u0642\u064a\u0645\u0629 \u0627\u0644\u062a\u0643\u0644\u0641\u0629']; totalRetail+=r['\u0642\u064a\u0645\u0629 \u0627\u0644\u0628\u064a\u0639']; });
+    const margin = totalRetail > 0 ? ((totalRetail-totalCost)/totalRetail*100).toFixed(1) : '0';
+    let rows = bv.map(r =>
+        `<tr><td>${r['\u0627\u0644\u0641\u0631\u0639']}</td><td>${fmt(r['\u0627\u0644\u0643\u0645\u064a\u0629'])}</td><td>${fmt(r['\u0642\u064a\u0645\u0629 \u0627\u0644\u062a\u0643\u0644\u0641\u0629'])}</td><td>${fmt(r['\u0642\u064a\u0645\u0629 \u0627\u0644\u0628\u064a\u0639'])}</td><td>${r['\u0646\u0633\u0628\u0629 \u0627\u0644\u0647\u0627\u0645\u0634']}%</td></tr>`
+    ).join('');
+    rows += `<tr class="table-warning fw-bold"><td>الإجمالى</td><td>${fmt(totalQty)}</td><td>${fmt(totalCost)}</td><td>${fmt(totalRetail)}</td><td>${margin}%</td></tr>`;
+    document.getElementById('table-branch-value').innerHTML =
+        `<h5>قيمة المخزون حسب الفرع</h5>
+        <table class="table table-striped table-hover"><thead class="table-dark"><tr><th>الفرع</th><th>الكمية</th><th>قيمة التكلفة (جنيه)</th><th>قيمة البيع (جنيه)</th><th>نسبة الهامش %</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderTopSellersTable(sellers) {
+    const rows = sellers.map((r,i) =>
+        `<tr><td>${i+1}</td><td>${r['\u0627\u0633\u0645 \u0627\u0644\u0635\u0646\u0641']}</td><td>${r['\u0627\u0644\u0643\u0648\u062f']}</td><td>${fmt(r['\u0627\u062c\u0645\u0627\u0644\u0649 \u0645\u0628\u064a\u0639\u0627\u062a'])}</td><td>${fmt(r['\u0627\u062c\u0645\u0627\u0644\u0649 \u0627\u0633\u062a\u0648\u0643'])}</td></tr>`
+    ).join('');
+    document.getElementById('table-top-sellers').innerHTML =
+        `<h5>أعلى 20 منتج مبيعاً</h5>
+        <table class="table table-striped table-hover"><thead class="table-dark"><tr><th>#</th><th>اسم الصنف</th><th>الكود</th><th>المبيعات</th><th>المخزون</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderDeadStockTable(ds) {
+    const rows = ds.items.map((r,i) =>
+        `<tr><td>${i+1}</td><td>${r['\u0627\u0633\u0645 \u0627\u0644\u0635\u0646\u0641']}</td><td>${r['\u0627\u0644\u0643\u0648\u062f']}</td><td>${fmt(r['\u0627\u062c\u0645\u0627\u0644\u0649 \u0627\u0633\u062a\u0648\u0643'])}</td></tr>`
+    ).join('');
+    document.getElementById('table-dead-stock').innerHTML =
+        `<h5>المخزون الراكد (${ds.count} صنف بدون مبيعات)</h5>
+        <table class="table table-striped table-hover"><thead class="table-dark"><tr><th>#</th><th>اسم الصنف</th><th>الكود</th><th>الكمية في المخزون</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// ============================================================
+// NEW: Alerts & Inventory Movement
+// ============================================================
+function renderAlerts(alerts) {
+    // Out of Stock
+    const outOfStock = alerts.out_of_stock.slice(0, 20); // limit to 20 items
+    let outOfStockHtml = '';
+    if (outOfStock.length === 0) {
+        outOfStockHtml = '<div class="alert-item green"><div class="product-name">لا يوجد منتجات نفدت من المخزون</div><div class="details">جميع المنتجات متوفرة</div></div>';
+    } else {
+        outOfStockHtml = outOfStock.map(item =>
+            `<div class="alert-item red">
+                <div class="product-name">${item['اسم المنتج']}</div>
+                <div class="details">الكود: ${item['الكود']} | المخزون: ${item['المخزون']} | المبيعات: ${item['المبيعات']}</div>
+            </div>`
+        ).join('');
+    }
+    document.getElementById('alerts-out-of-stock').innerHTML = outOfStockHtml;
+
+    // Low Stock
+    const lowStock = alerts.low_stock.slice(0, 20);
+    let lowStockHtml = '';
+    if (lowStock.length === 0) {
+        lowStockHtml = '<div class="alert-item green"><div class="product-name">لا يوجد منتجات قاربت على النفاد</div><div class="details">جميع المنتجات بخير</div></div>';
+    } else {
+        lowStockHtml = lowStock.map(item =>
+            `<div class="alert-item yellow">
+                <div class="product-name">${item['اسم المنتج']}</div>
+                <div class="details">الكود: ${item['الكود']} | المخزون: ${item['المخزون']} | المبيعات: ${item['المبيعات']}</div>
+            </div>`
+        ).join('');
+    }
+    document.getElementById('alerts-low-stock').innerHTML = lowStockHtml;
+
+    // Healthy Stock (sample)
+    const healthyStock = alerts.healthy_stock.slice(0, 10);
+    let healthyStockHtml = '';
+    if (healthyStock.length === 0) {
+        healthyStockHtml = '<div class="alert-item"><div class="product-name">لا توجد بيانات</div></div>';
+    } else {
+        healthyStockHtml = healthyStock.map(item =>
+            `<div class="alert-item green">
+                <div class="product-name">${item['اسم المنتج']}</div>
+                <div class="details">المخزون: ${item['المخزون']} | المبيعات: ${item['المبيعات']}</div>
+            </div>`
+        ).join('');
+    }
+    document.getElementById('alerts-healthy-stock').innerHTML = healthyStockHtml;
+}
+
+function renderInventoryMovement(movement) {
+    // Create line chart for inventory movement
+    const branches = movement.map(m => m['الفرع']);
+    const inbound = movement.map(m => m['الوارد']);
+    const outbound = movement.map(m => m['المنصرف']);
+    
+    const trace1 = {
+        x: branches,
+        y: inbound,
+        name: 'الوارد',
+        type: 'scatter',
+        mode: 'lines+markers',
+        line: {color: '#10b981', width: 3},
+        marker: {size: 8}
+    };
+    
+    const trace2 = {
+        x: branches,
+        y: outbound,
+        name: 'المنصرف',
+        type: 'scatter',
+        mode: 'lines+markers',
+        line: {color: '#e94560', width: 3},
+        marker: {size: 8}
+    };
+    
+    const layout = {
+        ...CHART_LAYOUT,
+        title: 'حركة المخزون حسب الفرع',
+        xaxis: {...CHART_LAYOUT.xaxis, title: 'الفرع'},
+        yaxis: {...CHART_LAYOUT.yaxis, title: 'الكمية (وحدة)'},
+        height: 500,
+        showlegend: true
+    };
+    
+    Plotly.newPlot('chart-inventory-movement', [trace1, trace2], layout, CFG);
+    
+    // Create summary table
+    let summaryHtml = '<table class="table table-sm">';
+    summaryHtml += '<thead><tr><th>الفرع</th><th>الوارد</th><th>المنصرف</th><th>التغير</th><th>نسبة الاستهلاك</th></tr></thead><tbody>';
+    
+    movement.forEach(m => {
+        const changeClass = m['التغير الصافي'] >= 0 ? 'text-success' : 'text-danger';
+        summaryHtml += `<tr>
+            <td>${m['الفرع']}</td>
+            <td>${fmt(m['الوارد'])}</td>
+            <td>${fmt(m['المنصرف'])}</td>
+            <td class="${changeClass}">${fmt(m['التغير الصافي'])}</td>
+            <td>${m['نسبة الاستهلاك']}%</td>
+        </tr>`;
+    });
+    
+    summaryHtml += '</tbody></table>';
+    document.getElementById('inventory-summary').innerHTML = summaryHtml;
+}
+
+// ============================================================
+// TAB 2: BRANCH PERFORMANCE DRILL-DOWN
+// ============================================================
+function populateBranchDropdown(branches) {
+    if (!branches || !branches.length) return;
+    const sel = document.getElementById('branch-select');
+    branches.forEach(b => {
+        const opt = document.createElement('option');
+        opt.value = b;
+        opt.textContent = b;
+        sel.appendChild(opt);
+    });
+    sel.addEventListener('change', function() {
+        if (this.value) {
+            renderBranchDrilldown(this.value);
+        } else {
+            document.getElementById('branch-content').style.display = 'none';
+            document.getElementById('branch-empty').style.display = 'block';
+        }
+    });
+}
+
+function renderBranchDrilldown(branchName) {
+    const items = DATA.items_data;
+    if (!items || !items.length) return;
+
+    const salesKey = branchName + '_sales';
+    const stockKey = branchName + '_stock';
+
+    let totalSales = 0, totalStock = 0;
+    const branchItems = [];
+
+    items.forEach(item => {
+        const s = item[salesKey] || 0;
+        const st = item[stockKey] || 0;
+        totalSales += s;
+        totalStock += st;
+        branchItems.push({name: item.name, code: item.code, sales: s, stock: st});
+    });
+
+    const sellThrough = (totalSales + totalStock) > 0 ? (totalSales / (totalSales + totalStock) * 100) : 0;
+
+    // Find branch performance data from branch_performance array
+    let branchData = null;
+    if (DATA.branch_performance) {
+        branchData = DATA.branch_performance.find(b => b.الفرع === branchName);
+    }
+
+    document.getElementById('branch-empty').style.display = 'none';
+    const content = document.getElementById('branch-content');
+    content.style.display = 'block';
+    content.classList.remove('fade-in');
+    void content.offsetWidth;
+    content.classList.add('fade-in');
+
+
+    // Detailed KPIs (New Cards)
+    let detailedKPIsHTML = '';
+    if (branchData) {
+        detailedKPIsHTML = `
+            <div class="kpi-card">
+                <div class="value">${fmt(branchData['الكمية المباعة'] || 0)}</div>
+                <div class="label">الكمية المباعة</div>
+            </div>
+            <div class="kpi-card accent">
+                <div class="value">${fmt(branchData['اجمالى المبيعات_جنيه'] || 0)}</div>
+                <div class="label">إجمالي المبيعات (جنيه)</div>
+            </div>
+            <div class="kpi-card warning">
+                <div class="value">${fmt(totalStock)}</div>
+                <div class="label">اجمالى مخزون الفرع</div>
+            </div>    
+            <div class="kpi-card success">
+                <div class="value">${pct(sellThrough)}</div>
+                <div class="label">معدل البيع (Sell-Through)</div>
+            </div>                   
+            <div class="kpi-card success">
+                <div class="value">${fmt(branchData['صافي الربح'] || 0)}</div>
+                <div class="label">صافي الربح</div>
+            </div>
+            <div class="kpi-card danger">
+                <div class="value">${fmt(branchData['عدد المنتجات غير المتوفرة'] || 0)}</div>
+                <div class="label">عدد المنتجات غير المتوفرة</div>
+            </div>
+            <div class="kpi-card warning">
+                <div class="value">${branchData['أكثر منتج مبيعًا'] || '--'}</div>
+                <div class="label">أكثر منتج مبيعًا</div>
+                <div class="sub-label">${fmt(branchData['كمية المنتج الأكثر مبيعًا'] || 0)} وحدة</div>
+            </div>
+        `;
+    } else {
+        detailedKPIsHTML = `
+            <div class="kpi-card">
+                <div class="value">${fmt(totalSales)}</div>
+                <div class="label">الكمية المباعة</div>
+            </div>
+            <div class="kpi-card accent">
+                <div class="value">--</div>
+                <div class="label">إجمالي المبيعات (جنيه)</div>
+            </div>
+            <div class="kpi-card success">
+                <div class="value">--</div>
+                <div class="label">صافي الربح</div>
+            </div>
+            <div class="kpi-card danger">
+                <div class="value">--</div>
+                <div class="label">عدد المنتجات غير المتوفرة</div>
+            </div>
+            <div class="kpi-card warning">
+                <div class="value">--</div>
+                <div class="label">أكثر منتج مبيعًا</div>
+            </div>
+        `;
+    }
+    document.getElementById('branch-detailed-kpis').innerHTML = detailedKPIsHTML;
+
+    // Branch Alerts
+    const outOfStock = branchItems.filter(item => item.stock === 0 && item.sales > 0);
+    const lowStock = branchItems.filter(item => item.stock > 0 && item.stock <= 5);
+    const healthyStock = branchItems.filter(item => item.stock > 5);
+
+    // Render out of stock alerts
+    let outOfStockHTML = '';
+    if (outOfStock.length === 0) {
+        outOfStockHTML = '<div class="alert-item" style="background:#fef2f2;color:#dc2626;"><div class="alert-icon">✅</div><div class="alert-text">لا توجد منتجات نفد مخزونها</div></div>';
+    } else {
+        outOfStock.slice(0, 10).forEach(item => {
+            outOfStockHTML += `
+                <div class="alert-item" style="background:#fef2f2;color:#dc2626;">
+                    <div class="alert-icon">🔴</div>
+                    <div class="alert-text">
+                        <strong>${item.name}</strong><br>
+                        <small>الكود: ${item.code} | المبيعات: ${fmt(item.sales)}</small>
+                    </div>
+                </div>
+            `;
+        });
+        if (outOfStock.length > 10) {
+            outOfStockHTML += `<div class="alert-item" style="background:#fef2f2;color:#dc2626;"><div class="alert-icon">📊</div><div class="alert-text">+ ${outOfStock.length - 10} منتجات أخرى</div></div>`;
+        }
+    }
+    document.getElementById('branch-alerts-out-of-stock').innerHTML = outOfStockHTML;
+
+    // Render low stock alerts
+    let lowStockHTML = '';
+    if (lowStock.length === 0) {
+        lowStockHTML = '<div class="alert-item" style="background:#fefce8;color:#ca8a04;"><div class="alert-icon">✅</div><div class="alert-text">لا توجد منتجات قرب نفاد المخزون</div></div>';
+    } else {
+        lowStock.slice(0, 10).forEach(item => {
+            lowStockHTML += `
+                <div class="alert-item" style="background:#fefce8;color:#ca8a04;">
+                    <div class="alert-icon">🟡</div>
+                    <div class="alert-text">
+                        <strong>${item.name}</strong><br>
+                        <small>الكود: ${item.code} | المخزون: ${fmt(item.stock)} | المبيعات: ${fmt(item.sales)}</small>
+                    </div>
+                </div>
+            `;
+        });
+        if (lowStock.length > 10) {
+            lowStockHTML += `<div class="alert-item" style="background:#fefce8;color:#ca8a04;"><div class="alert-icon">📊</div><div class="alert-text">+ ${lowStock.length - 10} منتجات أخرى</div></div>`;
+        }
+    }
+    document.getElementById('branch-alerts-low-stock').innerHTML = lowStockHTML;
+
+    // Render healthy stock alerts
+    let healthyStockHTML = '';
+    if (healthyStock.length === 0) {
+        healthyStockHTML = '<div class="alert-item" style="background:#f0fdf4;color:#16a34a;"><div class="alert-icon">⚠️</div><div class="alert-text">لا توجد منتجات بمخزون كافي</div></div>';
+    } else {
+        healthyStock.slice(0, 10).forEach(item => {
+            healthyStockHTML += `
+                <div class="alert-item" style="background:#f0fdf4;color:#16a34a;">
+                    <div class="alert-icon">🟢</div>
+                    <div class="alert-text">
+                        <strong>${item.name}</strong><br>
+                        <small>الكود: ${item.code} | المخزون: ${fmt(item.stock)} | المبيعات: ${fmt(item.sales)}</small>
+                    </div>
+                </div>
+            `;
+        });
+        if (healthyStock.length > 10) {
+            healthyStockHTML += `<div class="alert-item" style="background:#f0fdf4;color:#16a34a;"><div class="alert-icon">📊</div><div class="alert-text">+ ${healthyStock.length - 10} منتجات أخرى</div></div>`;
+        }
+    }
+    document.getElementById('branch-alerts-healthy-stock').innerHTML = healthyStockHTML;
+
+    // Top 10 bar chart
+    const top10 = [...branchItems].filter(i => i.sales > 0).sort((a,b) => b.sales - a.sales).slice(0, 10).reverse();
+    Plotly.newPlot('chart-branch-top10', [{
+        type: 'bar', orientation: 'h',
+        x: top10.map(d => d.sales),
+        y: top10.map(d => d.name.substring(0, 40)),
+        marker: {color: '#0f3460'},
+        text: top10.map(d => fmt(d.sales)),
+        textposition: 'outside',
+    }], {
+        ...CHART_LAYOUT,
+        title: '\u0623\u0639\u0644\u0649 10 \u0623\u0635\u0646\u0627\u0641 \u0645\u0628\u064a\u0639\u0627\u064b \u0641\u0649 ' + branchName,
+        xaxis: {...CHART_LAYOUT.xaxis, title: 'المبيعات (وحدة)'},
+        height: 450,
+    }, CFG);
+
+    // Dead stock table
+    const deadItems = branchItems.filter(i => i.stock > 0 && i.sales === 0).sort((a,b) => b.stock - a.stock);
+    if (deadItems.length === 0) {
+        document.getElementById('table-branch-dead').innerHTML =
+            `<h5>تنبيه المخزون الراكد</h5><p style="color:#10b981;font-weight:600;">لا يوجد أصناف راكدة فى هذا الفرع</p>`;
+    } else {
+        const rows = deadItems.slice(0, 50).map((r,i) =>
+            `<tr><td>${i+1}</td><td>${r.name}</td><td>${r.code}</td><td>${fmt(r.stock)}</td></tr>`
+        ).join('');
+        document.getElementById('table-branch-dead').innerHTML =
+            `<h5>تنبيه المخزون الراكد (${deadItems.length} صنف)</h5>
+            <table class="table table-striped table-hover"><thead class="table-dark"><tr><th>#</th><th>اسم الصنف</th><th>الكود</th><th>المخزون</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    // Branch Stock vs Sales Analysis (Scatter Plot)
+    const scatterData = branchItems.filter(item => item.sales > 0 || item.stock > 0);
+    if (scatterData.length > 0) {
+        const trace = {
+            x: scatterData.map(d => d.sales),
+            y: scatterData.map(d => d.stock),
+            mode: 'markers',
+            type: 'scatter',
+            marker: {
+                size: 12,
+                color: scatterData.map(d => {
+                    if (d.stock === 0) return '#ef4444'; // Red for out of stock
+                    if (d.stock <= 5) return '#f59e0b'; // Yellow for low stock
+                    return '#10b981'; // Green for healthy stock
+                }),
+                opacity: 0.8
+            },
+            text: scatterData.map(d => `${d.name}<br>الكود: ${d.code}<br>المبيعات: ${fmt(d.sales)}<br>المخزون: ${fmt(d.stock)}`),
+            hoverinfo: 'text'
+        };
+
+        const layout = {
+            ...CHART_LAYOUT,
+            title: `تحليل العلاقة بين المبيعات والمخزون في فرع ${branchName}`,
+            xaxis: { ...CHART_LAYOUT.xaxis, title: 'المبيعات (وحدة)' },
+            yaxis: { ...CHART_LAYOUT.yaxis, title: 'المخزون (وحدة)' },
+            height: 500,
+            shapes: [
+                // Vertical line for high sales threshold
+                {
+                    type: 'line',
+                    x0: 10,
+                    x1: 10,
+                    y0: 0,
+                    y1: Math.max(...scatterData.map(d => d.stock)),
+                    line: { color: '#3b82f6', width: 1, dash: 'dash' }
+                },
+                // Horizontal line for low stock threshold
+                {
+                    type: 'line',
+                    x0: 0,
+                    x1: Math.max(...scatterData.map(d => d.sales)),
+                    y0: 5,
+                    y1: 5,
+                    line: { color: '#f59e0b', width: 1, dash: 'dash' }
+                }
+            ],
+            annotations: [
+                {
+                    x: 10,
+                    y: Math.max(...scatterData.map(d => d.stock)) * 0.9,
+                    text: 'مبيعات عالية',
+                    showarrow: false,
+                    font: { color: '#3b82f6' }
+                },
+                {
+                    x: Math.max(...scatterData.map(d => d.sales)) * 0.9,
+                    y: 5,
+                    text: 'مخزون منخفض',
+                    showarrow: false,
+                    font: { color: '#f59e0b' }
+                }
+            ]
+        };
+
+        Plotly.newPlot('chart-branch-stock-vs-sales', [trace], layout, CFG);
+    } else {
+        document.getElementById('chart-branch-stock-vs-sales').innerHTML =
+            '<div class="empty-state"><div class="icon">📊</div><p>لا توجد بيانات كافية لرسم تحليل العلاقة بين المبيعات والمخزون</p></div>';
+    }
+
+    // Branch Inventory Movement (simplified - using branch items data)
+    // For demonstration, we'll create a simple line chart showing sales vs stock per product
+    const sortedBySales = [...branchItems].filter(i => i.sales > 0).sort((a,b) => b.sales - a.sales).slice(0, 15);
+    if (sortedBySales.length > 0) {
+        const movementTrace1 = {
+            x: sortedBySales.map(d => d.name.substring(0, 20)),
+            y: sortedBySales.map(d => d.sales),
+            name: 'المبيعات',
+            type: 'bar',
+            marker: { color: '#0f3460' }
+        };
+        const movementTrace2 = {
+            x: sortedBySales.map(d => d.name.substring(0, 20)),
+            y: sortedBySales.map(d => d.stock),
+            name: 'المخزون',
+            type: 'bar',
+            marker: { color: '#10b981' }
+        };
+
+        Plotly.newPlot('chart-branch-inventory-movement', [movementTrace1, movementTrace2], {
+            ...CHART_LAYOUT,
+            title: `حركة المخزون والمبيعات في فرع ${branchName}`,
+            xaxis: { ...CHART_LAYOUT.xaxis, tickangle: -45 },
+            yaxis: { ...CHART_LAYOUT.yaxis, title: 'الكمية' },
+            barmode: 'group',
+            height: 450
+        }, CFG);
+
+        // Inventory summary
+        const totalInbound = totalStock + totalSales; // Simplified: inbound = current stock + sales
+        const totalOutbound = totalSales;
+        const netChange = totalStock; // Simplified: net = current stock
+        
+        document.getElementById('branch-inventory-summary').innerHTML = `
+            <table class="table table-striped">
+                <tr><th>المؤشر</th><th>القيمة</th></tr>
+                <tr><td>المخزون الحالي</td><td>${fmt(totalStock)} وحدة</td></tr>
+                <tr><td>المبيعات (خارج)</td><td>${fmt(totalSales)} وحدة</td></tr>
+                <tr><td>إجمالي الحركة الداخلة</td><td>${fmt(totalInbound)} وحدة</td></tr>
+                <tr><td>صافي التغير</td><td>${fmt(netChange)} وحدة</td></tr>
+            </table>
+        `;
+    } else {
+        document.getElementById('chart-branch-inventory-movement').innerHTML =
+            '<div class="empty-state"><div class="icon">📊</div><p>لا توجد بيانات كافية لعرض حركة المخزون</p></div>';
+        document.getElementById('branch-inventory-summary').innerHTML =
+            '<p>لا توجد بيانات كافية لعرض ملخص الحركة</p>';
+    }
+}
+
+// ============================================================
+// TAB 3: ITEM DISTRIBUTION DRILL-DOWN
+// ============================================================
+document.getElementById('item-search-btn').addEventListener('click', searchItem);
+document.getElementById('item-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') searchItem();
+});
+
+function searchItem() {
+    const code = document.getElementById('item-input').value.trim();
+    if (!code || !DATA || !DATA.items_data) return;
+
+    const item = DATA.items_data.find(i => i.code === code);
+
+    document.getElementById('item-empty').style.display = 'none';
+    document.getElementById('item-not-found').style.display = 'none';
+    document.getElementById('item-content').style.display = 'none';
+
+    if (!item) {
+        document.getElementById('item-not-found').style.display = 'block';
+        return;
+    }
+
+    const content = document.getElementById('item-content');
+    content.style.display = 'block';
+    content.classList.remove('fade-in');
+    void content.offsetWidth;
+    content.classList.add('fade-in');
+
+    renderItemDrilldown(item);
+}
+
+function renderItemDrilldown(item) {
+    const branches = DATA.sales_branches;
+
+    // Collect branch performance data with sell-through
+    const branchData = [];
+    const outOfStockRisk = []; // sales > 0, stock = 0
+    const lowStockRisk = []; // stock <= 5
+    let bestBranch = null;
+    let worstBranch = null;
+
+    branches.forEach(b => {
+        const sales = item[b + '_sales'] || 0;
+        const stock = item[b + '_stock'] || 0;
+        const sellThrough = item[b + '_sell_through'] || 0;
+        const status = item[b + '_status'] || 'ضعيف';
+        const statusEmoji = item[b + '_status_emoji'] || '❌';
+        
+        branchData.push({
+            branch: b,
+            sales,
+            stock,
+            sellThrough,
+            status,
+            statusEmoji
+        });
+        
+        // Track out of stock (sales > 0, stock = 0)
+        if (sales > 0 && stock === 0) {
+            outOfStockRisk.push({branch: b, sales, stock});
+        }
+        
+        // Track low stock (stock <= 5)
+        if (stock > 0 && stock <= 5) {
+            lowStockRisk.push({branch: b, sales, stock});
+        }
+        
+        // Track best/worst branch based on sell-through (only if there are sales)
+        if (sales > 0) {
+            if (!bestBranch || sellThrough > bestBranch.sellThrough) {
+                bestBranch = {branch: b, sellThrough, sales, stock};
+            }
+            if (!worstBranch || sellThrough < worstBranch.sellThrough) {
+                worstBranch = {branch: b, sellThrough, sales, stock};
+            }
+        }
+    });
+
+    // Use pre-calculated best/worst branch if available
+    if (item.best_branch && item.best_branch !== 'لا يوجد') {
+        bestBranch = {
+            branch: item.best_branch,
+            sellThrough: item.best_branch_sell_through || 0,
+            sales: item[item.best_branch + '_sales'] || 0,
+            stock: item[item.best_branch + '_stock'] || 0
+        };
+    }
+    
+    if (item.worst_branch && item.worst_branch !== 'لا يوجد') {
+        worstBranch = {
+            branch: item.worst_branch,
+            sellThrough: item.worst_branch_sell_through || 0,
+            sales: item[item.worst_branch + '_sales'] || 0,
+            stock: item[item.worst_branch + '_stock'] || 0
+        };
+    }
+
+    // Item Info Card (updated with category)
+    document.getElementById('item-info').innerHTML = `
+        <div class="kpi-card" style="grid-column: span 2;">
+            <div class="value" style="font-size:1.3rem;">${item.name}</div>
+            <div class="label">اسم الصنف — كود: ${item.code}</div>
+        </div>
+        <div class="kpi-card">
+            <div class="value">${fmt(item.total_sales)}</div>
+            <div class="label">اجمالى المبيعات (كل الفروع)</div>
+        </div>
+        <div class="kpi-card warning">
+            <div class="value">${fmt(item.total_stock)}</div>
+            <div class="label">اجمالى المخزون (كل الفروع)</div>
+        </div>
+    `;
+
+    // New KPIs: Best and Worst Branch
+    const bestBranchHTML = bestBranch ? `
+            <div class="value">${bestBranch.branch}</div>
+            <div class="label">أفضل فرع في بيع الصنف</div>
+            <div class="sub-value">Sell‑through: ${bestBranch.sellThrough}%</div>
+            <div class="sub-label">المبيعات: ${fmt(bestBranch.sales)} | المخزون: ${fmt(bestBranch.stock)}</div>
+    ` : `
+            <div class="value">لا يوجد</div>
+            <div class="label">أفضل فرع في بيع الصنف</div>
+            <div class="sub-label">لا توجد مبيعات مسجلة</div>
+    `;
+    
+    const worstBranchHTML = worstBranch ? `
+            <div class="value">${worstBranch.branch}</div>
+            <div class="label">أسوأ فرع في بيع الصنف</div>
+            <div class="sub-value">Sell‑through: ${worstBranch.sellThrough}%</div>
+            <div class="sub-label">المبيعات: ${fmt(worstBranch.sales)} | المخزون: ${fmt(worstBranch.stock)}</div>
+    ` : `
+            <div class="value">لا يوجد</div>
+            <div class="label">أسوأ فرع في بيع الصنف</div>
+            <div class="sub-label">لا توجد مبيعات مسجلة</div>
+    `;
+    
+    document.getElementById('item-best-branch').innerHTML = bestBranchHTML;
+    document.getElementById('item-worst-branch').innerHTML = worstBranchHTML;
+
+    // Category and basic info
+    document.getElementById('item-category').textContent = item.category || 'غير محدد';
+    document.getElementById('item-code').textContent = item.code || '-';
+    document.getElementById('item-total-branches').textContent = branches.length;
+
+    // Clustered Bar Chart
+    Plotly.newPlot('chart-item-distribution', [
+        {
+            type: 'bar', name: 'المبيعات',
+            x: branchData.map(d => d.branch),
+            y: branchData.map(d => d.sales),
+            marker: {color: '#0f3460'},
+            text: branchData.map(d => d.sales > 0 ? fmt(d.sales) : ''),
+            textposition: 'outside',
+        },
+        {
+            type: 'bar', name: 'المخزون',
+            x: branchData.map(d => d.branch),
+            y: branchData.map(d => d.stock),
+            marker: {color: '#e94560'},
+            text: branchData.map(d => d.stock > 0 ? fmt(d.stock) : ''),
+            textposition: 'outside',
+        },
+    ], {
+        ...CHART_LAYOUT,
+        title: 'توزيع الصنف على الفروع — ' + item.name.substring(0, 30),
+        barmode: 'group',
+        xaxis: {...CHART_LAYOUT.xaxis, title: 'الفرع'},
+        yaxis: {...CHART_LAYOUT.yaxis, title: 'الكمية'},
+        height: 450,
+    }, CFG);
+
+    // Detailed Table
+    const tableRows = branchData.map(d => {
+        const statusClass = d.status === 'ممتاز' ? 'status-excellent' :
+                          d.status === 'متوسط' ? 'status-medium' : 'status-poor';
+        return `
+            <tr>
+                <td><strong>${d.branch}</strong></td>
+                <td>${fmt(d.stock)}</td>
+                <td>${fmt(d.sales)}</td>
+                <td>
+                    <div class="sell-through-bar">
+                        <div class="sell-through-fill" style="width: ${Math.min(d.sellThrough, 100)}%"></div>
+                        <span class="sell-through-text">${d.sellThrough}%</span>
+                    </div>
+                </td>
+                <td>
+                    <span class="status-badge ${statusClass}">
+                        ${d.statusEmoji} ${d.status}
+                    </span>
+                </td>
+            </tr>
+        `;
+    }).join('');
+    
+    document.getElementById('item-branch-table').innerHTML = tableRows;
+
+    // Enhanced Out of Stock Section
+    const totalOutOfStock = outOfStockRisk.length;
+    const totalLowStock = lowStockRisk.length;
+    
+    if (totalOutOfStock === 0 && totalLowStock === 0) {
+        document.getElementById('item-risk').innerHTML = `
+            <div class="table-header">
+                <h5>حالة المخزون في الفروع</h5>
+            </div>
+            <div class="alert alert-success">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">✅</div>
+                    <div>
+                        <strong>حالة المخزون ممتازة</strong>
+                        <p class="mb-0">لا يوجد أي فروع تعاني من نقص في المخزون أو قرب النفاد.</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else {
+        let outOfStockHTML = '';
+        let lowStockHTML = '';
+        
+        if (totalOutOfStock > 0) {
+            const outOfStockList = outOfStockRisk.map(r =>
+                `<span class="risk-badge critical">🔴 ${r.branch} (مبيعات: ${fmt(r.sales)})</span>`
+            ).join('');
+            outOfStockHTML = `
+                <div class="mb-3">
+                    <h6 class="text-danger mb-2">🔴 نفد المخزون (${totalOutOfStock} فرع)</h6>
+                    <p class="text-muted small mb-2">فروع لديها مبيعات ولكن المخزون = 0</p>
+                    <div class="risk-list">${outOfStockList}</div>
+                </div>
+            `;
+        }
+        
+        if (totalLowStock > 0) {
+            const lowStockList = lowStockRisk.map(r =>
+                `<span class="risk-badge warning">🟡 ${r.branch} (مخزون: ${fmt(r.stock)})</span>`
+            ).join('');
+            lowStockHTML = `
+                <div class="mb-3">
+                    <h6 class="text-warning mb-2">🟡 قرب ينفد (${totalLowStock} فرع)</h6>
+                    <p class="text-muted small mb-2">فروع لديها مخزون ≤ 5 وحدات</p>
+                    <div class="risk-list">${lowStockList}</div>
+                </div>
+            `;
+        }
+        
+        document.getElementById('item-risk').innerHTML = `
+            <div class="table-header">
+                <h5>حالة المخزون في الفروع</h5>
+            </div>
+            <div class="alert ${totalOutOfStock > 0 ? 'alert-danger' : 'alert-warning'}">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">${totalOutOfStock > 0 ? '⚠️' : '🔔'}</div>
+                    <div>
+                        <strong>تنبيه حالة المخزون</strong>
+                        <p class="mb-0">يوجد ${totalOutOfStock} فرع نفد مخزونه و ${totalLowStock} فرع قرب ينفد مخزونه.</p>
+                    </div>
+                </div>
+            </div>
+            ${outOfStockHTML}
+            ${lowStockHTML}
+        `;
+    }
+}
+</script>
+</body>
+</html>
