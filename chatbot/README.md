@@ -25,3 +25,10 @@ source .venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 ```
+### 2. Configure Environment
+
+Copy `.env.example` to `.env` and fill in your API keys:
+
+```bash
+cp .env.example .env
+```
