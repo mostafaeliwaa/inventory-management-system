@@ -32,3 +32,11 @@ Copy `.env.example` to `.env` and fill in your API keys:
 ```bash
 cp .env.example .env
 ```
+
+### 3.Testing using Studio
+
+```bash
+langgraph dev
+
+open http://127.0.0.1:2024
+```
