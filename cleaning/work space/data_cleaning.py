@@ -350,9 +350,9 @@ def load_clean_and_merge(
 
 if __name__ == "__main__":
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    DATA_DIR = os.path.join(BASE_DIR, "data")
+    DATA_DIR = os.path.join(BASE_DIR, "..", "..", "data")
 
-    OUTPUT_DIR = os.path.join(BASE_DIR, "output")
+    OUTPUT_DIR = os.path.join(BASE_DIR, "..", "output")
 
     master_df = load_clean_and_merge(
         file1_path=os.path.join(DATA_DIR, "مبيعات + استوكات خلال فترة.xls"),

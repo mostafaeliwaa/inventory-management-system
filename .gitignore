@@ -1,1 +1,7 @@
 .idea/
+.vscode/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.langgraph_api/
