@@ -1,0 +1,57 @@
+================================================================================
+ETL PIPELINE EXECUTION SUMMARY
+================================================================================
+
+Database: normalized_inventory_db
+Execution Date: 2026-04-26 20:44:44
+
+--------------------------------------------------------------------------------
+TABLE ROW COUNTS
+--------------------------------------------------------------------------------
+  products......................     22,064 rows
+  suppliers.....................        148 rows
+  product_suppliers.............     13,486 rows
+  branches......................         11 rows
+  branch_sales..................     26,708 rows
+  branch_stock..................     26,708 rows
+  warehouses....................          1 rows
+  warehouse_stock...............     21,951 rows
+  pricing.......................     21,957 rows
+
+--------------------------------------------------------------------------------
+DATA CLEANING STEPS
+--------------------------------------------------------------------------------
+  • Removed BOM (Byte Order Mark) from CSV headers
+  • Trimmed whitespace from all text fields
+  • Converted empty strings to NULL
+  • Removed duplicate products based on product_id
+  • Unpivoted wide-format branch columns to long format
+  • Mapped branch names and warehouse names to integer IDs
+  • Validated foreign key relationships
+  • Created indexes on foreign key columns
+
+--------------------------------------------------------------------------------
+ASSUMPTIONS MADE
+--------------------------------------------------------------------------------
+  • Product ID (الكود) is the primary identifier across all sources
+  • Missing values are converted to NULL in database
+  • Duplicate products are merged, taking first non-null value for each field
+  • Branch names extracted from column suffixes (_مبيعات, _استوك)
+  • Zero values in sales/stock are preserved (not treated as NULL)
+  • Pricing data merged from both pricing and warehouse files
+  • Text fields are trimmed of whitespace
+  • Empty strings converted to NULL
+
+--------------------------------------------------------------------------------
+SCHEMA DESIGN
+--------------------------------------------------------------------------------
+  • Normalized to 3NF (Third Normal Form)
+  • Wide-format branch columns unpivoted to long format
+  • Foreign key constraints enforced
+  • Indexes created on foreign keys for performance
+  • All table/column names in English (snake_case)
+  • Data values preserved in Arabic
+
+================================================================================
+ETL PIPELINE COMPLETED SUCCESSFULLY
+================================================================================
