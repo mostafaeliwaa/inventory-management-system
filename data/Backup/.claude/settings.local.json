@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(psql *)",
+      "Bash(curl *)",
+      "Bash(where pg_restore psql)",
+      "Bash(winget search *)",
+      "Bash(pip install *)",
+      "Bash(python *)",
+      "Bash(ping *)",
+      "Bash(nslookup *)"
+    ]
+  }
+}
