@@ -1,0 +1,25 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_147.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "05/05/2025",
+    "invoice_number": "02793",
+    "total_amount": "245",
+    "items": [
+      {
+        "product_name": "مشط فرشة شعر",
+        "quantity": "1",
+        "unit_price": "175",
+        "item_total": "175"
+      },
+      {
+        "product_name": "رول شعر",
+        "quantity": "1",
+        "unit_price": "70",
+        "item_total": "70"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "تم حساب الإجمالي بناءً على المجموع المكتوب بخط اليد 245 جنيه"
+  }
+}

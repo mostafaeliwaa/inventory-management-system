@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_050.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2025/5/7",
+    "invoice_number": "0129",
+    "total_amount": "300",
+    "items": [
+      {
+        "product_name": "طبق طائر",
+        "quantity": "25",
+        "unit_price": "12",
+        "item_total": "300"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "اسم العميل المذكور: عمرو وادي دمنة"
+  }
+}

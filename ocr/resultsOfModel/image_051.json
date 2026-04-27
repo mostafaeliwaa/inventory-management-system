@@ -1,0 +1,25 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_051.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "89/6/20",
+    "invoice_number": "0000330",
+    "total_amount": "5640",
+    "items": [
+      {
+        "product_name": "رجل قط ١٧٥",
+        "quantity": "40",
+        "unit_price": "140",
+        "item_total": "5600"
+      },
+      {
+        "product_name": "دحن",
+        "quantity": "40",
+        "unit_price": "1",
+        "item_total": "40"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وتتضمن اختصارات، تم تقدير الإجمالي بناءً على حاصل ضرب الكمية في السعر الموضح."
+  }
+}

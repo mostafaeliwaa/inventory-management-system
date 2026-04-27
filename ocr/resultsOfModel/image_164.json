@@ -1,0 +1,145 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_164.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "3518",
+    "total_amount": null,
+    "items": [
+      {
+        "product_name": "سوسيس اسكوش",
+        "quantity": "12",
+        "unit_price": "43",
+        "item_total": "516"
+      },
+      {
+        "product_name": "اسكوشي عودل",
+        "quantity": "8",
+        "unit_price": "58",
+        "item_total": "464"
+      },
+      {
+        "product_name": "فيل",
+        "quantity": "12",
+        "unit_price": "43",
+        "item_total": "516"
+      },
+      {
+        "product_name": "فلفل",
+        "quantity": "12",
+        "unit_price": "43",
+        "item_total": "516"
+      },
+      {
+        "product_name": "نجمة اسود",
+        "quantity": "16",
+        "unit_price": "43",
+        "item_total": "688"
+      },
+      {
+        "product_name": "شجرة",
+        "quantity": "14",
+        "unit_price": "50",
+        "item_total": "700"
+      },
+      {
+        "product_name": "كلكونا",
+        "quantity": "12",
+        "unit_price": "48",
+        "item_total": "576"
+      },
+      {
+        "product_name": "فنجا عماية",
+        "quantity": "12",
+        "unit_price": "52",
+        "item_total": "624"
+      },
+      {
+        "product_name": "٢ كوده انوام",
+        "quantity": "12",
+        "unit_price": "48",
+        "item_total": "576"
+      },
+      {
+        "product_name": "استشت",
+        "quantity": "12",
+        "unit_price": "43",
+        "item_total": "516"
+      },
+      {
+        "product_name": "قهة",
+        "quantity": "12",
+        "unit_price": "39",
+        "item_total": "468"
+      },
+      {
+        "product_name": "فهد تلوكية",
+        "quantity": "16",
+        "unit_price": "48",
+        "item_total": "768"
+      },
+      {
+        "product_name": "نجمة انوام",
+        "quantity": "3",
+        "unit_price": "23",
+        "item_total": "69"
+      },
+      {
+        "product_name": "ف اشة سوداي",
+        "quantity": "16",
+        "unit_price": "48",
+        "item_total": "768"
+      },
+      {
+        "product_name": "برجر",
+        "quantity": "8",
+        "unit_price": "75",
+        "item_total": "600"
+      },
+      {
+        "product_name": "خرتة سوداي",
+        "quantity": "16",
+        "unit_price": "43",
+        "item_total": "688"
+      },
+      {
+        "product_name": "رجل قلة ص",
+        "quantity": "16",
+        "unit_price": "43",
+        "item_total": "688"
+      },
+      {
+        "product_name": "كينى",
+        "quantity": "16",
+        "unit_price": "39",
+        "item_total": "624"
+      },
+      {
+        "product_name": "اوديو",
+        "quantity": "8",
+        "unit_price": "75",
+        "item_total": "600"
+      },
+      {
+        "product_name": "خوخ",
+        "quantity": "8",
+        "unit_price": "52",
+        "item_total": "416"
+      },
+      {
+        "product_name": "زنب",
+        "quantity": "12",
+        "unit_price": "39",
+        "item_total": "468"
+      },
+      {
+        "product_name": "زمر",
+        "quantity": "14",
+        "unit_price": "32",
+        "item_total": "448"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من فاتورة يدوية بخط غير واضح في بعض الأماكن."
+  }
+}

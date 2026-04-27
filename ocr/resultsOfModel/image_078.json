@@ -1,0 +1,49 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_078.jpg",
+  "extracted": {
+    "store_name": "تابع عمرو وادي دجلة",
+    "invoice_date": null,
+    "invoice_number": null,
+    "total_amount": "79814.5",
+    "items": [
+      {
+        "product_name": "حملة ماكينة",
+        "quantity": null,
+        "unit_price": null,
+        "item_total": "14974.5"
+      },
+      {
+        "product_name": "خصم بونية",
+        "quantity": null,
+        "unit_price": null,
+        "item_total": "400"
+      },
+      {
+        "product_name": "حملة ف",
+        "quantity": null,
+        "unit_price": null,
+        "item_total": "14974.5"
+      },
+      {
+        "product_name": "خصم",
+        "quantity": null,
+        "unit_price": null,
+        "item_total": "140"
+      },
+      {
+        "product_name": "حملة Instapay",
+        "quantity": null,
+        "unit_price": null,
+        "item_total": "15984.5"
+      },
+      {
+        "product_name": "خصم",
+        "quantity": null,
+        "unit_price": null,
+        "item_total": "5000"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "الفاتورة مكتوبة بخط اليد وتحتوي على عمليات حسابية متراكمة (حملات وخصومات)"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_122.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2025/5/7",
+    "invoice_number": "0129",
+    "total_amount": "300",
+    "items": [
+      {
+        "product_name": "طبق طاير",
+        "quantity": "2",
+        "unit_price": "150",
+        "item_total": "300"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "الاسم المذكور في الفاتورة: عمرو وادي دبة"
+  }
+}

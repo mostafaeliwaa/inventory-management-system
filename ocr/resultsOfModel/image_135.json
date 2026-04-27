@@ -1,0 +1,49 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_135.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2024/05/09",
+    "invoice_number": "0004325",
+    "total_amount": "295",
+    "items": [
+      {
+        "product_name": "كروسه بدم",
+        "quantity": "3",
+        "unit_price": "85",
+        "item_total": "255"
+      },
+      {
+        "product_name": "اسلام هاني",
+        "quantity": "2",
+        "unit_price": "21",
+        "item_total": "42"
+      },
+      {
+        "product_name": "شفرة بلاستك",
+        "quantity": "1",
+        "unit_price": "30",
+        "item_total": "30"
+      },
+      {
+        "product_name": "طباق باريور",
+        "quantity": "2",
+        "unit_price": "35",
+        "item_total": "70"
+      },
+      {
+        "product_name": "كراسي اكسسوار",
+        "quantity": "3",
+        "unit_price": "30",
+        "item_total": "90"
+      },
+      {
+        "product_name": "طقم سكاكين",
+        "quantity": "2",
+        "unit_price": "27",
+        "item_total": "54"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وتتضمن اختصارات. تم تقدير أسماء المنتجات بناءً على السياق."
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_128.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2019/4/24",
+    "invoice_number": "1492",
+    "total_amount": "11790",
+    "items": [
+      {
+        "product_name": "بسكويت كوتش",
+        "quantity": "21",
+        "unit_price": "75",
+        "item_total": "1575"
+      },
+      {
+        "product_name": "بسكويت فراولة",
+        "quantity": "24",
+        "unit_price": "45",
+        "item_total": "1080"
+      },
+      {
+        "product_name": "وافل بسكويت",
+        "quantity": "24",
+        "unit_price": "50",
+        "item_total": "1200"
+      },
+      {
+        "product_name": "بسكويت ديا شفاف",
+        "quantity": "12",
+        "unit_price": "45",
+        "item_total": "540"
+      },
+      {
+        "product_name": "منجا بسكويت",
+        "quantity": "24",
+        "unit_price": "45",
+        "item_total": "1080"
+      },
+      {
+        "product_name": "ريم بسكويت",
+        "quantity": "20",
+        "unit_price": "42",
+        "item_total": "840"
+      },
+      {
+        "product_name": "برتقالة بسكويت",
+        "quantity": "12",
+        "unit_price": "45",
+        "item_total": "540"
+      },
+      {
+        "product_name": "توت بسكويت",
+        "quantity": "24",
+        "unit_price": "45",
+        "item_total": "1080"
+      },
+      {
+        "product_name": "تمار + فار",
+        "quantity": "12",
+        "unit_price": "45",
+        "item_total": "540"
+      },
+      {
+        "product_name": "بسكويت سمد",
+        "quantity": "12",
+        "unit_price": "45",
+        "item_total": "540"
+      },
+      {
+        "product_name": "فيلة شوكوليم",
+        "quantity": "2",
+        "unit_price": "110",
+        "item_total": "220"
+      },
+      {
+        "product_name": "عربية ونت صغير",
+        "quantity": "2",
+        "unit_price": "125",
+        "item_total": "250"
+      },
+      {
+        "product_name": "بلبنور",
+        "quantity": "2",
+        "unit_price": "45",
+        "item_total": "90"
+      },
+      {
+        "product_name": "نغم 4×1",
+        "quantity": "2",
+        "unit_price": "110",
+        "item_total": "220"
+      },
+      {
+        "product_name": "مهمال + بسكويت",
+        "quantity": "12",
+        "unit_price": "75",
+        "item_total": "900"
+      },
+      {
+        "product_name": "اكس لارج شوكولاتة",
+        "quantity": "9",
+        "unit_price": "50",
+        "item_total": "450"
+      },
+      {
+        "product_name": "بازل سمسم",
+        "quantity": "6",
+        "unit_price": "20",
+        "item_total": "120"
+      },
+      {
+        "product_name": "حبل عراو",
+        "quantity": "6",
+        "unit_price": "25",
+        "item_total": "150"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "المطلوب من السيد: وادي دجلة فرع مصر"
+  }
+}

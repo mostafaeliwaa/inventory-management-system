@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_146.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "00212",
+    "total_amount": "24",
+    "items": [
+      {
+        "product_name": "سكر",
+        "quantity": "2",
+        "unit_price": "12",
+        "item_total": "24"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "الكمية مكتوبة بوضوح كـ 2، وسعر الوحدة 12، والإجمالي 24 جنيه."
+  }
+}

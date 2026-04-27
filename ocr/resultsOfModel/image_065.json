@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_065.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "25/8/2020",
+    "invoice_number": "2718",
+    "total_amount": "1980",
+    "items": [
+      {
+        "product_name": "سيراميك",
+        "quantity": "6",
+        "unit_price": "330",
+        "item_total": "1980"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وتصعب قراءتها بدقة تامة، تم تقدير اسم المنتج بـ 'سيراميك' بناءً على سياق السوق المصري المماثل."
+  }
+}

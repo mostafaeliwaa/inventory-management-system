@@ -1,0 +1,133 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_040.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "3/4/2025",
+    "invoice_number": "0123",
+    "total_amount": "264",
+    "items": [
+      {
+        "product_name": "لايف S",
+        "quantity": "2",
+        "unit_price": "8",
+        "item_total": "16"
+      },
+      {
+        "product_name": "لايف M",
+        "quantity": "2",
+        "unit_price": "10",
+        "item_total": "20"
+      },
+      {
+        "product_name": "لايف L",
+        "quantity": "2",
+        "unit_price": "12",
+        "item_total": "24"
+      },
+      {
+        "product_name": "عوامة 5 ديزني",
+        "quantity": "3",
+        "unit_price": "25",
+        "item_total": "75"
+      },
+      {
+        "product_name": "عوامة 6 ديزني",
+        "quantity": "3",
+        "unit_price": "35",
+        "item_total": "105"
+      },
+      {
+        "product_name": "عوامة 7 ديزني",
+        "quantity": "3",
+        "unit_price": "45",
+        "item_total": "135"
+      },
+      {
+        "product_name": "عوامة 8 ديزني",
+        "quantity": "3",
+        "unit_price": "55",
+        "item_total": "165"
+      },
+      {
+        "product_name": "عوامة 9 ديزني",
+        "quantity": "3",
+        "unit_price": "65",
+        "item_total": "195"
+      },
+      {
+        "product_name": "كنافة Index",
+        "quantity": "6",
+        "unit_price": "55",
+        "item_total": "330"
+      },
+      {
+        "product_name": "كنافة Bestway",
+        "quantity": "6",
+        "unit_price": "50",
+        "item_total": "300"
+      },
+      {
+        "product_name": "عوامة تيبا",
+        "quantity": "1",
+        "unit_price": "20",
+        "item_total": "20"
+      },
+      {
+        "product_name": "عوامة سمسمة",
+        "quantity": "1",
+        "unit_price": "15",
+        "item_total": "15"
+      },
+      {
+        "product_name": "عوامة رجلين اطفال",
+        "quantity": "2",
+        "unit_price": "65",
+        "item_total": "130"
+      },
+      {
+        "product_name": "عوامة بطة",
+        "quantity": "1",
+        "unit_price": "55",
+        "item_total": "55"
+      },
+      {
+        "product_name": "عوامة Index",
+        "quantity": "3",
+        "unit_price": "90",
+        "item_total": "270"
+      },
+      {
+        "product_name": "مدفع سناي",
+        "quantity": "4",
+        "unit_price": "4",
+        "item_total": "16"
+      },
+      {
+        "product_name": "مسدس مياه",
+        "quantity": "12",
+        "unit_price": "15",
+        "item_total": "180"
+      },
+      {
+        "product_name": "مدفع فلك",
+        "quantity": "4",
+        "unit_price": "55",
+        "item_total": "220"
+      },
+      {
+        "product_name": "بورد",
+        "quantity": "2",
+        "unit_price": "57",
+        "item_total": "114"
+      },
+      {
+        "product_name": "مدفع شبكة",
+        "quantity": "6",
+        "unit_price": "30",
+        "item_total": "180"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من الفاتورة المرفقة، توجد أرقام مكتوبة بخط اليد وأرقام مطبوعة"
+  }
+}

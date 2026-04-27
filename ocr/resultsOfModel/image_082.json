@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_082.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2025/05/25",
+    "invoice_number": "4304",
+    "total_amount": "120",
+    "items": [
+      {
+        "product_name": "بونيه",
+        "quantity": "3",
+        "unit_price": "40",
+        "item_total": "120"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "الاسم المذكور في خانة المطلوب من السيد هو عمرو وادى دحله"
+  }
+}

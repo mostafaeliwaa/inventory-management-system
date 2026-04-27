@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_134.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "30076",
+    "total_amount": "190",
+    "items": [
+      {
+        "product_name": "فلتر استينلس",
+        "quantity": "2",
+        "unit_price": "85",
+        "item_total": "190"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "المطلوب من السيد: واوى مجلة"
+  }
+}

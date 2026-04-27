@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_157.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "0430",
+    "total_amount": "390",
+    "items": [
+      {
+        "product_name": "كريم شعر",
+        "quantity": "6",
+        "unit_price": "65",
+        "item_total": "390"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "تم استنتاج الكمية (6) من حاصل قسمة الإجمالي (390) على سعر الوحدة (65)."
+  }
+}

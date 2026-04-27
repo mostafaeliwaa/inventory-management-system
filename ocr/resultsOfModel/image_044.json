@@ -1,0 +1,139 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_044.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "1268",
+    "total_amount": "1124",
+    "items": [
+      {
+        "product_name": "بريمو إسكوشي",
+        "quantity": "1",
+        "unit_price": "260",
+        "item_total": "260"
+      },
+      {
+        "product_name": "هلال إسكوشي",
+        "quantity": "1",
+        "unit_price": "260",
+        "item_total": "260"
+      },
+      {
+        "product_name": "سون كوم",
+        "quantity": "3",
+        "unit_price": "260",
+        "item_total": "780"
+      },
+      {
+        "product_name": "قلب إسكوشي",
+        "quantity": "1",
+        "unit_price": "260",
+        "item_total": "260"
+      },
+      {
+        "product_name": "بنية",
+        "quantity": "1",
+        "unit_price": "54",
+        "item_total": "54"
+      },
+      {
+        "product_name": "ذرة إسكوشي",
+        "quantity": "12",
+        "unit_price": "65",
+        "item_total": "780"
+      },
+      {
+        "product_name": "سكون إسكوشي",
+        "quantity": "24",
+        "unit_price": "60",
+        "item_total": "1440"
+      },
+      {
+        "product_name": "كيكة سمسم",
+        "quantity": "1",
+        "unit_price": "40",
+        "item_total": "40"
+      },
+      {
+        "product_name": "عنب إسكوت",
+        "quantity": "1",
+        "unit_price": "40",
+        "item_total": "40"
+      },
+      {
+        "product_name": "كيكة ألوان",
+        "quantity": "1",
+        "unit_price": "40",
+        "item_total": "40"
+      },
+      {
+        "product_name": "فراولة",
+        "quantity": "1",
+        "unit_price": "40",
+        "item_total": "40"
+      },
+      {
+        "product_name": "إسكوشي كلوكة",
+        "quantity": "12",
+        "unit_price": "37.5",
+        "item_total": "450"
+      },
+      {
+        "product_name": "سوسيس",
+        "quantity": "12",
+        "unit_price": "25",
+        "item_total": "300"
+      },
+      {
+        "product_name": "كورة ألوان",
+        "quantity": "12",
+        "unit_price": "40",
+        "item_total": "480"
+      },
+      {
+        "product_name": "كورة ميني إسكوشي",
+        "quantity": "12",
+        "unit_price": "20",
+        "item_total": "240"
+      },
+      {
+        "product_name": "إسكوشي زجاجة",
+        "quantity": "12",
+        "unit_price": "20",
+        "item_total": "240"
+      },
+      {
+        "product_name": "كسوريا",
+        "quantity": "12",
+        "unit_price": "25",
+        "item_total": "300"
+      },
+      {
+        "product_name": "كف",
+        "quantity": "12",
+        "unit_price": "25",
+        "item_total": "300"
+      },
+      {
+        "product_name": "وافل",
+        "quantity": "12",
+        "unit_price": "47.5",
+        "item_total": "570"
+      },
+      {
+        "product_name": "دونوتز",
+        "quantity": "12",
+        "unit_price": "47.5",
+        "item_total": "570"
+      },
+      {
+        "product_name": "طرسة",
+        "quantity": "12",
+        "unit_price": "47.5",
+        "item_total": "570"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "الفاتورة مكتوبة بخط اليد وبها تداخل في بعض الأسماء والأسعار، تم تقدير القيم بناءً على السياق الحسابي."
+  }
+}

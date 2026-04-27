@@ -1,0 +1,97 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_020.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "0974",
+    "total_amount": "129.25",
+    "items": [
+      {
+        "product_name": "لا بوبو 6x18",
+        "quantity": "6",
+        "unit_price": "20",
+        "item_total": "120"
+      },
+      {
+        "product_name": "بسكويت مروة",
+        "quantity": "3",
+        "unit_price": "42.5",
+        "item_total": "127.5"
+      },
+      {
+        "product_name": "بسكويت",
+        "quantity": "2",
+        "unit_price": "20",
+        "item_total": "40"
+      },
+      {
+        "product_name": "بسكويت مسالية",
+        "quantity": "9",
+        "unit_price": "22",
+        "item_total": "198"
+      },
+      {
+        "product_name": "بسكويت مسالية",
+        "quantity": "3",
+        "unit_price": "22",
+        "item_total": "66"
+      },
+      {
+        "product_name": "لا بوبو كيس",
+        "quantity": "1",
+        "unit_price": "60",
+        "item_total": "60"
+      },
+      {
+        "product_name": "لا بوبو كوكو",
+        "quantity": "2",
+        "unit_price": "60",
+        "item_total": "120"
+      },
+      {
+        "product_name": "بسكويت كوكو",
+        "quantity": "2",
+        "unit_price": "35",
+        "item_total": "70"
+      },
+      {
+        "product_name": "بسكويت",
+        "quantity": "2",
+        "unit_price": "40",
+        "item_total": "80"
+      },
+      {
+        "product_name": "لا بوبو",
+        "quantity": "3",
+        "unit_price": "35",
+        "item_total": "105"
+      },
+      {
+        "product_name": "مسالية كيس",
+        "quantity": "4",
+        "unit_price": "25",
+        "item_total": "100"
+      },
+      {
+        "product_name": "بسكويت كوكو",
+        "quantity": "2",
+        "unit_price": "25",
+        "item_total": "50"
+      },
+      {
+        "product_name": "مسالية",
+        "quantity": "2",
+        "unit_price": "25",
+        "item_total": "50"
+      },
+      {
+        "product_name": "بسكويت",
+        "quantity": "2",
+        "unit_price": "22.5",
+        "item_total": "45"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "تم استخراج البيانات بناءً على الأرقام المكتوبة بخط اليد؛ قد تحتوي الفاتورة على أخطاء حسابية أو عدم اتساق في البيانات."
+  }
+}

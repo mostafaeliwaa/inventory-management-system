@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_080.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "2025/5/2",
+    "invoice_number": "0281",
+    "total_amount": "360",
+    "items": [
+      {
+        "product_name": "ليمون",
+        "quantity": "6",
+        "unit_price": "60",
+        "item_total": "360"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "اسم العميل: عمرو وادى دله"
+  }
+}

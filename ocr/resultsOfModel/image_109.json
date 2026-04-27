@@ -1,0 +1,31 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_109.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "20/8/2009",
+    "invoice_number": "2715",
+    "total_amount": "444",
+    "items": [
+      {
+        "product_name": "سويتر صوف",
+        "quantity": "8",
+        "unit_price": "33",
+        "item_total": "264"
+      },
+      {
+        "product_name": "سويتر صوف",
+        "quantity": "3",
+        "unit_price": "33",
+        "item_total": "99"
+      },
+      {
+        "product_name": "سويتر صوف",
+        "quantity": "3",
+        "unit_price": "27",
+        "item_total": "81"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وتتضمن تكراراً لنفس الصنف 'سويتر صوف' بأسعار أو كميات مختلفة."
+  }
+}

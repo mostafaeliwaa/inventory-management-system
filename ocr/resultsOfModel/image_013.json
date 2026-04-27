@@ -1,0 +1,133 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_013.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "139",
+    "total_amount": "2134",
+    "items": [
+      {
+        "product_name": "حلمها فين",
+        "quantity": "2",
+        "unit_price": "360",
+        "item_total": null
+      },
+      {
+        "product_name": "زمارة نور",
+        "quantity": "6",
+        "unit_price": "12",
+        "item_total": null
+      },
+      {
+        "product_name": "مساح",
+        "quantity": "7",
+        "unit_price": "48",
+        "item_total": null
+      },
+      {
+        "product_name": "برطمنور",
+        "quantity": "3",
+        "unit_price": "125",
+        "item_total": null
+      },
+      {
+        "product_name": "كورة فوم",
+        "quantity": "7",
+        "unit_price": "300",
+        "item_total": null
+      },
+      {
+        "product_name": "دبى حبل نط",
+        "quantity": "25",
+        "unit_price": "54",
+        "item_total": null
+      },
+      {
+        "product_name": "روليك",
+        "quantity": "35",
+        "unit_price": "126",
+        "item_total": null
+      },
+      {
+        "product_name": "مضرب سنجل",
+        "quantity": "5",
+        "unit_price": "100",
+        "item_total": null
+      },
+      {
+        "product_name": "لانش مسك",
+        "quantity": "35",
+        "unit_price": "105",
+        "item_total": null
+      },
+      {
+        "product_name": "دكتور شنطة",
+        "quantity": "5",
+        "unit_price": "150",
+        "item_total": null
+      },
+      {
+        "product_name": "فوس كين",
+        "quantity": "5",
+        "unit_price": "200",
+        "item_total": null
+      },
+      {
+        "product_name": "منظار",
+        "quantity": "14",
+        "unit_price": "24",
+        "item_total": null
+      },
+      {
+        "product_name": "كرت عربية",
+        "quantity": "9",
+        "unit_price": "27",
+        "item_total": null
+      },
+      {
+        "product_name": "كتكوت",
+        "quantity": "15",
+        "unit_price": "24",
+        "item_total": "260"
+      },
+      {
+        "product_name": "بطوط سكوتش",
+        "quantity": "95",
+        "unit_price": "2",
+        "item_total": "28"
+      },
+      {
+        "product_name": "ميدى طبق",
+        "quantity": "10",
+        "unit_price": "15",
+        "item_total": null
+      },
+      {
+        "product_name": "طلق",
+        "quantity": "20",
+        "unit_price": "60",
+        "item_total": "120"
+      },
+      {
+        "product_name": "عصايا نور",
+        "quantity": "25",
+        "unit_price": "20",
+        "item_total": "600"
+      },
+      {
+        "product_name": "ميدى ميل",
+        "quantity": "25",
+        "unit_price": "20",
+        "item_total": null
+      },
+      {
+        "product_name": "ميدى مياه",
+        "quantity": "20",
+        "unit_price": "24",
+        "item_total": "74"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "تم استخراج البيانات بناءً على الأرقام العربية المكتوبة بخط اليد والتي قد تحتمل التأويل، الإجمالي المكتوب في الأسفل هو 2134"
+  }
+}

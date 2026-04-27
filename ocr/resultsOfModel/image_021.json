@@ -1,0 +1,133 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_021.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "136",
+    "total_amount": "807",
+    "items": [
+      {
+        "product_name": "تراك",
+        "quantity": "1",
+        "unit_price": "405",
+        "item_total": "405"
+      },
+      {
+        "product_name": "شنطة",
+        "quantity": "4",
+        "unit_price": "178",
+        "item_total": "712"
+      },
+      {
+        "product_name": "اسكوتشي",
+        "quantity": "1",
+        "unit_price": "36",
+        "item_total": "36"
+      },
+      {
+        "product_name": "تسريحة",
+        "quantity": "1",
+        "unit_price": "40",
+        "item_total": "40"
+      },
+      {
+        "product_name": "قلم 3D",
+        "quantity": "4",
+        "unit_price": "375",
+        "item_total": "1500"
+      },
+      {
+        "product_name": "تلوين دايوند",
+        "quantity": "3",
+        "unit_price": "20",
+        "item_total": "72"
+      },
+      {
+        "product_name": "دايوند",
+        "quantity": "12",
+        "unit_price": "25",
+        "item_total": "300"
+      },
+      {
+        "product_name": "دايموند بولار",
+        "quantity": "24",
+        "unit_price": "35",
+        "item_total": "840"
+      },
+      {
+        "product_name": "عربية ريموت",
+        "quantity": "2",
+        "unit_price": "265",
+        "item_total": "530"
+      },
+      {
+        "product_name": "عربية ريموت",
+        "quantity": "3",
+        "unit_price": "130",
+        "item_total": "390"
+      },
+      {
+        "product_name": "عربية ريموت",
+        "quantity": "2",
+        "unit_price": "275",
+        "item_total": "550"
+      },
+      {
+        "product_name": "مكياج",
+        "quantity": "3",
+        "unit_price": "115",
+        "item_total": "345"
+      },
+      {
+        "product_name": "شنطة أيد",
+        "quantity": "3",
+        "unit_price": "50",
+        "item_total": "150"
+      },
+      {
+        "product_name": "تلوين رملي",
+        "quantity": "3",
+        "unit_price": "60",
+        "item_total": "180"
+      },
+      {
+        "product_name": "بنى",
+        "quantity": "3",
+        "unit_price": "40",
+        "item_total": "125"
+      },
+      {
+        "product_name": "صفارة",
+        "quantity": "3",
+        "unit_price": "180",
+        "item_total": "540"
+      },
+      {
+        "product_name": "سلايم",
+        "quantity": "18",
+        "unit_price": "20",
+        "item_total": "360"
+      },
+      {
+        "product_name": "هوك توكس",
+        "quantity": "6",
+        "unit_price": "135",
+        "item_total": "810"
+      },
+      {
+        "product_name": "دريكسون",
+        "quantity": "3",
+        "unit_price": "100",
+        "item_total": "300"
+      },
+      {
+        "product_name": "صلصال",
+        "quantity": "12",
+        "unit_price": "32",
+        "item_total": "384"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من فاتورة مكتوبة بخط اليد وتتضمن أرقاماً عربية."
+  }
+}

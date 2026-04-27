@@ -1,0 +1,29 @@
+# Product Matching System Requirements
+# Core dependencies
+sentence-transformers>=2.2.0
+rapidfuzz>=3.0.0
+numpy>=1.20.0
+scikit-learn>=1.0.0
+
+# Optional for large datasets (FAISS for fast similarity search)
+faiss-cpu>=1.7.0
+
+# Development and testing
+pytest>=7.0.0
+black>=22.0.0
+mypy>=0.950
+
+# Arabic text processing (optional enhancements)
+arabic-reshaper>=2.1.0
+python-bidi>=0.4.0
+
+# Note: The system will work without FAISS for small to medium databases
+# FAISS provides significant speedup for databases with >1000 products
+streamlit>=1.28.0
+requests>=2.31.0
+pillow>=10.0.0
+pandas>=2.0.0
+plotly>=5.18.0
+streamlit-option-menu>=0.3.6
+aiohttp>=3.8.0
+python-dotenv>=1.0.0

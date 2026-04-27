@@ -1,0 +1,25 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_041.jpg",
+  "extracted": {
+    "store_name": "وادي المعادي",
+    "invoice_date": null,
+    "invoice_number": "0000146",
+    "total_amount": "1370",
+    "items": [
+      {
+        "product_name": "بديل طوش",
+        "quantity": "2",
+        "unit_price": "425",
+        "item_total": "850"
+      },
+      {
+        "product_name": "طقم تيفال كرومي",
+        "quantity": "1",
+        "unit_price": "520",
+        "item_total": "520"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "تم حساب الإجمالي بناءً على القيم المكتوبة في الفاتورة (850 + 520 = 1370)"
+  }
+}

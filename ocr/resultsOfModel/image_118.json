@@ -1,0 +1,121 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_118.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "0154",
+    "total_amount": "11038",
+    "items": [
+      {
+        "product_name": "تلوين رمل",
+        "quantity": "1",
+        "unit_price": "26",
+        "item_total": "26"
+      },
+      {
+        "product_name": "2 باكت ور",
+        "quantity": "2",
+        "unit_price": "65",
+        "item_total": "130"
+      },
+      {
+        "product_name": "تويست 4",
+        "quantity": "3",
+        "unit_price": "44",
+        "item_total": "132"
+      },
+      {
+        "product_name": "اسكوتش اصبع",
+        "quantity": "12",
+        "unit_price": "40",
+        "item_total": "480"
+      },
+      {
+        "product_name": "مسطرة صوت",
+        "quantity": "5",
+        "unit_price": "60",
+        "item_total": "290"
+      },
+      {
+        "product_name": "أي باد",
+        "quantity": "2",
+        "unit_price": "65",
+        "item_total": "130"
+      },
+      {
+        "product_name": "دومينو مرايا",
+        "quantity": "3",
+        "unit_price": "120",
+        "item_total": "360"
+      },
+      {
+        "product_name": "ديسون قلبي",
+        "quantity": "2",
+        "unit_price": "50",
+        "item_total": "100"
+      },
+      {
+        "product_name": "مكتب صابون",
+        "quantity": "8",
+        "unit_price": "90",
+        "item_total": "720"
+      },
+      {
+        "product_name": "منظار",
+        "quantity": "2",
+        "unit_price": "50",
+        "item_total": "100"
+      },
+      {
+        "product_name": "خرز بنات",
+        "quantity": "5",
+        "unit_price": "40",
+        "item_total": "200"
+      },
+      {
+        "product_name": "اسك مادة",
+        "quantity": "12",
+        "unit_price": "20",
+        "item_total": "240"
+      },
+      {
+        "product_name": "مويل",
+        "quantity": "12",
+        "unit_price": "65",
+        "item_total": "780"
+      },
+      {
+        "product_name": "طارة فل تشر",
+        "quantity": "2",
+        "unit_price": "40",
+        "item_total": "80"
+      },
+      {
+        "product_name": "تيلك",
+        "quantity": "2",
+        "unit_price": "40",
+        "item_total": "80"
+      },
+      {
+        "product_name": "جيبي مياه",
+        "quantity": "6",
+        "unit_price": "22",
+        "item_total": "135"
+      },
+      {
+        "product_name": "يونيت أزر",
+        "quantity": "6",
+        "unit_price": "90",
+        "item_total": "540"
+      },
+      {
+        "product_name": "مكتب صابون",
+        "quantity": "14",
+        "unit_price": "47",
+        "item_total": "654"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وبها بعض الاختصارات، قد تكون هناك صعوبة في مطابقة بعض أسماء المنتجات بدقة مطلقة."
+  }
+}
