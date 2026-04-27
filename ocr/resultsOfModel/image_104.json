@@ -1,0 +1,133 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_104.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "٦ / ٥ / ٢٠٢٠",
+    "invoice_number": "4269",
+    "total_amount": null,
+    "items": [
+      {
+        "product_name": "دجاج",
+        "quantity": "2",
+        "unit_price": "3",
+        "item_total": "6"
+      },
+      {
+        "product_name": "لام كوكو مسالي",
+        "quantity": "12",
+        "unit_price": "4.5",
+        "item_total": "54"
+      },
+      {
+        "product_name": "سكر صاحب صادق",
+        "quantity": "2",
+        "unit_price": "22",
+        "item_total": "44"
+      },
+      {
+        "product_name": "مالح",
+        "quantity": "2",
+        "unit_price": "13",
+        "item_total": "26"
+      },
+      {
+        "product_name": "عصارة",
+        "quantity": "2",
+        "unit_price": "13",
+        "item_total": "26"
+      },
+      {
+        "product_name": "عربية بسامة",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "شوكولاتة",
+        "quantity": "4",
+        "unit_price": "5.5",
+        "item_total": "22"
+      },
+      {
+        "product_name": "صلصة هل جزا",
+        "quantity": "1",
+        "unit_price": "16",
+        "item_total": "16"
+      },
+      {
+        "product_name": "سكر ابيض",
+        "quantity": "1",
+        "unit_price": "15",
+        "item_total": "15"
+      },
+      {
+        "product_name": "كروت لعبة كيس",
+        "quantity": "12",
+        "unit_price": "2",
+        "item_total": "24"
+      },
+      {
+        "product_name": "سناكس",
+        "quantity": "2",
+        "unit_price": "5",
+        "item_total": "10"
+      },
+      {
+        "product_name": "حلوى",
+        "quantity": "2",
+        "unit_price": "8",
+        "item_total": "16"
+      },
+      {
+        "product_name": "ورق عصافير",
+        "quantity": "2",
+        "unit_price": "10",
+        "item_total": "20"
+      },
+      {
+        "product_name": "خرز",
+        "quantity": "1",
+        "unit_price": "30",
+        "item_total": "30"
+      },
+      {
+        "product_name": "خرز",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "فلك كارت",
+        "quantity": "6",
+        "unit_price": "7",
+        "item_total": "42"
+      },
+      {
+        "product_name": "تخليلية",
+        "quantity": "6",
+        "unit_price": "17",
+        "item_total": "102"
+      },
+      {
+        "product_name": "دانتة",
+        "quantity": "2",
+        "unit_price": "7",
+        "item_total": "14"
+      },
+      {
+        "product_name": "سوستة",
+        "quantity": "3",
+        "unit_price": "3",
+        "item_total": "9"
+      },
+      {
+        "product_name": "توك بور",
+        "quantity": "2",
+        "unit_price": "6",
+        "item_total": "12"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وبصعوبة في بعض العناصر، تم تقدير الأسعار والكميات بناءً على السياق."
+  }
+}

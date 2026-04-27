@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_156.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2025/5/2",
+    "invoice_number": "02866",
+    "total_amount": "450",
+    "items": [
+      {
+        "product_name": "حلو",
+        "quantity": "1",
+        "unit_price": "450",
+        "item_total": "450"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "تم استخراج اسم المنتج كـ 'حلو' بناءً على الخط المكتوب في خانة الصنف."
+  }
+}

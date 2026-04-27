@@ -1,0 +1,121 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\results\\tmp4cvqgw3g.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2004/04/20",
+    "invoice_number": "1492",
+    "total_amount": "11695",
+    "items": [
+      {
+        "product_name": "جليع اسكوتش",
+        "quantity": "10",
+        "unit_price": "7.20",
+        "item_total": "72"
+      },
+      {
+        "product_name": "اسكوتش فراولة",
+        "quantity": "24",
+        "unit_price": "4.50",
+        "item_total": "108"
+      },
+      {
+        "product_name": "وافل اسكوتش",
+        "quantity": "24",
+        "unit_price": "5.00",
+        "item_total": "120"
+      },
+      {
+        "product_name": "اسكوتش دبا شفاف",
+        "quantity": "12",
+        "unit_price": "4.50",
+        "item_total": "54"
+      },
+      {
+        "product_name": "منجا اسكوتش",
+        "quantity": "24",
+        "unit_price": "4.50",
+        "item_total": "108"
+      },
+      {
+        "product_name": "ريد اسكوتش",
+        "quantity": "24",
+        "unit_price": "3.50",
+        "item_total": "84"
+      },
+      {
+        "product_name": "برتقالة اسكوتش",
+        "quantity": "12",
+        "unit_price": "4.50",
+        "item_total": "54"
+      },
+      {
+        "product_name": "تفحه اسكوتش",
+        "quantity": "24",
+        "unit_price": "4.50",
+        "item_total": "108"
+      },
+      {
+        "product_name": "تمساح + فار",
+        "quantity": "12",
+        "unit_price": "4.50",
+        "item_total": "54"
+      },
+      {
+        "product_name": "اسكوتش سلحفاة",
+        "quantity": "12",
+        "unit_price": "4.50",
+        "item_total": "54"
+      },
+      {
+        "product_name": "طبلة شوطين",
+        "quantity": "2",
+        "unit_price": "110",
+        "item_total": "220"
+      },
+      {
+        "product_name": "عربة وش معدن",
+        "quantity": "2",
+        "unit_price": "125",
+        "item_total": "250"
+      },
+      {
+        "product_name": "بليز بور",
+        "quantity": "20",
+        "unit_price": "4.50",
+        "item_total": "90"
+      },
+      {
+        "product_name": "نغم ٤ * ١",
+        "quantity": "2",
+        "unit_price": "110",
+        "item_total": "220"
+      },
+      {
+        "product_name": "صلصال + اسكوتش",
+        "quantity": "12",
+        "unit_price": "7.50",
+        "item_total": "90"
+      },
+      {
+        "product_name": "اسلايم شوكلاتة",
+        "quantity": "9",
+        "unit_price": "5.00",
+        "item_total": "45"
+      },
+      {
+        "product_name": "بازل سمكة",
+        "quantity": "6",
+        "unit_price": "20",
+        "item_total": "120"
+      },
+      {
+        "product_name": "حبل عداد",
+        "quantity": "6",
+        "unit_price": "35",
+        "item_total": "210"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "الفاتورة محررة لصالح 'وادى دجلة فرع مصر'. يلاحظ أن المجموع الكلي المكتوب أسفل الفاتورة (11695) لا يتطابق حسابياً مع مجموع البنود المسجلة (الذي يساوي 2061)، مما قد يشير إلى خطأ كتابي في الجمع أو وجود مبالغ أخرى غير مدونة بوضوح."
+  }
+}

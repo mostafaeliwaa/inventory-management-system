@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_139.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "2005/8/8",
+    "invoice_number": "3540",
+    "total_amount": "500",
+    "items": [
+      {
+        "product_name": "كهرباء",
+        "quantity": "20",
+        "unit_price": "25",
+        "item_total": "500"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وتفسيرها كـ 'كهرباء' للخدمة أو السلعة."
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_112.jpg",
+  "extracted": {
+    "store_name": "أسواق أسيوط",
+    "invoice_date": null,
+    "invoice_number": "0139",
+    "total_amount": "19445",
+    "items": [
+      {
+        "product_name": "كيسة فرم",
+        "quantity": "6",
+        "unit_price": "290",
+        "item_total": "1740"
+      },
+      {
+        "product_name": "مويل ميزان",
+        "quantity": "6",
+        "unit_price": "290",
+        "item_total": "1740"
+      },
+      {
+        "product_name": "بربيل",
+        "quantity": "14",
+        "unit_price": "27",
+        "item_total": "378"
+      },
+      {
+        "product_name": "مساحيق صابون",
+        "quantity": "12",
+        "unit_price": "30",
+        "item_total": "360"
+      },
+      {
+        "product_name": "مساحيق 8*3",
+        "quantity": "6",
+        "unit_price": "37",
+        "item_total": "222"
+      },
+      {
+        "product_name": "مساحيق صابون علك",
+        "quantity": "12",
+        "unit_price": "75",
+        "item_total": "900"
+      },
+      {
+        "product_name": "اسيم بط",
+        "quantity": "24",
+        "unit_price": "45",
+        "item_total": "1080"
+      },
+      {
+        "product_name": "اسيم بطوط",
+        "quantity": "24",
+        "unit_price": "30",
+        "item_total": "720"
+      },
+      {
+        "product_name": "اسيم كريم",
+        "quantity": "24",
+        "unit_price": "30",
+        "item_total": "720"
+      },
+      {
+        "product_name": "اسيم مواليه",
+        "quantity": "24",
+        "unit_price": "45",
+        "item_total": "1080"
+      },
+      {
+        "product_name": "بورد سائل",
+        "quantity": "12",
+        "unit_price": "50",
+        "item_total": "600"
+      },
+      {
+        "product_name": "بورد بياض",
+        "quantity": "12",
+        "unit_price": "58",
+        "item_total": "696"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من فاتورة مكتوبة بخط اليد، قد تختلف الأسماء قليلاً بسبب وضوح الخط."
+  }
+}

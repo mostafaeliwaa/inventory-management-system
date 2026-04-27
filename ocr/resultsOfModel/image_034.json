@@ -1,0 +1,31 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_034.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "4/4/2020",
+    "invoice_number": "0189",
+    "total_amount": "110.4",
+    "items": [
+      {
+        "product_name": "لوز",
+        "quantity": "2",
+        "unit_price": "18",
+        "item_total": "54"
+      },
+      {
+        "product_name": "يويو",
+        "quantity": "2",
+        "unit_price": "14",
+        "item_total": "54"
+      },
+      {
+        "product_name": "مستلزمات صالون",
+        "quantity": null,
+        "unit_price": null,
+        "item_total": null
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "صورة الفاتورة غير واضحة تماماً، قد تكون هناك أخطاء في قراءة أسماء المنتجات أو الأسعار بسبب جودة الصورة."
+  }
+}

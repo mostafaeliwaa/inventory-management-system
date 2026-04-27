@@ -1,0 +1,85 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_057.jpg",
+  "extracted": {
+    "store_name": "وادي دجلة",
+    "invoice_date": "14/7/2020",
+    "invoice_number": "0859",
+    "total_amount": "749",
+    "items": [
+      {
+        "product_name": "شكولاتة ربع قطعة 1x5",
+        "quantity": "10",
+        "unit_price": "45",
+        "item_total": "450"
+      },
+      {
+        "product_name": "شكولاتة فراشة",
+        "quantity": "7",
+        "unit_price": "45",
+        "item_total": "315"
+      },
+      {
+        "product_name": "ب ب ربع قطعة كبير",
+        "quantity": "16",
+        "unit_price": "9",
+        "item_total": "144"
+      },
+      {
+        "product_name": "شكولاتة شكل",
+        "quantity": "12",
+        "unit_price": "6",
+        "item_total": "72"
+      },
+      {
+        "product_name": "كيت كات",
+        "quantity": "16",
+        "unit_price": "45",
+        "item_total": "72"
+      },
+      {
+        "product_name": "ام كيت كات",
+        "quantity": "24",
+        "unit_price": "45",
+        "item_total": "1080"
+      },
+      {
+        "product_name": "ب ب ب قطعة كبير",
+        "quantity": "6",
+        "unit_price": "11",
+        "item_total": "66"
+      },
+      {
+        "product_name": "ب ب ريو كبير",
+        "quantity": "10",
+        "unit_price": "7",
+        "item_total": "70"
+      },
+      {
+        "product_name": "ب ب ربع قطعة كبير",
+        "quantity": "34",
+        "unit_price": "35",
+        "item_total": "1190"
+      },
+      {
+        "product_name": "كورة بويت",
+        "quantity": "24",
+        "unit_price": "30",
+        "item_total": "720"
+      },
+      {
+        "product_name": "كورة بويت شوك",
+        "quantity": "12",
+        "unit_price": "30",
+        "item_total": "360"
+      },
+      {
+        "product_name": "ملايب مروحة",
+        "quantity": "24",
+        "unit_price": "45",
+        "item_total": "1080"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة الفاتورة المرفقة، وقد تكون هناك تباينات في الأرقام الإجمالية نظراً لخط اليد."
+  }
+}

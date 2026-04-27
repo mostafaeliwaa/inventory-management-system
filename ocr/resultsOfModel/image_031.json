@@ -1,0 +1,139 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_031.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2023/5/5",
+    "invoice_number": "0000976",
+    "total_amount": "1679",
+    "items": [
+      {
+        "product_name": "لايويو ويت",
+        "quantity": "2",
+        "unit_price": "6.75",
+        "item_total": "13.50"
+      },
+      {
+        "product_name": "لايويو ميرالير",
+        "quantity": "2",
+        "unit_price": "6",
+        "item_total": "12"
+      },
+      {
+        "product_name": "لايويو ميرك",
+        "quantity": "3",
+        "unit_price": "5",
+        "item_total": "15"
+      },
+      {
+        "product_name": "لايويو مرونة",
+        "quantity": "4",
+        "unit_price": "4.50",
+        "item_total": "18"
+      },
+      {
+        "product_name": "لايويو كورة",
+        "quantity": "2",
+        "unit_price": "6.50",
+        "item_total": "13"
+      },
+      {
+        "product_name": "لايويو كورة كبير",
+        "quantity": "1",
+        "unit_price": "19.50",
+        "item_total": "19.50"
+      },
+      {
+        "product_name": "لايويو",
+        "quantity": "2",
+        "unit_price": "6",
+        "item_total": "12"
+      },
+      {
+        "product_name": "لايويو 146",
+        "quantity": "2",
+        "unit_price": "6",
+        "item_total": "12"
+      },
+      {
+        "product_name": "لايويو كنز",
+        "quantity": "3",
+        "unit_price": "5",
+        "item_total": "15"
+      },
+      {
+        "product_name": "لايويو",
+        "quantity": "4",
+        "unit_price": "2.25",
+        "item_total": "9"
+      },
+      {
+        "product_name": "لايويو كيس",
+        "quantity": "2",
+        "unit_price": "6",
+        "item_total": "12"
+      },
+      {
+        "product_name": "لايويو ميرالير",
+        "quantity": "2",
+        "unit_price": "7.50",
+        "item_total": "15"
+      },
+      {
+        "product_name": "لايويو ميرالير",
+        "quantity": "2",
+        "unit_price": "7.50",
+        "item_total": "15"
+      },
+      {
+        "product_name": "كرات فرقع",
+        "quantity": "7",
+        "unit_price": "7.50",
+        "item_total": "52.50"
+      },
+      {
+        "product_name": "كورة 6/4",
+        "quantity": "3",
+        "unit_price": "5.50",
+        "item_total": "16.50"
+      },
+      {
+        "product_name": "بنتى",
+        "quantity": "2",
+        "unit_price": "5",
+        "item_total": "10"
+      },
+      {
+        "product_name": "لايويو كبير",
+        "quantity": "3",
+        "unit_price": "3",
+        "item_total": "9"
+      },
+      {
+        "product_name": "شعرلات مشكل",
+        "quantity": "9",
+        "unit_price": "6",
+        "item_total": "54"
+      },
+      {
+        "product_name": "مسدس ماليوت",
+        "quantity": "3",
+        "unit_price": "10",
+        "item_total": "30"
+      },
+      {
+        "product_name": "ولع",
+        "quantity": "3",
+        "unit_price": "4.50",
+        "item_total": "13.50"
+      },
+      {
+        "product_name": "لبالطوانات",
+        "quantity": "7",
+        "unit_price": "9",
+        "item_total": "63"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة فاتورة يدوية بخط غير واضح في بعض الأجزاء، قد توجد تقديرات في القيم الرقمية."
+  }
+}

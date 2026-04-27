@@ -1,0 +1,97 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_068.jpg",
+  "extracted": {
+    "store_name": "محلات العمرو",
+    "invoice_date": "2025/6/1",
+    "invoice_number": "0338",
+    "total_amount": "33185",
+    "items": [
+      {
+        "product_name": "حملة مافند",
+        "quantity": "12",
+        "unit_price": "200",
+        "item_total": "18990"
+      },
+      {
+        "product_name": "هجوي",
+        "quantity": "12",
+        "unit_price": "270",
+        "item_total": ""
+      },
+      {
+        "product_name": "حم مياه",
+        "quantity": "12",
+        "unit_price": "780",
+        "item_total": ""
+      },
+      {
+        "product_name": "تكوين",
+        "quantity": "12",
+        "unit_price": "900",
+        "item_total": ""
+      },
+      {
+        "product_name": "تكوين",
+        "quantity": "14",
+        "unit_price": "480",
+        "item_total": ""
+      },
+      {
+        "product_name": "كوتشي سكتش",
+        "quantity": "36",
+        "unit_price": "1800",
+        "item_total": ""
+      },
+      {
+        "product_name": "كتافة Bestway",
+        "quantity": "36",
+        "unit_price": "224",
+        "item_total": ""
+      },
+      {
+        "product_name": "بونية",
+        "quantity": "12",
+        "unit_price": "660",
+        "item_total": ""
+      },
+      {
+        "product_name": "كورة هايدر",
+        "quantity": "24",
+        "unit_price": "200",
+        "item_total": ""
+      },
+      {
+        "product_name": "كورة بلاستيك",
+        "quantity": "4",
+        "unit_price": "200",
+        "item_total": ""
+      },
+      {
+        "product_name": "كورة ركبي",
+        "quantity": "12",
+        "unit_price": "960",
+        "item_total": ""
+      },
+      {
+        "product_name": "كورة خانا",
+        "quantity": "12",
+        "unit_price": "1800",
+        "item_total": ""
+      },
+      {
+        "product_name": "كورة كلاس عالمية",
+        "quantity": "12",
+        "unit_price": "1800",
+        "item_total": ""
+      },
+      {
+        "product_name": "كورة بورو",
+        "quantity": "12",
+        "unit_price": "1500",
+        "item_total": ""
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "تم استخراج البيانات بناءً على قراءة الأرقام الموضحة في الفاتورة"
+  }
+}

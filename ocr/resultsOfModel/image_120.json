@@ -1,0 +1,133 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_120.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "2023",
+    "invoice_number": "",
+    "total_amount": "840",
+    "items": [
+      {
+        "product_name": "اى نكل",
+        "quantity": "6",
+        "unit_price": "25",
+        "item_total": "150"
+      },
+      {
+        "product_name": "امتح موضى",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "يونى دميل",
+        "quantity": "6",
+        "unit_price": "25",
+        "item_total": "150"
+      },
+      {
+        "product_name": "رويال",
+        "quantity": "2",
+        "unit_price": "18",
+        "item_total": "36"
+      },
+      {
+        "product_name": "يونى اسيدو",
+        "quantity": "4",
+        "unit_price": "12",
+        "item_total": "48"
+      },
+      {
+        "product_name": "ونق",
+        "quantity": "4",
+        "unit_price": "4",
+        "item_total": "16"
+      },
+      {
+        "product_name": "اقول وافعل",
+        "quantity": "6",
+        "unit_price": "25",
+        "item_total": "150"
+      },
+      {
+        "product_name": "متحور",
+        "quantity": "6",
+        "unit_price": "25",
+        "item_total": "150"
+      },
+      {
+        "product_name": "1*5",
+        "quantity": "2",
+        "unit_price": "14",
+        "item_total": "28"
+      },
+      {
+        "product_name": "ليدو",
+        "quantity": "2",
+        "unit_price": "35",
+        "item_total": "70"
+      },
+      {
+        "product_name": "شن كظا",
+        "quantity": "2",
+        "unit_price": "4",
+        "item_total": "8"
+      },
+      {
+        "product_name": "تون تون",
+        "quantity": "2",
+        "unit_price": "10",
+        "item_total": "20"
+      },
+      {
+        "product_name": "ديسون",
+        "quantity": "2",
+        "unit_price": "20",
+        "item_total": "40"
+      },
+      {
+        "product_name": "استير",
+        "quantity": "12",
+        "unit_price": "4",
+        "item_total": "48"
+      },
+      {
+        "product_name": "الير",
+        "quantity": "12",
+        "unit_price": "20",
+        "item_total": "240"
+      },
+      {
+        "product_name": "اسلم",
+        "quantity": "1",
+        "unit_price": "9",
+        "item_total": "9"
+      },
+      {
+        "product_name": "مس صابون كرم",
+        "quantity": "3",
+        "unit_price": "20",
+        "item_total": "60"
+      },
+      {
+        "product_name": "مس صابون ديصور",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "صور باكتوم راد",
+        "quantity": "1",
+        "unit_price": "75",
+        "item_total": "75"
+      },
+      {
+        "product_name": "صور باكتوم ميم",
+        "quantity": "1",
+        "unit_price": "125",
+        "item_total": "125"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "تم تجميع المبالغ بناءً على المدون في الفاتورة، يوجد بعض عدم الاتساق في الحسابات المكتوبة يدوياً في الأصل."
+  }
+}

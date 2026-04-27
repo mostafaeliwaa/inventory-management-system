@@ -1,0 +1,73 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_026.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "٥/٨/٢٠٠٩",
+    "invoice_number": "0000786",
+    "total_amount": "559",
+    "items": [
+      {
+        "product_name": "سترس علي كاري",
+        "quantity": "18",
+        "unit_price": "40",
+        "item_total": "720"
+      },
+      {
+        "product_name": "سترس كاري",
+        "quantity": "13",
+        "unit_price": "20",
+        "item_total": "260"
+      },
+      {
+        "product_name": "سترس مدخ",
+        "quantity": "4",
+        "unit_price": "25",
+        "item_total": "100"
+      },
+      {
+        "product_name": "عروست دجاج بوبيز",
+        "quantity": "2",
+        "unit_price": "70",
+        "item_total": "140"
+      },
+      {
+        "product_name": "مدكس",
+        "quantity": "6",
+        "unit_price": "145",
+        "item_total": "870"
+      },
+      {
+        "product_name": "بلياردو",
+        "quantity": "1",
+        "unit_price": "250",
+        "item_total": "250"
+      },
+      {
+        "product_name": "علبة مكنيا",
+        "quantity": "1",
+        "unit_price": "40",
+        "item_total": "40"
+      },
+      {
+        "product_name": "علبة مكنيا",
+        "quantity": "1",
+        "unit_price": "45",
+        "item_total": "45"
+      },
+      {
+        "product_name": "علبة مكنيا",
+        "quantity": "1",
+        "unit_price": "55",
+        "item_total": "55"
+      },
+      {
+        "product_name": "ماكينة بريكو",
+        "quantity": "1",
+        "unit_price": "200",
+        "item_total": "200"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة فاتورة يدوية وقد تحتوي على تقديرات للنصوص المكتوبة بخط اليد."
+  }
+}

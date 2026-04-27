@@ -1,0 +1,49 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_023.jpg",
+  "extracted": {
+    "store_name": "بيان",
+    "invoice_date": "2025/4/6",
+    "invoice_number": "500412",
+    "total_amount": "240",
+    "items": [
+      {
+        "product_name": "بسكويت بونجور",
+        "quantity": "1",
+        "unit_price": "45",
+        "item_total": "45"
+      },
+      {
+        "product_name": "بسكويت أوريو",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "توت ميه",
+        "quantity": "1",
+        "unit_price": "35",
+        "item_total": "35"
+      },
+      {
+        "product_name": "ساعة كاسيو",
+        "quantity": "1",
+        "unit_price": "50",
+        "item_total": "50"
+      },
+      {
+        "product_name": "استيك برشمل",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "عدسة ريميل فلو",
+        "quantity": "1",
+        "unit_price": "60",
+        "item_total": "60"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة فاتورة يدوية، قد تكون هناك احتمالية لعدم دقة بعض الأسماء نتيجة الكتابة بخط اليد."
+  }
+}

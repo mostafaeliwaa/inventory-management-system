@@ -1,0 +1,109 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_098.jpg",
+  "extracted": {
+    "store_name": "عمرو و ولاء هدايا",
+    "invoice_date": null,
+    "invoice_number": "4263",
+    "total_amount": "1054",
+    "items": [
+      {
+        "product_name": "طبق طاير",
+        "quantity": "6",
+        "unit_price": "15",
+        "item_total": "90"
+      },
+      {
+        "product_name": "قلب داموند",
+        "quantity": "12",
+        "unit_price": "20",
+        "item_total": "240"
+      },
+      {
+        "product_name": "بطارة",
+        "quantity": "12",
+        "unit_price": "15",
+        "item_total": "180"
+      },
+      {
+        "product_name": "نظارة حواج",
+        "quantity": "3",
+        "unit_price": "50",
+        "item_total": "150"
+      },
+      {
+        "product_name": "نظارة speed",
+        "quantity": "4",
+        "unit_price": "50",
+        "item_total": "200"
+      },
+      {
+        "product_name": "بونيه مصب",
+        "quantity": "3",
+        "unit_price": "48",
+        "item_total": "144"
+      },
+      {
+        "product_name": "مغاطيس",
+        "quantity": "2",
+        "unit_price": "75",
+        "item_total": "150"
+      },
+      {
+        "product_name": "صورة برواز",
+        "quantity": "2",
+        "unit_price": "35",
+        "item_total": "70"
+      },
+      {
+        "product_name": "فويكس",
+        "quantity": "4",
+        "unit_price": "25",
+        "item_total": "100"
+      },
+      {
+        "product_name": "اكباد",
+        "quantity": "7",
+        "unit_price": "75",
+        "item_total": "525"
+      },
+      {
+        "product_name": "قشارة معدن",
+        "quantity": "2",
+        "unit_price": "18",
+        "item_total": "36"
+      },
+      {
+        "product_name": "مسدس صابون",
+        "quantity": "3",
+        "unit_price": "85",
+        "item_total": "255"
+      },
+      {
+        "product_name": "مسدس صابون سمك",
+        "quantity": "3",
+        "unit_price": "75",
+        "item_total": "225"
+      },
+      {
+        "product_name": "مشبك ديناصور",
+        "quantity": "2",
+        "unit_price": "40",
+        "item_total": "80"
+      },
+      {
+        "product_name": "مشبك مكبر",
+        "quantity": "12",
+        "unit_price": "5",
+        "item_total": "60"
+      },
+      {
+        "product_name": "توك",
+        "quantity": "12",
+        "unit_price": "2",
+        "item_total": "24"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من فاتورة مكتوبة بخط اليد."
+  }
+}

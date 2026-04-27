@@ -1,0 +1,49 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_012.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "3534",
+    "total_amount": "56.50",
+    "items": [
+      {
+        "product_name": "حصالة",
+        "quantity": "2",
+        "unit_price": "27.5",
+        "item_total": "75.0"
+      },
+      {
+        "product_name": "لايولول",
+        "quantity": "1",
+        "unit_price": "7.5",
+        "item_total": "7.5"
+      },
+      {
+        "product_name": "لايولوك",
+        "quantity": "3",
+        "unit_price": "2.0",
+        "item_total": "6.0"
+      },
+      {
+        "product_name": "لايويو",
+        "quantity": "6",
+        "unit_price": "2.0",
+        "item_total": "12.0"
+      },
+      {
+        "product_name": "لايويو",
+        "quantity": "2",
+        "unit_price": "2.0",
+        "item_total": "4.0"
+      },
+      {
+        "product_name": "لايويو",
+        "quantity": "3",
+        "unit_price": "4.2",
+        "item_total": "19.8"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من خط يدوي، قد تكون هناك تداخلات في الأرقام."
+  }
+}

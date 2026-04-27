@@ -1,0 +1,37 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_113.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2025/9/9",
+    "invoice_number": "003584",
+    "total_amount": "827",
+    "items": [
+      {
+        "product_name": "بسكويت",
+        "quantity": "24",
+        "unit_price": "33",
+        "item_total": "792"
+      },
+      {
+        "product_name": "بسكويت",
+        "quantity": "1",
+        "unit_price": "43",
+        "item_total": "43"
+      },
+      {
+        "product_name": "بسكويت",
+        "quantity": "13",
+        "unit_price": "48",
+        "item_total": "624"
+      },
+      {
+        "product_name": "بسكويت",
+        "quantity": "8",
+        "unit_price": "58",
+        "item_total": "464"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وبها تداخل في الأرقام، تم استنتاج القيم بناءً على السياق الحسابي."
+  }
+}

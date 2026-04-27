@@ -1,0 +1,49 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_071.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "103768",
+    "total_amount": "139.50",
+    "items": [
+      {
+        "product_name": "جابورب ٢٠",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "كوره خلاط",
+        "quantity": "1",
+        "unit_price": "20",
+        "item_total": "20"
+      },
+      {
+        "product_name": "قفز حربي",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "مضرب برست",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "باتر فيل",
+        "quantity": "1",
+        "unit_price": "12.50",
+        "item_total": "12.50"
+      },
+      {
+        "product_name": "غيل غزار",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "الاسم المكتوب للمشتري: عمرو وردي دجلة"
+  }
+}

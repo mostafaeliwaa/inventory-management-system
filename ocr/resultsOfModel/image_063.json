@@ -1,0 +1,133 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_063.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "",
+    "invoice_number": "8729",
+    "total_amount": "14450",
+    "items": [
+      {
+        "product_name": "استك ايدجو",
+        "quantity": "7",
+        "unit_price": "110",
+        "item_total": "770"
+      },
+      {
+        "product_name": "استك",
+        "quantity": "2",
+        "unit_price": "125",
+        "item_total": "250"
+      },
+      {
+        "product_name": "عروسة كونيافير",
+        "quantity": "2",
+        "unit_price": "125",
+        "item_total": "250"
+      },
+      {
+        "product_name": "خصيات لسة",
+        "quantity": "6",
+        "unit_price": "125",
+        "item_total": "750"
+      },
+      {
+        "product_name": "كوكو بوبيت",
+        "quantity": "4",
+        "unit_price": "20",
+        "item_total": "80"
+      },
+      {
+        "product_name": "بر مصصم",
+        "quantity": "48",
+        "unit_price": "30",
+        "item_total": "1440"
+      },
+      {
+        "product_name": "بر بوبيت",
+        "quantity": "2",
+        "unit_price": "260",
+        "item_total": "520"
+      },
+      {
+        "product_name": "عربية ٤×١",
+        "quantity": "1",
+        "unit_price": "350",
+        "item_total": "350"
+      },
+      {
+        "product_name": "عربية ١×٢",
+        "quantity": "1",
+        "unit_price": "200",
+        "item_total": "200"
+      },
+      {
+        "product_name": "خصيات سيد ريام",
+        "quantity": "6",
+        "unit_price": "125",
+        "item_total": "750"
+      },
+      {
+        "product_name": "ميتجا",
+        "quantity": "4",
+        "unit_price": "100",
+        "item_total": "400"
+      },
+      {
+        "product_name": "قطع كبير شكل",
+        "quantity": "12",
+        "unit_price": "100",
+        "item_total": "1200"
+      },
+      {
+        "product_name": "سي دي نوتة",
+        "quantity": "1",
+        "unit_price": "150",
+        "item_total": "150"
+      },
+      {
+        "product_name": "مسدس",
+        "quantity": "2",
+        "unit_price": "70",
+        "item_total": "140"
+      },
+      {
+        "product_name": "كروت كروت",
+        "quantity": "15",
+        "unit_price": "25",
+        "item_total": "375"
+      },
+      {
+        "product_name": "كلواليت ١×٨",
+        "quantity": "1",
+        "unit_price": "250",
+        "item_total": "250"
+      },
+      {
+        "product_name": "مسدس صابون شكل",
+        "quantity": "3",
+        "unit_price": "100",
+        "item_total": "300"
+      },
+      {
+        "product_name": "بولو",
+        "quantity": "6",
+        "unit_price": "110",
+        "item_total": "660"
+      },
+      {
+        "product_name": "صلة",
+        "quantity": "2",
+        "unit_price": "110",
+        "item_total": "220"
+      },
+      {
+        "product_name": "بازل",
+        "quantity": "6",
+        "unit_price": "100",
+        "item_total": "600"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة فاتورة مكتوبة بخط اليد، قد توجد بعض الاختلافات في أسماء الأصناف بسبب وضوح الخط."
+  }
+}

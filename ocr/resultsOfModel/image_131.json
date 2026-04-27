@@ -1,0 +1,73 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_131.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "00093",
+    "total_amount": "467.20",
+    "items": [
+      {
+        "product_name": "نحل ماريه",
+        "quantity": "2",
+        "unit_price": "45",
+        "item_total": "90"
+      },
+      {
+        "product_name": "مشروب بلديتي كرميل",
+        "quantity": "1",
+        "unit_price": "35",
+        "item_total": "35"
+      },
+      {
+        "product_name": "سلت دقيق",
+        "quantity": "4",
+        "unit_price": "32",
+        "item_total": "128"
+      },
+      {
+        "product_name": "قهوة ماريه",
+        "quantity": "1",
+        "unit_price": "45",
+        "item_total": "45"
+      },
+      {
+        "product_name": "خالة روس",
+        "quantity": "3",
+        "unit_price": "50",
+        "item_total": "150"
+      },
+      {
+        "product_name": "جبنة",
+        "quantity": "2",
+        "unit_price": null,
+        "item_total": null
+      },
+      {
+        "product_name": "كيلو علبة",
+        "quantity": "1",
+        "unit_price": "100",
+        "item_total": "100"
+      },
+      {
+        "product_name": "كولا كانز",
+        "quantity": "2",
+        "unit_price": "20",
+        "item_total": "40"
+      },
+      {
+        "product_name": "كيسة",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "موالح",
+        "quantity": "3",
+        "unit_price": "75",
+        "item_total": "225"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "الخط اليدوي غير واضح في بعض الأجزاء، والأرقام مكتوبة بنظام الأرقام العربية المستخدم في مصر، وقد تم تقدير بعض القيم بناءً على المجموع الإجمالي الظاهر في أسفل الفاتورة."
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_061.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "0726",
+    "total_amount": "1150",
+    "items": [
+      {
+        "product_name": "كورة 101",
+        "quantity": "6",
+        "unit_price": "100",
+        "item_total": "600"
+      },
+      {
+        "product_name": "فروه",
+        "quantity": "4",
+        "unit_price": "30",
+        "item_total": "120"
+      },
+      {
+        "product_name": "ملاية",
+        "quantity": "2",
+        "unit_price": "75",
+        "item_total": "150"
+      },
+      {
+        "product_name": "جال 1×3",
+        "quantity": "24",
+        "unit_price": "10",
+        "item_total": "240"
+      },
+      {
+        "product_name": "ولاعة",
+        "quantity": "6",
+        "unit_price": "40",
+        "item_total": "240"
+      },
+      {
+        "product_name": "أخوات",
+        "quantity": "6",
+        "unit_price": "40",
+        "item_total": "240"
+      },
+      {
+        "product_name": "أخوات + كشاف",
+        "quantity": "4",
+        "unit_price": "60",
+        "item_total": "240"
+      },
+      {
+        "product_name": "أخوات 1×6",
+        "quantity": "4",
+        "unit_price": "55",
+        "item_total": "220"
+      },
+      {
+        "product_name": "أخوات مياه",
+        "quantity": "6",
+        "unit_price": "40",
+        "item_total": "240"
+      },
+      {
+        "product_name": "أكس",
+        "quantity": "4",
+        "unit_price": "50",
+        "item_total": "200"
+      },
+      {
+        "product_name": "صابون مروحة",
+        "quantity": "4",
+        "unit_price": "40",
+        "item_total": "160"
+      },
+      {
+        "product_name": "صابون بطل",
+        "quantity": "16",
+        "unit_price": "50",
+        "item_total": "800"
+      },
+      {
+        "product_name": "صابون مروحة",
+        "quantity": "4",
+        "unit_price": "40",
+        "item_total": "160"
+      },
+      {
+        "product_name": "برسيل علبة صغير",
+        "quantity": "20",
+        "unit_price": "55",
+        "item_total": "1100"
+      },
+      {
+        "product_name": "برسيل علبة",
+        "quantity": "12",
+        "unit_price": "55",
+        "item_total": "660"
+      },
+      {
+        "product_name": "برسيل",
+        "quantity": "1",
+        "unit_price": "250",
+        "item_total": "250"
+      },
+      {
+        "product_name": "برسيل جل وفيل علبة",
+        "quantity": "12",
+        "unit_price": "44",
+        "item_total": "528"
+      },
+      {
+        "product_name": "برسيل علبة بهار",
+        "quantity": "12",
+        "unit_price": "45",
+        "item_total": "540"
+      },
+      {
+        "product_name": "بركوكو",
+        "quantity": "3",
+        "unit_price": "200",
+        "item_total": "600"
+      },
+      {
+        "product_name": "بيريد",
+        "quantity": "12",
+        "unit_price": "250",
+        "item_total": "3000"
+      },
+      {
+        "product_name": "بيريد علبة ص",
+        "quantity": "12",
+        "unit_price": "250",
+        "item_total": "3000"
+      },
+      {
+        "product_name": "بوكس قصدير ديجيتال",
+        "quantity": "12",
+        "unit_price": "50",
+        "item_total": "600"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة الفاتورة، الأسماء مكتوبة بخط اليد وقد تحتوي على تقديرات للأسماء التقنية للمنتجات."
+  }
+}

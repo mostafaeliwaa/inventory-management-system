@@ -1,0 +1,133 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_092.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2025/5/5",
+    "invoice_number": "4351",
+    "total_amount": "346",
+    "items": [
+      {
+        "product_name": "مدى شلة",
+        "quantity": "12",
+        "unit_price": "3",
+        "item_total": "36"
+      },
+      {
+        "product_name": "عوامة هلال",
+        "quantity": "24",
+        "unit_price": "6",
+        "item_total": "144"
+      },
+      {
+        "product_name": "بونية",
+        "quantity": "3",
+        "unit_price": "36",
+        "item_total": "108"
+      },
+      {
+        "product_name": "بونية روليس",
+        "quantity": "15",
+        "unit_price": "36",
+        "item_total": "540"
+      },
+      {
+        "product_name": "بونية كيس",
+        "quantity": "25",
+        "unit_price": "36",
+        "item_total": "34"
+      },
+      {
+        "product_name": "نظارة حرة",
+        "quantity": "15",
+        "unit_price": "12",
+        "item_total": "180"
+      },
+      {
+        "product_name": "نظارة حرة",
+        "quantity": "3",
+        "unit_price": "12",
+        "item_total": "36"
+      },
+      {
+        "product_name": "نظارة علبة فهد",
+        "quantity": "4",
+        "unit_price": "25",
+        "item_total": "100"
+      },
+      {
+        "product_name": "نظارة",
+        "quantity": "11",
+        "unit_price": "24",
+        "item_total": "264"
+      },
+      {
+        "product_name": "عوامة IMA",
+        "quantity": "85",
+        "unit_price": "36",
+        "item_total": "3060"
+      },
+      {
+        "product_name": "عوامة بطة",
+        "quantity": "55",
+        "unit_price": "24",
+        "item_total": "132"
+      },
+      {
+        "product_name": "عوامة هلال",
+        "quantity": "65",
+        "unit_price": "12",
+        "item_total": "78"
+      },
+      {
+        "product_name": "عوامة IMA",
+        "quantity": "15",
+        "unit_price": "6",
+        "item_total": "90"
+      },
+      {
+        "product_name": "عوامة دوتس",
+        "quantity": "25",
+        "unit_price": "4",
+        "item_total": "106"
+      },
+      {
+        "product_name": "عوامة حشرة",
+        "quantity": "25",
+        "unit_price": "4",
+        "item_total": "18"
+      },
+      {
+        "product_name": "عوامة زحليقة",
+        "quantity": "18",
+        "unit_price": "12",
+        "item_total": "216"
+      },
+      {
+        "product_name": "كتافة ديرى",
+        "quantity": "5",
+        "unit_price": "36",
+        "item_total": "180"
+      },
+      {
+        "product_name": "كتافة ص",
+        "quantity": "2",
+        "unit_price": "36",
+        "item_total": "72"
+      },
+      {
+        "product_name": "كتافة ديرى",
+        "quantity": "25",
+        "unit_price": "12",
+        "item_total": "396"
+      },
+      {
+        "product_name": "لايف",
+        "quantity": "2",
+        "unit_price": "12",
+        "item_total": "48"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "المطلوب من السيد: عمرو وادى دحلة"
+  }
+}

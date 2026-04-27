@@ -1,0 +1,97 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_024.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2020/9/9",
+    "invoice_number": "0000944",
+    "total_amount": "12920",
+    "items": [
+      {
+        "product_name": "لا يويو 6*6",
+        "quantity": "6",
+        "unit_price": "400",
+        "item_total": "2400"
+      },
+      {
+        "product_name": "لا يويو مروحة",
+        "quantity": "2",
+        "unit_price": "450",
+        "item_total": "900"
+      },
+      {
+        "product_name": "لا يويو",
+        "quantity": "1",
+        "unit_price": "400",
+        "item_total": "400"
+      },
+      {
+        "product_name": "لا يويو ميرلي",
+        "quantity": "3",
+        "unit_price": "270",
+        "item_total": "810"
+      },
+      {
+        "product_name": "لا يويو",
+        "quantity": "2",
+        "unit_price": "440",
+        "item_total": "880"
+      },
+      {
+        "product_name": "لا يويو ميكس",
+        "quantity": "2",
+        "unit_price": "350",
+        "item_total": "700"
+      },
+      {
+        "product_name": "لا يويو",
+        "quantity": "2",
+        "unit_price": "600",
+        "item_total": "1200"
+      },
+      {
+        "product_name": "لا يويو كورة",
+        "quantity": "14",
+        "unit_price": "60",
+        "item_total": "840"
+      },
+      {
+        "product_name": "لا يويو",
+        "quantity": "2",
+        "unit_price": "250",
+        "item_total": "500"
+      },
+      {
+        "product_name": "لا يويو كلب",
+        "quantity": "2",
+        "unit_price": "275",
+        "item_total": "550"
+      },
+      {
+        "product_name": "لا يويو",
+        "quantity": "2",
+        "unit_price": "375",
+        "item_total": "750"
+      },
+      {
+        "product_name": "لا يويو ميرلي كيس",
+        "quantity": "12",
+        "unit_price": "25",
+        "item_total": "300"
+      },
+      {
+        "product_name": "لا يويو كورة",
+        "quantity": "12",
+        "unit_price": "25",
+        "item_total": "300"
+      },
+      {
+        "product_name": "لا يويو ميرلي",
+        "quantity": "2",
+        "unit_price": "440",
+        "item_total": "880"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من فاتورة مكتوبة بخط اليد؛ قد تكون هناك تفاوتات بسيطة في تقدير الأرقام نظراً لجودة الصورة."
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_029.jpg",
+  "extracted": {
+    "store_name": "وادي دجلة - مدينة",
+    "invoice_date": "",
+    "invoice_number": "0000785",
+    "total_amount": "1540",
+    "items": [
+      {
+        "product_name": "لا بوبو سالية",
+        "quantity": "2",
+        "unit_price": "495",
+        "item_total": "990"
+      },
+      {
+        "product_name": "لا بوبو - قبعة",
+        "quantity": "1",
+        "unit_price": "125",
+        "item_total": "125"
+      },
+      {
+        "product_name": "شورت",
+        "quantity": "1",
+        "unit_price": "200",
+        "item_total": "200"
+      },
+      {
+        "product_name": "تي شيرت عليم",
+        "quantity": "1",
+        "unit_price": "175",
+        "item_total": "175"
+      },
+      {
+        "product_name": "كورة لا بوبو",
+        "quantity": "1",
+        "unit_price": "420",
+        "item_total": "420"
+      },
+      {
+        "product_name": "لا بوبو شطاف",
+        "quantity": "1",
+        "unit_price": "500",
+        "item_total": "500"
+      },
+      {
+        "product_name": "186 إستاند",
+        "quantity": "9",
+        "unit_price": "200",
+        "item_total": "1800"
+      },
+      {
+        "product_name": "كلب لا بوبو",
+        "quantity": "8",
+        "unit_price": "375",
+        "item_total": "3000"
+      },
+      {
+        "product_name": "عروسة فاشن",
+        "quantity": "2",
+        "unit_price": "175",
+        "item_total": "350"
+      },
+      {
+        "product_name": "طقم فرز زير",
+        "quantity": "2",
+        "unit_price": "225",
+        "item_total": "450"
+      },
+      {
+        "product_name": "عربية ابور",
+        "quantity": "2",
+        "unit_price": "265",
+        "item_total": "530"
+      },
+      {
+        "product_name": "مكنة تريكو",
+        "quantity": "1",
+        "unit_price": "475",
+        "item_total": "475"
+      },
+      {
+        "product_name": "كليت",
+        "quantity": "1",
+        "unit_price": "375",
+        "item_total": "375"
+      },
+      {
+        "product_name": "عروسة لا بوبو",
+        "quantity": "1",
+        "unit_price": "445",
+        "item_total": "445"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وبها تداخل في الأرقام، تم استخراج القيم بناءً على السياق الظاهر في الفاتورة."
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_158.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "29/4/2025",
+    "invoice_number": "1190",
+    "total_amount": "1866",
+    "items": [
+      {
+        "product_name": "برجر زلزام اسكوبيني",
+        "quantity": "18",
+        "unit_price": "48",
+        "item_total": "864"
+      },
+      {
+        "product_name": "كيتى",
+        "quantity": "18",
+        "unit_price": "29",
+        "item_total": "522"
+      },
+      {
+        "product_name": "كيكة",
+        "quantity": "24",
+        "unit_price": "22",
+        "item_total": "528"
+      },
+      {
+        "product_name": "فراشة",
+        "quantity": "18",
+        "unit_price": "48",
+        "item_total": "864"
+      },
+      {
+        "product_name": "خماصيم",
+        "quantity": "24",
+        "unit_price": "22",
+        "item_total": "528"
+      },
+      {
+        "product_name": "منجا",
+        "quantity": "24",
+        "unit_price": "22",
+        "item_total": "528"
+      },
+      {
+        "product_name": "بطيخ",
+        "quantity": "24",
+        "unit_price": "22",
+        "item_total": "528"
+      },
+      {
+        "product_name": "نجمة الزوام",
+        "quantity": "24",
+        "unit_price": "42",
+        "item_total": "1008"
+      },
+      {
+        "product_name": "تجامعماية",
+        "quantity": "20",
+        "unit_price": "58",
+        "item_total": "1160"
+      },
+      {
+        "product_name": "كودة",
+        "quantity": "24",
+        "unit_price": "48",
+        "item_total": "1152"
+      },
+      {
+        "product_name": "كرون",
+        "quantity": "24",
+        "unit_price": "42",
+        "item_total": "1008"
+      },
+      {
+        "product_name": "قطة",
+        "quantity": "24",
+        "unit_price": "29",
+        "item_total": "696"
+      },
+      {
+        "product_name": "استنشا",
+        "quantity": "24",
+        "unit_price": "42",
+        "item_total": "1008"
+      },
+      {
+        "product_name": "اريو",
+        "quantity": "18",
+        "unit_price": "68",
+        "item_total": "1224"
+      },
+      {
+        "product_name": "كتكوت",
+        "quantity": "26",
+        "unit_price": "48",
+        "item_total": "1248"
+      },
+      {
+        "product_name": "نجوم سوداء",
+        "quantity": "26",
+        "unit_price": "42",
+        "item_total": "1092"
+      },
+      {
+        "product_name": "كودة بويت",
+        "quantity": "26",
+        "unit_price": "38",
+        "item_total": "988"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة فاتورة بخط يدوي، قد توجد احتمالية لخطأ في قراءة أسماء الأصناف."
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_045.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "",
+    "invoice_number": "02267",
+    "total_amount": "975",
+    "items": [
+      {
+        "product_name": "كرت فرقه",
+        "quantity": "1",
+        "unit_price": "75",
+        "item_total": "75"
+      },
+      {
+        "product_name": "اسفنج فواكه",
+        "quantity": "2",
+        "unit_price": "200",
+        "item_total": "400"
+      },
+      {
+        "product_name": "شالوش هدايا",
+        "quantity": "1",
+        "unit_price": "100",
+        "item_total": "100"
+      },
+      {
+        "product_name": "الوان مياه",
+        "quantity": "6",
+        "unit_price": "50",
+        "item_total": "300"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "المجموع المذكور في أسفل الفاتورة 975، ويوجد اسم العميل (عمرو وادي) مكتوب في خانة المطلوب من السيد."
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_074.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2024/05/05",
+    "invoice_number": "1043",
+    "total_amount": "160.56",
+    "items": [
+      {
+        "product_name": "حلاوة علب",
+        "quantity": "2",
+        "unit_price": "26.75",
+        "item_total": "53.50"
+      },
+      {
+        "product_name": "حلاوة شمع",
+        "quantity": "4",
+        "unit_price": "26",
+        "item_total": "104"
+      },
+      {
+        "product_name": "حلاوة",
+        "quantity": "1",
+        "unit_price": "125",
+        "item_total": "125"
+      },
+      {
+        "product_name": "حلاوة",
+        "quantity": "1",
+        "unit_price": "150",
+        "item_total": "150"
+      },
+      {
+        "product_name": "فول ويسل",
+        "quantity": "12",
+        "unit_price": "18",
+        "item_total": "216"
+      },
+      {
+        "product_name": "معنا وعلينا",
+        "quantity": "12",
+        "unit_price": "4",
+        "item_total": "48"
+      },
+      {
+        "product_name": "بودكاست",
+        "quantity": "12",
+        "unit_price": "4.5",
+        "item_total": "54"
+      },
+      {
+        "product_name": "كورة حليم",
+        "quantity": "24",
+        "unit_price": "22",
+        "item_total": "528"
+      },
+      {
+        "product_name": "ولاعة",
+        "quantity": "12",
+        "unit_price": "4",
+        "item_total": "48"
+      },
+      {
+        "product_name": "بوبيت",
+        "quantity": "24",
+        "unit_price": "7",
+        "item_total": "168"
+      },
+      {
+        "product_name": "بطل شاكوت",
+        "quantity": "6",
+        "unit_price": "95",
+        "item_total": "570"
+      },
+      {
+        "product_name": "مشبك اه",
+        "quantity": "12",
+        "unit_price": "35",
+        "item_total": "420"
+      },
+      {
+        "product_name": "يويو",
+        "quantity": "6",
+        "unit_price": "20",
+        "item_total": "120"
+      },
+      {
+        "product_name": "شطرنج",
+        "quantity": "2",
+        "unit_price": "85",
+        "item_total": "170"
+      },
+      {
+        "product_name": "شطرنج",
+        "quantity": "2",
+        "unit_price": "185",
+        "item_total": "370"
+      },
+      {
+        "product_name": "مكعب",
+        "quantity": "2",
+        "unit_price": "35",
+        "item_total": "70"
+      },
+      {
+        "product_name": "اير هوكي",
+        "quantity": "2",
+        "unit_price": "27",
+        "item_total": "55"
+      },
+      {
+        "product_name": "بيانو",
+        "quantity": "2",
+        "unit_price": "135",
+        "item_total": "270"
+      },
+      {
+        "product_name": "عروسة",
+        "quantity": "6",
+        "unit_price": "32",
+        "item_total": "192"
+      },
+      {
+        "product_name": "عروسة فروزن",
+        "quantity": "6",
+        "unit_price": "105",
+        "item_total": "630"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "المطلوب من السيد: عمرو وردي جملة اسيوط"
+  }
+}

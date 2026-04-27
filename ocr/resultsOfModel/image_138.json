@@ -1,0 +1,25 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_138.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "٢٠٢٠/٥/٣",
+    "invoice_number": "0492",
+    "total_amount": "58",
+    "items": [
+      {
+        "product_name": "سكوير مشكل",
+        "quantity": "٤٥",
+        "unit_price": "١",
+        "item_total": "٤٥"
+      },
+      {
+        "product_name": "سكوير مروح",
+        "quantity": "١٣",
+        "unit_price": "١",
+        "item_total": "١٣"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وبها تداخل في الأرقام، تم تقدير الإجمالي بناءً على المجموع المذكور في أسفل خانة الجنيه (٥٨)"
+  }
+}

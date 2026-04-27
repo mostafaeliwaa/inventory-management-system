@@ -1,0 +1,85 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_014.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2024/2/4",
+    "invoice_number": "2565",
+    "total_amount": "11475",
+    "items": [
+      {
+        "product_name": "روم سوسه",
+        "quantity": "3",
+        "unit_price": "445",
+        "item_total": "1335"
+      },
+      {
+        "product_name": "ليمون وليم",
+        "quantity": "3",
+        "unit_price": "370",
+        "item_total": "1110"
+      },
+      {
+        "product_name": "روم لولو+ش",
+        "quantity": "2",
+        "unit_price": "445",
+        "item_total": "890"
+      },
+      {
+        "product_name": "روم لولو",
+        "quantity": "1",
+        "unit_price": "330",
+        "item_total": "330"
+      },
+      {
+        "product_name": "روم لولو",
+        "quantity": "2",
+        "unit_price": "445",
+        "item_total": "890"
+      },
+      {
+        "product_name": "ليمون اكياس",
+        "quantity": "2",
+        "unit_price": "175",
+        "item_total": "350"
+      },
+      {
+        "product_name": "روم لويوكر",
+        "quantity": "2",
+        "unit_price": "445",
+        "item_total": "890"
+      },
+      {
+        "product_name": "كولا",
+        "quantity": "6",
+        "unit_price": "350",
+        "item_total": "2100"
+      },
+      {
+        "product_name": "روم مل",
+        "quantity": "1",
+        "unit_price": "450",
+        "item_total": "450"
+      },
+      {
+        "product_name": "كلو",
+        "quantity": "3",
+        "unit_price": "325",
+        "item_total": "975"
+      },
+      {
+        "product_name": "كول",
+        "quantity": "14",
+        "unit_price": "60",
+        "item_total": "840"
+      },
+      {
+        "product_name": "عصل",
+        "quantity": "3",
+        "unit_price": "350",
+        "item_total": "1050"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة فاتورة بخط يدوي ويصعب قراءة بعض الأسماء بدقة مطلقة"
+  }
+}

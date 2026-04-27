@@ -1,0 +1,79 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_003.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "",
+    "invoice_number": "2699",
+    "total_amount": "560",
+    "items": [
+      {
+        "product_name": "توني (تونة)",
+        "quantity": "1",
+        "unit_price": "27",
+        "item_total": "27"
+      },
+      {
+        "product_name": "توني (تونة)",
+        "quantity": "1",
+        "unit_price": "22",
+        "item_total": "22"
+      },
+      {
+        "product_name": "سردين",
+        "quantity": "1",
+        "unit_price": "85",
+        "item_total": "85"
+      },
+      {
+        "product_name": "طحينة",
+        "quantity": "2",
+        "unit_price": "8",
+        "item_total": "16"
+      },
+      {
+        "product_name": "مربى توت كبر",
+        "quantity": "1",
+        "unit_price": "45",
+        "item_total": "45"
+      },
+      {
+        "product_name": "مربى توت",
+        "quantity": "1",
+        "unit_price": "35",
+        "item_total": "35"
+      },
+      {
+        "product_name": "خوخ",
+        "quantity": "2",
+        "unit_price": "35",
+        "item_total": "70"
+      },
+      {
+        "product_name": "كولا",
+        "quantity": "2",
+        "unit_price": "22",
+        "item_total": "44"
+      },
+      {
+        "product_name": "مرق",
+        "quantity": "1",
+        "unit_price": "90",
+        "item_total": "90"
+      },
+      {
+        "product_name": "موز",
+        "quantity": "1",
+        "unit_price": "75",
+        "item_total": "75"
+      },
+      {
+        "product_name": "كوكو",
+        "quantity": "1",
+        "unit_price": "100",
+        "item_total": "100"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من خط يدوي، قد تكون هناك احتمالية خطأ في قراءة بعض أسماء المنتجات نظراً لطبيعة الخط."
+  }
+}

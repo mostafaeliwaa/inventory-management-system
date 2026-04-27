@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_084.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "19/5/2020",
+    "invoice_number": "4481",
+    "total_amount": "36",
+    "items": [
+      {
+        "product_name": "سرو",
+        "quantity": "12",
+        "unit_price": "3",
+        "item_total": "36"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "اسم العميل المكتوب: عمرو وادى دحلة"
+  }
+}

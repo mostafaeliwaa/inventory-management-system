@@ -1,0 +1,91 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_030.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "29/4/2020",
+    "invoice_number": "000171",
+    "total_amount": "265",
+    "items": [
+      {
+        "product_name": "ديودرنت",
+        "quantity": "2",
+        "unit_price": "25",
+        "item_total": "60"
+      },
+      {
+        "product_name": "اسكرو",
+        "quantity": "2",
+        "unit_price": "9",
+        "item_total": "18"
+      },
+      {
+        "product_name": "اسكرو ماجيك",
+        "quantity": "2",
+        "unit_price": "20",
+        "item_total": "40"
+      },
+      {
+        "product_name": "لابيل",
+        "quantity": "2",
+        "unit_price": "7",
+        "item_total": "15"
+      },
+      {
+        "product_name": "سمسو",
+        "quantity": "2",
+        "unit_price": "14",
+        "item_total": "26"
+      },
+      {
+        "product_name": "بونسي عسلات",
+        "quantity": "2",
+        "unit_price": "5",
+        "item_total": "10"
+      },
+      {
+        "product_name": "بونسي قماش براني",
+        "quantity": "2",
+        "unit_price": "10",
+        "item_total": "20"
+      },
+      {
+        "product_name": "ديودرنت",
+        "quantity": "2",
+        "unit_price": "24",
+        "item_total": "48"
+      },
+      {
+        "product_name": "ديودرنت مخمر",
+        "quantity": "2",
+        "unit_price": "12",
+        "item_total": "24"
+      },
+      {
+        "product_name": "بودر سباحة",
+        "quantity": "2",
+        "unit_price": "5",
+        "item_total": "10"
+      },
+      {
+        "product_name": "عبارات شعر",
+        "quantity": "2",
+        "unit_price": "24",
+        "item_total": "46"
+      },
+      {
+        "product_name": "بنسك الحظ",
+        "quantity": "2",
+        "unit_price": "4",
+        "item_total": "16"
+      },
+      {
+        "product_name": "رويال",
+        "quantity": "2",
+        "unit_price": "9",
+        "item_total": "18"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة فاتورة يدوية، قد تكون هناك تباينات في الأسماء نتيجة خط اليد."
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_115.jpg",
+  "extracted": {
+    "store_name": "وادى دجلة للجمال",
+    "invoice_date": null,
+    "invoice_number": "4686",
+    "total_amount": "7760",
+    "items": [
+      {
+        "product_name": "عدس خرطوم وسط",
+        "quantity": "2",
+        "unit_price": "425",
+        "item_total": "850"
+      },
+      {
+        "product_name": "بدل",
+        "quantity": "1",
+        "unit_price": "500",
+        "item_total": "500"
+      },
+      {
+        "product_name": "بدل",
+        "quantity": "1",
+        "unit_price": "250",
+        "item_total": "250"
+      },
+      {
+        "product_name": "عربة ريمود",
+        "quantity": "1",
+        "unit_price": "50",
+        "item_total": "50"
+      },
+      {
+        "product_name": "سي دور شكل",
+        "quantity": "5",
+        "unit_price": "225",
+        "item_total": "1125"
+      },
+      {
+        "product_name": "عروة",
+        "quantity": "1",
+        "unit_price": "250",
+        "item_total": "250"
+      },
+      {
+        "product_name": "عدس تلبيض",
+        "quantity": "1",
+        "unit_price": "20",
+        "item_total": "20"
+      },
+      {
+        "product_name": "عدس طاره",
+        "quantity": "1",
+        "unit_price": "150",
+        "item_total": "150"
+      },
+      {
+        "product_name": "عدس قفل كارت",
+        "quantity": "1",
+        "unit_price": "350",
+        "item_total": "350"
+      },
+      {
+        "product_name": "برواز",
+        "quantity": "2",
+        "unit_price": "240",
+        "item_total": "480"
+      },
+      {
+        "product_name": "بدل",
+        "quantity": "1",
+        "unit_price": "420",
+        "item_total": "420"
+      },
+      {
+        "product_name": "بدل",
+        "quantity": "1",
+        "unit_price": "400",
+        "item_total": "400"
+      },
+      {
+        "product_name": "كيس بالسوم",
+        "quantity": "1",
+        "unit_price": "450",
+        "item_total": "450"
+      },
+      {
+        "product_name": "كيس مكنرو",
+        "quantity": "1",
+        "unit_price": "150",
+        "item_total": "150"
+      },
+      {
+        "product_name": "لصيقة",
+        "quantity": "8",
+        "unit_price": "150",
+        "item_total": "1200"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة فاتورة يدوية، بعض الأسماء قد تكون غير واضحة تماماً بسبب خط اليد."
+  }
+}

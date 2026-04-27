@@ -1,0 +1,121 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_060.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "2025/5/28",
+    "invoice_number": "0286",
+    "total_amount": "1077",
+    "items": [
+      {
+        "product_name": "حلاوة",
+        "quantity": "1",
+        "unit_price": "90",
+        "item_total": "90"
+      },
+      {
+        "product_name": "مربى",
+        "quantity": "2",
+        "unit_price": "12",
+        "item_total": "24"
+      },
+      {
+        "product_name": "كراتش",
+        "quantity": "2",
+        "unit_price": "12",
+        "item_total": "24"
+      },
+      {
+        "product_name": "رويال",
+        "quantity": "2",
+        "unit_price": "5",
+        "item_total": "10"
+      },
+      {
+        "product_name": "لاسيل",
+        "quantity": "2",
+        "unit_price": "12.5",
+        "item_total": "25"
+      },
+      {
+        "product_name": "مروحة",
+        "quantity": "4",
+        "unit_price": "7",
+        "item_total": "28"
+      },
+      {
+        "product_name": "دريكسيون",
+        "quantity": "2",
+        "unit_price": "10",
+        "item_total": "20"
+      },
+      {
+        "product_name": "غير محدد",
+        "quantity": "2",
+        "unit_price": "65",
+        "item_total": "130"
+      },
+      {
+        "product_name": "مكعبات",
+        "quantity": "2",
+        "unit_price": "4",
+        "item_total": "8"
+      },
+      {
+        "product_name": "ثلج ص",
+        "quantity": "1",
+        "unit_price": "22",
+        "item_total": "22"
+      },
+      {
+        "product_name": "مسك صابون",
+        "quantity": "2",
+        "unit_price": "6",
+        "item_total": "12"
+      },
+      {
+        "product_name": "صفارة",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "كورة جلد",
+        "quantity": "2",
+        "unit_price": "25",
+        "item_total": "50"
+      },
+      {
+        "product_name": "صورة",
+        "quantity": "6",
+        "unit_price": "5",
+        "item_total": "30"
+      },
+      {
+        "product_name": "نوتيلا",
+        "quantity": "4",
+        "unit_price": "32",
+        "item_total": "128"
+      },
+      {
+        "product_name": "كيس نسكو",
+        "quantity": "2",
+        "unit_price": "12.5",
+        "item_total": "25"
+      },
+      {
+        "product_name": "طيارة سنسور",
+        "quantity": "2",
+        "unit_price": "110",
+        "item_total": "220"
+      },
+      {
+        "product_name": "كريس بورت",
+        "quantity": "1",
+        "unit_price": "160",
+        "item_total": "160"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "الفاتورة مكتوبة بخط اليد وتصعب قراءة بعض الأسماء بدقة مطلقة"
+  }
+}

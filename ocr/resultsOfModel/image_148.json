@@ -1,0 +1,49 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_148.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "٥/٩/٢٠٢٢",
+    "invoice_number": "1511",
+    "total_amount": "9755",
+    "items": [
+      {
+        "product_name": "فرخة بوراك",
+        "quantity": "284",
+        "unit_price": "42",
+        "item_total": "1650"
+      },
+      {
+        "product_name": "بهمة ألوام",
+        "quantity": "26",
+        "unit_price": "42",
+        "item_total": "1548"
+      },
+      {
+        "product_name": "فرآسة بوراك",
+        "quantity": "74",
+        "unit_price": "48",
+        "item_total": "1842"
+      },
+      {
+        "product_name": "كيكة رع + كيكة ميروية",
+        "quantity": "28",
+        "unit_price": "42",
+        "item_total": "1584"
+      },
+      {
+        "product_name": "كروسان",
+        "quantity": "268",
+        "unit_price": "42",
+        "item_total": "1584"
+      },
+      {
+        "product_name": "زهر + وافل",
+        "quantity": "26",
+        "unit_price": "42",
+        "item_total": "1548"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من فاتورة مكتوبة بخط اليد وقد تحتوي على بعض الصعوبات في تفسير دقة أسماء الأصناف."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_002.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "2020/09/19",
+    "invoice_number": "3539",
+    "total_amount": "2200",
+    "items": [
+      {
+        "product_name": "عين جمل و لوز",
+        "quantity": "8",
+        "unit_price": "275",
+        "item_total": "2200"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "الكمية والسعر للوحدة تقديرية بناءً على قسمة الإجمالي (2200) على العدد (8) حيث أن الكتابة اليدوية لخانة الفئة غير واضحة تماماً."
+  }
+}

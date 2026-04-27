@@ -1,0 +1,103 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_155.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "",
+    "invoice_number": "3829",
+    "total_amount": "935",
+    "items": [
+      {
+        "product_name": "إسكوت سويس",
+        "quantity": "12",
+        "unit_price": "45",
+        "item_total": "540"
+      },
+      {
+        "product_name": "إسكوت 2 كوره",
+        "quantity": "12",
+        "unit_price": "45",
+        "item_total": "540"
+      },
+      {
+        "product_name": "سر سر تورتد",
+        "quantity": "16",
+        "unit_price": "45",
+        "item_total": "720"
+      },
+      {
+        "product_name": "سر سر زهر",
+        "quantity": "12",
+        "unit_price": "45",
+        "item_total": "540"
+      },
+      {
+        "product_name": "شمبر فخ 190",
+        "quantity": "10",
+        "unit_price": "55",
+        "item_total": "550"
+      },
+      {
+        "product_name": "كوره جوت شطر",
+        "quantity": "36",
+        "unit_price": "35",
+        "item_total": "1260"
+      },
+      {
+        "product_name": "استك ريمو",
+        "quantity": "6",
+        "unit_price": "50",
+        "item_total": "300"
+      },
+      {
+        "product_name": "استك ريمو 190",
+        "quantity": "12",
+        "unit_price": "40",
+        "item_total": "480"
+      },
+      {
+        "product_name": "مخادمه 190",
+        "quantity": "10",
+        "unit_price": "60",
+        "item_total": "600"
+      },
+      {
+        "product_name": "إسكوت استك",
+        "quantity": "16",
+        "unit_price": "45",
+        "item_total": "720"
+      },
+      {
+        "product_name": "إسكوت اريو",
+        "quantity": "8",
+        "unit_price": "65",
+        "item_total": "520"
+      },
+      {
+        "product_name": "إسكوت فراشه 210",
+        "quantity": "16",
+        "unit_price": "45",
+        "item_total": "720"
+      },
+      {
+        "product_name": "مرايا 20 محج",
+        "quantity": "4",
+        "unit_price": "195",
+        "item_total": "780"
+      },
+      {
+        "product_name": "برواز استرت",
+        "quantity": "12",
+        "unit_price": "50",
+        "item_total": "600"
+      },
+      {
+        "product_name": "برواز استرت 210",
+        "quantity": "10",
+        "unit_price": "15",
+        "item_total": "150"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات المكتوبة بخط اليد صعبة القراءة وقد تحتوي على بعض التقديرات في الأسعار والأرقام نتيجة تداخل الكتابة."
+  }
+}

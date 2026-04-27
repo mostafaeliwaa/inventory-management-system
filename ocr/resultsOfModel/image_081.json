@@ -1,0 +1,67 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_081.jpg",
+  "extracted": {
+    "store_name": "وادي دجلة",
+    "invoice_date": "2025/6/2",
+    "invoice_number": "0002670",
+    "total_amount": "12640",
+    "items": [
+      {
+        "product_name": "فرخة",
+        "quantity": "1",
+        "unit_price": "250",
+        "item_total": "250"
+      },
+      {
+        "product_name": "كوكاكولا",
+        "quantity": "2",
+        "unit_price": "100",
+        "item_total": "200"
+      },
+      {
+        "product_name": "فاكهة",
+        "quantity": "2",
+        "unit_price": "250",
+        "item_total": "500"
+      },
+      {
+        "product_name": "فاكهة ممتازة",
+        "quantity": "2",
+        "unit_price": "250",
+        "item_total": "500"
+      },
+      {
+        "product_name": "سوسيس",
+        "quantity": "1",
+        "unit_price": "240",
+        "item_total": "240"
+      },
+      {
+        "product_name": "أنواع",
+        "quantity": "2",
+        "unit_price": "200",
+        "item_total": "400"
+      },
+      {
+        "product_name": "آيس كريم",
+        "quantity": "6",
+        "unit_price": "15",
+        "item_total": "90"
+      },
+      {
+        "product_name": "خضارة",
+        "quantity": "3",
+        "unit_price": "75",
+        "item_total": "225"
+      },
+      {
+        "product_name": "خضار",
+        "quantity": "4",
+        "unit_price": "65",
+        "item_total": "260"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من صورة الفاتورة، قد تختلف بعض القيم بسبب جودة الخط اليدوي."
+  }
+}

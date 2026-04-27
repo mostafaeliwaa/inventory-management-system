@@ -1,0 +1,67 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_006.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "2024/8/11",
+    "invoice_number": "3528",
+    "total_amount": "1216",
+    "items": [
+      {
+        "product_name": "اسكوشى قطه كاشلك",
+        "quantity": "6",
+        "unit_price": "110",
+        "item_total": "660"
+      },
+      {
+        "product_name": "اسكوشى رجل قطه ص",
+        "quantity": "34",
+        "unit_price": "35",
+        "item_total": "1190"
+      },
+      {
+        "product_name": "اسكوشى اوريوم",
+        "quantity": "36",
+        "unit_price": "75",
+        "item_total": "2700"
+      },
+      {
+        "product_name": "اسكوشى رجل قطه لاكريه",
+        "quantity": "24",
+        "unit_price": "90",
+        "item_total": "2160"
+      },
+      {
+        "product_name": "اسكوشى رجل قطه ارضيه",
+        "quantity": "24",
+        "unit_price": "90",
+        "item_total": "2160"
+      },
+      {
+        "product_name": "اسكوشى د ب ك",
+        "quantity": "6",
+        "unit_price": "100",
+        "item_total": "600"
+      },
+      {
+        "product_name": "اسكوشى اسبرمان",
+        "quantity": "48",
+        "unit_price": "40",
+        "item_total": "1920"
+      },
+      {
+        "product_name": "اسكوشى اوريوم",
+        "quantity": "34",
+        "unit_price": "35",
+        "item_total": "1190"
+      },
+      {
+        "product_name": "اسكوشى رجل قطه ملون",
+        "quantity": "16",
+        "unit_price": "45",
+        "item_total": "720"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من فاتورة مكتوبة بخط اليد؛ تم تحويل الأرقام العربية إلى أرقام لاتينية لضمان توافقها مع الأنظمة الرقمية."
+  }
+}

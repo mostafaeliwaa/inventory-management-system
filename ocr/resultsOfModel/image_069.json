@@ -1,0 +1,25 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_069.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "",
+    "invoice_number": "103822",
+    "total_amount": "264",
+    "items": [
+      {
+        "product_name": "اسكوت اوجيل",
+        "quantity": "7",
+        "unit_price": "25",
+        "item_total": "175"
+      },
+      {
+        "product_name": "سردين",
+        "quantity": "2",
+        "unit_price": "45",
+        "item_total": "90"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وبها بعض التداخل، تم تقدير الأرقام بناءً على السياق الحسابي للفاتورة."
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\ocr\\processing_images\\invoices1\\image_108.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "0133",
+    "total_amount": "17957",
+    "items": [
+      {
+        "product_name": "مغيط سلك",
+        "quantity": "12",
+        "unit_price": "26",
+        "item_total": "312"
+      },
+      {
+        "product_name": "بكره لحام",
+        "quantity": "3",
+        "unit_price": "160",
+        "item_total": "480"
+      },
+      {
+        "product_name": "جونتي اسود",
+        "quantity": "2",
+        "unit_price": "75",
+        "item_total": "150"
+      },
+      {
+        "product_name": "كارت اكسسوار",
+        "quantity": "6",
+        "unit_price": "9",
+        "item_total": "54"
+      },
+      {
+        "product_name": "مسمار برمه",
+        "quantity": "3",
+        "unit_price": "30",
+        "item_total": "90"
+      },
+      {
+        "product_name": "اسكور",
+        "quantity": "1",
+        "unit_price": "30",
+        "item_total": "30"
+      },
+      {
+        "product_name": "بويت",
+        "quantity": "7",
+        "unit_price": "12",
+        "item_total": "84"
+      },
+      {
+        "product_name": "اسبير شفاف",
+        "quantity": "5",
+        "unit_price": "9",
+        "item_total": "45"
+      },
+      {
+        "product_name": "مسمار نحاس",
+        "quantity": "2",
+        "unit_price": "12",
+        "item_total": "24"
+      },
+      {
+        "product_name": "مسمار فشار نيزر",
+        "quantity": "2",
+        "unit_price": "75",
+        "item_total": "150"
+      },
+      {
+        "product_name": "ورنيش اسود",
+        "quantity": "2",
+        "unit_price": "65",
+        "item_total": "130"
+      },
+      {
+        "product_name": "دبوس قلم",
+        "quantity": "3",
+        "unit_price": "25",
+        "item_total": "75"
+      },
+      {
+        "product_name": "طوال كارت",
+        "quantity": "2",
+        "unit_price": "22",
+        "item_total": "296"
+      },
+      {
+        "product_name": "ديس كارت",
+        "quantity": "2",
+        "unit_price": "100",
+        "item_total": "200"
+      },
+      {
+        "product_name": "بيانو",
+        "quantity": "1",
+        "unit_price": "125",
+        "item_total": "125"
+      },
+      {
+        "product_name": "مسمار فل",
+        "quantity": "2",
+        "unit_price": "50",
+        "item_total": "100"
+      },
+      {
+        "product_name": "طقم طير",
+        "quantity": "2",
+        "unit_price": "50",
+        "item_total": "1000"
+      },
+      {
+        "product_name": "سلك اسود",
+        "quantity": "2",
+        "unit_price": "25",
+        "item_total": "50"
+      },
+      {
+        "product_name": "بطل شالوت",
+        "quantity": "1",
+        "unit_price": "90",
+        "item_total": "90"
+      },
+      {
+        "product_name": "ماجيله وقر",
+        "quantity": "2",
+        "unit_price": "24",
+        "item_total": "48"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من فاتورة مكتوبة بخط اليد، قد تختلف أسماء المنتجات قليلاً بسبب الكتابة اليدوية."
+  }
+}
