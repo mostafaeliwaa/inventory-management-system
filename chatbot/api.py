@@ -69,18 +69,6 @@ async def chat_endpoint(request: ChatRequest):
             "final_answer": ""
         }
 
-        from pathlib import Path
-
-
-        # generate image bytes
-        img_bytes = chatbot_graph.get_graph().draw_mermaid_png()
-
-        # save to file
-        output_path = Path("graph.png")
-        with open(output_path, "wb") as f:
-            f.write(img_bytes)
-
-        print(f"Graph saved to {output_path}")
 
         result = await chatbot_graph.ainvoke(initial_state)
 
