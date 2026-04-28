@@ -13,7 +13,7 @@ class DatabaseManager:
     def _connect(self) -> None:
         
         self.client = create_client(self.url, self.key)
-        print("✅ Connected to Supabase")
+        print("Connected to Supabase")
     
     def execute_query(self, query: str):
         if not query.lower().strip().startswith("select"):
