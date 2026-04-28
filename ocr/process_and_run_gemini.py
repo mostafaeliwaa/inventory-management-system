@@ -1,10 +1,3 @@
-"""Preprocess images from original_data/invoices1, save to processing_images/invoices1
-with unique names (image_001, ...), run Gemini extraction on each processed
-image, and save per-image results into ocr/resultsOfModel as JSON.
-
-Run from repository root:
-    python ocr/process_and_run_gemini.py
-"""
 from pathlib import Path
 import json
 import sys
@@ -57,10 +50,8 @@ def main():
         except Exception as e:
             print(f"Failed to process {img_path}: {e}")
 
-    # Setup Gemini model (uses GEMINI_API_KEY env var if not provided)
     model = pipeline.setup_gemini()
 
-    # Run extraction and save per-image JSON
     for p in processed_paths:
         try:
             pil = Image.open(p)
