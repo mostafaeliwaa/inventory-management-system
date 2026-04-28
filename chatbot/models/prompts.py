@@ -1,5 +1,5 @@
 class PromptTemplates:
-    
+
     SQL_GENERATION = """
 You are an expert SQL assistant (PostgreSQL).
 
@@ -47,7 +47,7 @@ Rules:
     - branch_sales(sale_id, product_id, branch_id, quantity_sold)
     - warehouses(warehouse_id, warehouse_name)
     - warehouse_stock(warehouse_stock_id, product_id, warehouse_id, quantity)
-    
+
     QUERY STRATEGY:
 
 1) Identify main entity:
@@ -65,13 +65,15 @@ Rules:
 
     Arabic to English:
     - "كود" or "كود المنتج" → product_id
-    - "اسم" or "اسم المنتج" → product_name  
+    - "اسم" or "اسم المنتج" → product_name
     - "مورد" → supplier_name
     - "الفرع" → branch_name
     - "الكمية" → quantity or stock_quantity
 
+    CONVERSATION HISTORY:
+    {memory}
 
-    QUESTION: {question}
+    CURRENT QUESTION: {question}
     """
         
     FORMAT_ANSWER = """
@@ -84,6 +86,9 @@ Rules:
     - لا تعدل أي رقم أو ID
     - لا تعيد توليد أو استنتاج أي قيم
     - اعتبر "النتيجة من قاعدة البيانات" هي المصدر الوحيد الصحيح
+
+    CONVERSATION HISTORY:
+    {memory}
 
     السؤال:
     {question}
@@ -105,6 +110,9 @@ Rules:
 المستخدم بيسأل على سؤال في المجال ده.
 
 - رد رد منظم في سطرين او 3
+
+CONVERSATION HISTORY:
+{memory}
 
 السؤال:
 جاوب على السؤال ده:\n{question}
