@@ -37,9 +37,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# ============================================================================
 # IMAGE PREPROCESSING FUNCTIONS
-# ============================================================================
 
 def preprocess_full_pipeline(pil_image: Image.Image, max_width: int = 600) -> Image.Image:
     """
@@ -101,9 +99,7 @@ def load_and_preprocess_image(image_path: str, max_width: int = 600) -> Optional
         logger.error(f"Error preprocessing {image_path}: {e}")
         return None
 
-# ============================================================================
 # FOLDER SCANNING AND IMAGE DISCOVERY
-# ============================================================================
 
 def scan_images_recursively(root_dir: str, extensions: List[str] = None) -> List[str]:
     """
@@ -151,9 +147,7 @@ def get_all_images_from_folders(folders: List[str] = None) -> List[str]:
     
     return sorted(list(set(all_images)))
 
-# ============================================================================
 # GEMINI API INTEGRATION
-# ============================================================================
 
 def setup_gemini(api_key: str = None):
     """
@@ -167,8 +161,8 @@ def setup_gemini(api_key: str = None):
         else:
             logger.warning("No Gemini API key provided. Set GEMINI_API_KEY environment variable.")
             return None
-        #models/gemini-3.1-flash-lite-preview    
-        model = genai.GenerativeModel("models/gemini-flash-latest")
+        #models/gemini-flash-latest   
+        model = genai.GenerativeModel("models/gemini-3.1-flash-lite-preview")
         logger.info("Gemini API configured successfully")
         return model
     except Exception as e:
@@ -277,306 +271,3 @@ def extract_invoice_data_gemini(model, image: Image.Image, max_retries: int = 3)
     
     return None
 
-# ============================================================================
-# PIPELINE PROCESSING
-# ============================================================================
-
-def process_single_image(image_path: str, model, output_dir: str = "ocr/results") -> Dict[str, Any]:
-    """
-    Process a single image through the complete pipeline.
-    """
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    image_name = Path(image_path).stem
-    processing_id = f"{image_name}_{timestamp}"
-    
-    result = {
-        "processing_id": processing_id,
-        "image_path": str(image_path),
-        "image_name": image_name,
-        "timestamp": timestamp,
-        "status": "pending",
-        "preprocessed": False,
-        "gemini_processed": False,
-        "error": None
-    }
-    
-    try:
-        # Step 1: Load and preprocess image
-        logger.info(f"Processing image: {image_path}")
-        processed_image = load_and_preprocess_image(image_path)
-        
-        if processed_image is None:
-            result["status"] = "failed"
-            result["error"] = "Failed to preprocess image"
-            return result
-        
-        result["preprocessed"] = True
-        
-        # Step 2: Extract data with Gemini
-        if model:
-            extracted_data = extract_invoice_data_gemini(model, processed_image)
-            
-            if extracted_data:
-                result["gemini_processed"] = True
-                result["extracted_data"] = extracted_data
-                result["status"] = "completed"
-            else:
-                result["status"] = "partial"
-                result["error"] = "Gemini extraction returned no data"
-        else:
-            result["status"] = "skipped"
-            result["error"] = "Gemini API not available"
-        
-    except Exception as e:
-        logger.error(f"Error processing {image_path}: {e}")
-        result["status"] = "failed"
-        result["error"] = str(e)
-    
-    return result
-
-def process_image_batch(image_paths: List[str], model, output_dir: str = "ocr/results") -> List[Dict[str, Any]]:
-    """
-    Process a batch of images through the pipeline.
-    """
-    results = []
-    
-    logger.info(f"Starting batch processing of {len(image_paths)} images")
-    
-    for i, image_path in enumerate(tqdm(image_paths, desc="Processing images")):
-        logger.info(f"Processing image {i+1}/{len(image_paths)}: {image_path}")
-        
-        result = process_single_image(
-            image_path=image_path,
-            model=model,
-            output_dir=output_dir
-        )
-        
-        results.append(result)
-        
-        # Save intermediate results every 10 images
-        if (i + 1) % 10 == 0:
-            batch_results_path = Path(output_dir) / f"batch_results_{i+1}.json"
-            with open(batch_results_path, 'w', encoding='utf-8') as f:
-                json.dump(results, f, ensure_ascii=False, indent=2)
-            logger.info(f"Saved intermediate results to {batch_results_path}")
-    
-    return results
-
-# ============================================================================
-# OUTPUT AND EXPORT
-# ============================================================================
-
-def save_results_to_json(results: List[Dict[str, Any]], output_file: str = "ocr/results/ocr_results.json") -> str:
-    """
-    Save processing results to a JSON file.
-    """
-    output_path = Path(output_file)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    
-    # Create summary statistics
-    total = len(results)
-    completed = sum(1 for r in results if r.get("status") == "completed")
-    failed = sum(1 for r in results if r.get("status") == "failed")
-    partial = sum(1 for r in results if r.get("status") == "partial")
-    
-    summary = {
-        "total_images": total,
-        "completed": completed,
-        "failed": failed,
-        "partial": partial,
-        "success_rate": (completed / total * 100) if total > 0 else 0
-    }
-    
-    # Prepare the complete output data
-    output_data = {
-        "metadata": {
-            "generated_at": datetime.now().isoformat(),
-            "total_results": total,
-            "pipeline_version": "1.0.0"
-        },
-        "summary": summary,
-        "results": results
-    }
-    
-    # Save to file
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(output_data, f, ensure_ascii=False, indent=2)
-    
-    logger.info(f"Saved {len(results)} results to {output_path}")
-    logger.info(f"Summary: {completed} completed, {failed} failed, {partial} partial")
-    
-    return str(output_path)
-
-def export_for_product_matching(results: List[Dict[str, Any]], output_file: str = "ocr/results/products_for_matching.json") -> str:
-    """
-    Extract product data from results for use with product matching system.
-    """
-    products = []
-    
-    for result in results:
-        if result.get("status") == "completed" and "extracted_data" in result:
-            extracted = result["extracted_data"]
-            
-            # Extract items from the invoice
-            if "items" in extracted and isinstance(extracted["items"], list):
-                for item in extracted["items"]:
-                    if isinstance(item, dict) and "product_name" in item:
-                        product_entry = {
-                            "source_image": result["image_path"],
-                            "processing_id": result["processing_id"],
-                            "extracted_text": item.get("product_name", ""),
-                            "quantity": item.get("quantity"),
-                            "unit_price": item.get("unit_price"),
-                            "item_total": item.get("item_total"),
-                            "invoice_metadata": {
-                                "store_name": extracted.get("store_name"),
-                                "invoice_date": extracted.get("invoice_date"),
-                                "invoice_number": extracted.get("invoice_number"),
-                                "currency": extracted.get("currency")
-                            }
-                        }
-                        products.append(product_entry)
-    
-    # Prepare output
-    output_data = {
-        "metadata": {
-            "generated_at": datetime.now().isoformat(),
-            "total_products": len(products),
-            "source_images": len(set(p["source_image"] for p in products))
-        },
-        "products": products
-    }
-    
-    # Save to file
-    output_path = Path(output_file)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(output_data, f, ensure_ascii=False, indent=2)
-    
-    logger.info(f"Exported {len(products)} products for matching to {output_path}")
-    return str(output_path)
-
-# ============================================================================
-# MAIN PIPELINE FUNCTION
-# ============================================================================
-
-def run_complete_pipeline(
-    api_key: str = None,
-    input_folders: List[str] = None,
-    output_dir: str = "ocr/results",
-    max_images: int = None,
-    test_mode: bool = False
-) -> Dict[str, Any]:
-    """
-    Run the complete OCR pipeline.
-    
-    Args:
-        api_key: Gemini API key (optional, can use GEMINI_API_KEY env var)
-        input_folders: List of folders to scan for images
-        output_dir: Directory to save results
-        max_images: Maximum number of images to process (for testing)
-        test_mode: If True, only process a few images
-    
-    Returns:
-        Dictionary with pipeline results
-    """
-    logger.info("=" * 40)
-    logger.info("Starting complete OCR pipeline")
-
-    # Prepare model
-    model = setup_gemini(api_key)
-
-    # Discover images
-    if input_folders:
-        images = []
-        for f in input_folders:
-            images.extend(scan_images_recursively(f))
-        images = sorted(list(set(images)))
-    else:
-        images = get_all_images_from_folders()
-
-    if max_images and max_images > 0:
-        images = images[:max_images]
-
-    if test_mode:
-        images = images[:5]
-
-    logger.info(f"Pipeline will process {len(images)} images")
-
-    if not images:
-        logger.warning("No images found; exiting pipeline")
-        return {"error": "no_images_found", "processed": 0}
-
-    # Ensure output dir exists
-    out_dir_path = Path(output_dir)
-    out_dir_path.mkdir(parents=True, exist_ok=True)
-
-    # Run processing
-    results = process_image_batch(images, model, output_dir=output_dir)
-
-    # Save results and export products
-    results_file = Path(output_dir) / "ocr_results.json"
-    saved_results = save_results_to_json(results, str(results_file))
-
-    products_file = Path(output_dir) / "products_for_matching.json"
-    exported_products = export_for_product_matching(results, str(products_file))
-
-    # Prepare summary
-    total = len(results)
-    completed = sum(1 for r in results if r.get("status") == "completed")
-    failed = sum(1 for r in results if r.get("status") == "failed")
-    partial = sum(1 for r in results if r.get("status") == "partial")
-
-    summary = {
-        "total": total,
-        "completed": completed,
-        "failed": failed,
-        "partial": partial,
-        "results_file": str(saved_results),
-        "products_file": str(exported_products)
-    }
-
-    logger.info(f"Pipeline finished: {completed} completed, {failed} failed, {partial} partial")
-    return {"summary": summary, "results": results}
-
-
-def _build_arg_parser():
-    import argparse
-
-    parser = argparse.ArgumentParser(description="Run complete OCR pipeline")
-    parser.add_argument("--api-key", type=str, default=None, help="Gemini API key")
-    parser.add_argument("--input-folders", type=str, nargs="*", default=None,
-                        help="One or more folders to scan for images")
-    parser.add_argument("--output-dir", type=str, default="ocr/results", help="Directory to write outputs")
-    parser.add_argument("--max-images", type=int, default=0, help="Limit number of images processed (0 = no limit)")
-    parser.add_argument("--test", action="store_true", help="Test mode: process only a few images")
-    return parser
-
-
-def main():
-    parser = _build_arg_parser()
-    args = parser.parse_args()
-
-    max_images = args.max_images if args.max_images and args.max_images > 0 else None
-
-    result = run_complete_pipeline(
-        api_key=args.api_key,
-        input_folders=args.input_folders,
-        output_dir=args.output_dir,
-        max_images=max_images,
-        test_mode=args.test
-    )
-
-    # Print concise summary
-    if isinstance(result, dict) and "summary" in result:
-        s = result["summary"]
-        print(f"Processed: {s['total']} images — {s['completed']} completed, {s['failed']} failed, {s['partial']} partial")
-        print(f"Results JSON: {s['results_file']}")
-        print(f"Products JSON: {s['products_file']}")
-    else:
-        print("Pipeline did not produce a summary. See logs for details.")
-
-
-if __name__ == "__main__":
-    main()
