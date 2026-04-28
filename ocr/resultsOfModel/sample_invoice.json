@@ -1,121 +1,79 @@
 {
-  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\results\\tmp4cvqgw3g.jpg",
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\results\\tmpf12qm7m7.jpg",
   "extracted": {
-    "store_name": null,
-    "invoice_date": "2004/04/20",
-    "invoice_number": "1492",
-    "total_amount": "11695",
+    "store_name": "المجمع",
+    "invoice_date": "2024/4/7",
+    "invoice_number": "1269",
+    "total_amount": "7930",
     "items": [
       {
-        "product_name": "جليع اسكوتش",
+        "product_name": "عروسه متحركه",
         "quantity": "10",
-        "unit_price": "7.20",
-        "item_total": "72"
+        "unit_price": "135",
+        "item_total": "1350"
       },
       {
-        "product_name": "اسكوتش فراولة",
-        "quantity": "24",
-        "unit_price": "4.50",
-        "item_total": "108"
-      },
-      {
-        "product_name": "وافل اسكوتش",
-        "quantity": "24",
-        "unit_price": "5.00",
-        "item_total": "120"
-      },
-      {
-        "product_name": "اسكوتش دبا شفاف",
-        "quantity": "12",
-        "unit_price": "4.50",
-        "item_total": "54"
-      },
-      {
-        "product_name": "منجا اسكوتش",
-        "quantity": "24",
-        "unit_price": "4.50",
-        "item_total": "108"
-      },
-      {
-        "product_name": "ريد اسكوتش",
-        "quantity": "24",
-        "unit_price": "3.50",
-        "item_total": "84"
-      },
-      {
-        "product_name": "برتقالة اسكوتش",
-        "quantity": "12",
-        "unit_price": "4.50",
-        "item_total": "54"
-      },
-      {
-        "product_name": "تفحه اسكوتش",
-        "quantity": "24",
-        "unit_price": "4.50",
-        "item_total": "108"
-      },
-      {
-        "product_name": "تمساح + فار",
-        "quantity": "12",
-        "unit_price": "4.50",
-        "item_total": "54"
-      },
-      {
-        "product_name": "اسكوتش سلحفاة",
-        "quantity": "12",
-        "unit_price": "4.50",
-        "item_total": "54"
-      },
-      {
-        "product_name": "طبلة شوطين",
-        "quantity": "2",
-        "unit_price": "110",
-        "item_total": "220"
-      },
-      {
-        "product_name": "عربة وش معدن",
-        "quantity": "2",
-        "unit_price": "125",
-        "item_total": "250"
-      },
-      {
-        "product_name": "بليز بور",
-        "quantity": "20",
-        "unit_price": "4.50",
-        "item_total": "90"
-      },
-      {
-        "product_name": "نغم ٤ * ١",
-        "quantity": "2",
-        "unit_price": "110",
-        "item_total": "220"
-      },
-      {
-        "product_name": "صلصال + اسكوتش",
-        "quantity": "12",
-        "unit_price": "7.50",
-        "item_total": "90"
-      },
-      {
-        "product_name": "اسلايم شوكلاتة",
-        "quantity": "9",
-        "unit_price": "5.00",
-        "item_total": "45"
-      },
-      {
-        "product_name": "بازل سمكة",
-        "quantity": "6",
-        "unit_price": "20",
-        "item_total": "120"
-      },
-      {
-        "product_name": "حبل عداد",
-        "quantity": "6",
+        "product_name": "كوره مضيئه",
+        "quantity": "48",
         "unit_price": "35",
-        "item_total": "210"
+        "item_total": "1680"
+      },
+      {
+        "product_name": "مسدس ليزر علبه كبيره",
+        "quantity": "4",
+        "unit_price": "100",
+        "item_total": "400"
+      },
+      {
+        "product_name": "اسبيد",
+        "quantity": "6",
+        "unit_price": "60",
+        "item_total": "360"
+      },
+      {
+        "product_name": "اسطوانة الوان",
+        "quantity": "6",
+        "unit_price": "85",
+        "item_total": "510"
+      },
+      {
+        "product_name": "فل عداد",
+        "quantity": "6",
+        "unit_price": "25",
+        "item_total": "150"
+      },
+      {
+        "product_name": "شلة فل",
+        "quantity": "6",
+        "unit_price": "45",
+        "item_total": "270"
+      },
+      {
+        "product_name": "بيت كارت",
+        "quantity": "6",
+        "unit_price": "100",
+        "item_total": "600"
+      },
+      {
+        "product_name": "سيف شفاف",
+        "quantity": "12",
+        "unit_price": "50",
+        "item_total": "600"
+      },
+      {
+        "product_name": "اشكال لعبة",
+        "quantity": "6",
+        "unit_price": "185",
+        "item_total": "1110"
+      },
+      {
+        "product_name": "مغازل بوشايه",
+        "quantity": "12",
+        "unit_price": "75",
+        "item_total": "900"
       }
     ],
     "currency": "جنيه",
-    "notes": "الفاتورة محررة لصالح 'وادى دجلة فرع مصر'. يلاحظ أن المجموع الكلي المكتوب أسفل الفاتورة (11695) لا يتطابق حسابياً مع مجموع البنود المسجلة (الذي يساوي 2061)، مما قد يشير إلى خطأ كتابي في الجمع أو وجود مبالغ أخرى غير مدونة بوضوح."
+    "notes": "فاتورة يدوية لأصناف لعب أطفال. الحسابات تتطابق مع المجموع النهائي المكتوب (7930). تم تخطي البند رقم 5 لوجود شطب عليه."
   }
 }
