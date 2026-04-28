@@ -1,15 +1,3 @@
-"""
-Complete Image Processing and OCR Extraction Pipeline
-=====================================================
-
-A production-ready pipeline for:
-1. Recursively scanning folders for images (handles Windows paths)
-2. Preprocessing invoice images (PDF pages or image files)
-3. Sending processed images to Gemini Vision model
-4. Extracting structured invoice data using optimized prompts
-5. Outputting clean structured JSON ready for product matching system
-"""
-
 import cv2
 import numpy as np
 from PIL import Image, ImageEnhance
@@ -21,7 +9,6 @@ try:
     import json_repair
 except Exception:
     json_repair = json
-    # Optional dependency missing; warn via print (logging configured later)
     print("Optional dependency 'json_repair' not found — falling back to 'json' (no repair features)")
 from tqdm import tqdm
 import google.generativeai as genai
@@ -52,10 +39,9 @@ def preprocess_full_pipeline(pil_image: Image.Image, max_width: int = 600) -> Im
     # HSV enhancement
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV).astype(np.float32)
     
-    # Adjust HSV channels for better text visibility
-    hsv[:, :, 0] *= 0.1    # Hue - reduce color variation
-    hsv[:, :, 1] *= 4.0    # Saturation - increase color intensity
-    hsv[:, :, 2] *= 0.5    # Value - reduce brightness for better contrast
+    hsv[:, :, 0] *= 0.1    
+    hsv[:, :, 1] *= 4.0    
+    hsv[:, :, 2] *= 0.5    
     
     # Clip values to valid ranges
     hsv[:, :, 0] = np.clip(hsv[:, :, 0], 0, 179)
@@ -148,7 +134,6 @@ def get_all_images_from_folders(folders: List[str] = None) -> List[str]:
     return sorted(list(set(all_images)))
 
 # GEMINI API INTEGRATION
-
 def setup_gemini(api_key: str = None):
     """
     Setup Gemini API with optional API key.
