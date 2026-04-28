@@ -6,3 +6,5 @@ pydantic
 langchain-google-genai
 langchain-core
 langgraph-cli[inmem]
+pyodbc
+supabase

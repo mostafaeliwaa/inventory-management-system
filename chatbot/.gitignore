@@ -33,3 +33,9 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/.langgraph_api/
+
+
+.langgraph_api/
+.venv/
+__pycache__/
+.env

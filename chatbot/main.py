@@ -1,5 +1,10 @@
-"""
-Application entry point.
-Initializes and runs the FastAPI app, includes routes,
-and sets up global configuration like app metadata.
-"""
+from Agents import InventoryAssistant
+
+def main():
+    assistant = InventoryAssistant()
+    assistant.run()
+
+
+
+if __name__ == "__main__":
+    main()

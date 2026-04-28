@@ -1,7 +1,7 @@
 {
   "dependencies": ["."],
   "graphs": {
-    "chatbot": "./agent.py:app"
+    "chatbot": "./AI_Inventory_Assistant_app.py:app"
   },
   "env": ".env"
 }

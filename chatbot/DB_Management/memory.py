@@ -1,0 +1,1 @@
+""" Memory management for the inventory assistant """
