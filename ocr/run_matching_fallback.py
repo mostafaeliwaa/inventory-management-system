@@ -8,10 +8,7 @@ from ocr.product_matcher import normalize_product_name
 
 MASTER_CSV = Path('cleaning/output/master_dataframe.csv')
 
-
-# -----------------------------
 # Load product database as a LIST of product NAMES (strings)
-# -----------------------------
 def load_product_database():
     """
     Loads product database and returns:
@@ -29,22 +26,18 @@ def load_product_database():
         reader = csv.DictReader(f)
 
         for row_id, row in enumerate(reader):
-            # Try to find the column that contains product names
             name = None
             
-            # Common column names for product name column
             possible_columns = ['اسم الصنف', 'product_name', 'name', 'Product', 'الصنف', 'اسم المنتج']
             
             for col in possible_columns:
                 if col in row and row[col] and str(row[col]).strip():
                     name = str(row[col]).strip()
                     break
-            
-            # Fallback: use first non-empty column if no match found
             if not name:
                 for col in row:
                     val = row[col]
-                    if val and str(val).strip() and not val.isdigit():  # Avoid numeric IDs as names
+                    if val and str(val).strip() and not val.isdigit():
                         name = str(val).strip()
                         break
             
@@ -52,17 +45,13 @@ def load_product_database():
                 product_names.append(name)
                 product_lookup[row_id] = name
             elif 'id' in row and row['id']:
-                # If only ID exists but no name, use ID as fallback
                 product_names.append(str(row['id']))
                 product_lookup[row_id] = str(row['id'])
 
     print(f"Loaded {len(product_names)} products from CSV")
     return product_names, product_lookup
 
-
-# -----------------------------
 # Init matcher once
-# -----------------------------
 def build_matcher():
     product_names, _ = load_product_database()
 
@@ -70,7 +59,7 @@ def build_matcher():
         raise ValueError("No products loaded from master CSV")
 
     matcher = ProductMatcher(
-        product_database=product_names,  # Now this is a list of actual names!
+        product_database=product_names, 
         model_name="paraphrase-multilingual-MiniLM-L12-v2",
         semantic_weight=0.7,
         fuzzy_weight=0.3,
@@ -81,10 +70,8 @@ def build_matcher():
     matcher.compute_embeddings()
     return matcher
 
-
-# -----------------------------
 # top-k matching - RETURNS ACTUAL PRODUCT NAMES
-# -----------------------------
+
 def get_top_matches(matcher, query, top_k=10):
     normalized_query = normalize_product_name(query, aggressive=True)
 
@@ -119,14 +106,13 @@ def get_top_matches(matcher, query, top_k=10):
     results = []
 
     for idx, score, s, f in combined[:top_k]:
-        # IMPORTANT: Get the ACTUAL product name from the database
         if idx < len(matcher.product_database):
             product_name = matcher.product_database[idx]
         else:
             product_name = f"unknown_{idx}"
         
         results.append({
-            "name": product_name,  # Now this is the actual product name, not an ID!
+            "name": product_name, 
             "score": float(score),
             "semantic": float(s),
             "fuzzy": float(f),
@@ -135,10 +121,7 @@ def get_top_matches(matcher, query, top_k=10):
 
     return results
 
-
-# -----------------------------
 # MAIN FUNCTION
-# -----------------------------
 def run_fallback_matching(extraction: dict, matcher, output_dir: Path, top_k=10):
     items = extraction.get("items", []) if isinstance(extraction, dict) else []
 
@@ -170,10 +153,7 @@ def run_fallback_matching(extraction: dict, matcher, output_dir: Path, top_k=10)
 
     return result, output_path
 
-
-# -----------------------------
 # OPTIONAL: file runner (for testing only)
-# -----------------------------
 def run_from_files(input_file: Path, output_file: Path):
     matcher = build_matcher()
 
@@ -181,8 +161,6 @@ def run_from_files(input_file: Path, output_file: Path):
         data = json.load(f)
 
     extraction = data.get('extracted') or data
-
-    # Need to provide output_dir
     result, _ = run_fallback_matching(extraction, matcher, output_file.parent)
 
     with open(output_file, 'w', encoding='utf-8') as f:
