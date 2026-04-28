@@ -1,12 +1,3 @@
-"""
-Arabic Text Normalization for OCR Product Matching
-==================================================
-
-This module provides comprehensive text normalization functions for Arabic and mixed-script
-product names extracted from OCR systems. Designed for Egyptian market use cases with
-Arabic + English mixed text and common OCR noise patterns.
-"""
-
 import re
 import string
 from typing import Optional, List, Set
@@ -44,41 +35,27 @@ def normalize_arabic(text: str) -> str:
     """
     if not text:
         return ""
-    
-    # Step 1-3: Character normalization using translation tables
-    # Create translation tables for Arabic character normalization
+
     alef_variants = {
-        'أ': 'ا', 'إ': 'ا', 'آ': 'ا',  # Alef variants
-        'ة': 'ه',  # Teh Marbuta
-        'ى': 'ي',  # Alef Maqsura
+        'أ': 'ا', 'إ': 'ا', 'آ': 'ا',  
+        'ة': 'ه',  
+        'ى': 'ي', 
     }
     
-    # Step 4: Remove Arabic diacritics (harakat)
     diacritics = 'ًًٌٌٍٍََُُِِّّْْٰٰ'
     
-    # Combine all replacements into a single translation table
     translation_table = str.maketrans({
         **alef_variants,
         **{d: '' for d in diacritics}
     })
     
-    # Apply character replacements
     text = text.translate(translation_table)
     
-    # Step 5: Remove non-alphanumeric characters
-    # Keep Arabic letters (0600-06FF), English letters, numbers, and spaces
-    # Arabic Unicode range: \u0600-\u06FF
-    # Also include Arabic extended (0750-077F) and Persian/Arabic supplement (FB50-FDFF, FE70-FEFF)
+
     arabic_pattern = r'[^\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z0-9\s]'
     text = re.sub(arabic_pattern, ' ', text)
-    
-    # Step 6: Convert to lowercase (affects English letters only)
     text = text.lower()
-    
-    # Step 7-8: Clean up whitespace
-    # Collapse multiple spaces to single space
     text = re.sub(r'\s+', ' ', text)
-    # Trim leading/trailing whitespace
     text = text.strip()
     
     return text
@@ -113,8 +90,6 @@ def normalize_mixed_script(text: str) -> str:
     if not text:
         return ""
     
-    # First, normalize Arabic characters in the entire text
-    # This handles character-level normalization without removing English
     alef_variants = {'أ': 'ا', 'إ': 'ا', 'آ': 'ا', 'ة': 'ه', 'ى': 'ي'}
     diacritics = 'ًًٌٌٍٍََُُِِّّْْٰٰ'
     
@@ -124,19 +99,15 @@ def normalize_mixed_script(text: str) -> str:
     })
     
     text = text.translate(translation_table)
-    
-    # Convert to lowercase for English portions
-    # We'll handle this by processing the text while preserving Arabic
+
     result_parts = []
     current_part = []
     
     for char in text:
         if '\u0600' <= char <= '\u06FF' or '\u0750' <= char <= '\u077F' or \
            '\uFB50' <= char <= '\uFDFF' or '\uFE70' <= char <= '\uFEFF':
-            # Arabic character - keep as is (already normalized)
             current_part.append(char)
         else:
-            # Non-Arabic character
             if current_part:
                 result_parts.append(''.join(current_part))
                 current_part = []
@@ -147,12 +118,9 @@ def normalize_mixed_script(text: str) -> str:
     
     text = ''.join(result_parts)
     
-    # Remove non-alphanumeric characters except spaces and common punctuation
-    # Keep Arabic, English, numbers, spaces, and basic punctuation (. -)
     pattern = r'[^\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z0-9\s\.\-]'
     text = re.sub(pattern, ' ', text)
     
-    # Clean up whitespace
     text = re.sub(r'\s+', ' ', text)
     text = text.strip()
     
@@ -183,7 +151,6 @@ def remove_stop_words(text: str, language: str = 'arabic') -> str:
     if not text:
         return ""
     
-    # Define stop word lists
     arabic_stop_words = {
         'من', 'إلى', 'عن', 'على', 'مع', 'في', 'هذا', 'هذه', 
         'ذلك', 'تلك', 'كان', 'يكون', 'هو', 'هي', 'هم', 'هن',
@@ -196,7 +163,6 @@ def remove_stop_words(text: str, language: str = 'arabic') -> str:
         'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did'
     }
     
-    # Combine based on language selection
     stop_words = set()
     if language == 'arabic':
         stop_words = arabic_stop_words
@@ -207,13 +173,8 @@ def remove_stop_words(text: str, language: str = 'arabic') -> str:
     else:
         raise ValueError(f"Unsupported language: {language}. Use 'arabic', 'english', or 'both'.")
     
-    # Split text into words
     words = text.split()
-    
-    # Filter out stop words
     filtered_words = [word for word in words if word not in stop_words]
-    
-    # Rejoin with single spaces
     return ' '.join(filtered_words)
 
 
@@ -247,46 +208,29 @@ def normalize_ocr_noise(text: str) -> str:
     if not text:
         return ""
     
-    # Fix 1: Normalize Arabic-Indic digits to Western digits
     arabic_digits = '٠١٢٣٤٥٦٧٨٩'
     western_digits = '0123456789'
     digit_translation = str.maketrans(arabic_digits, western_digits)
     text = text.translate(digit_translation)
-    
-    # Fix 2: Remove repeated characters (3+ repetitions -> 2)
-    # This handles cases like "للله" -> "لله"
+
     text = re.sub(r'(.)\1\1+', r'\1\1', text)
     
-    # Fix 3: Fix common ligature issues
-    # Handle ل + ا that might be separated or combined incorrectly
-    text = re.sub(r'ل\s*ا', 'لا', text)  # ل ا -> لا
-    text = re.sub(r'ل\s*أ', 'لا', text)  # ل أ -> لا
-    text = re.sub(r'ل\s*إ', 'لا', text)  # ل إ -> لا
-    text = re.sub(r'ل\s*آ', 'لا', text)  # ل آ -> لا
-    
-    # Fix 4: Handle stray punctuation at word boundaries
-    # Remove punctuation that's stuck to words
-    text = re.sub(r'(\w)[.,;:!?]+(\s|$)', r'\1\2', text)  # End of word
-    text = re.sub(r'(\s|^)[.,;:!?]+(\w)', r'\1\2', text)  # Start of word
-    
-    # Fix 5: Fix common English OCR errors
-    # 0/O confusion in context
-    text = re.sub(r'\b([A-Za-z])0([A-Za-z])\b', r'\1O\2', text)  # Middle of word
-    text = re.sub(r'\b0([A-Za-z]+)\b', r'O\1', text)  # Start of word
-    text = re.sub(r'\b([A-Za-z]+)0\b', r'\1O', text)  # End of word
-    
-    # 1/I/l confusion
+    text = re.sub(r'ل\s*ا', 'لا', text)
+    text = re.sub(r'ل\s*أ', 'لا', text) 
+    text = re.sub(r'ل\s*إ', 'لا', text)
+    text = re.sub(r'ل\s*آ', 'لا', text)      
+    text = re.sub(r'(\w)[.,;:!?]+(\s|$)', r'\1\2', text) 
+    text = re.sub(r'(\s|^)[.,;:!?]+(\w)', r'\1\2', text)
+
+    text = re.sub(r'\b([A-Za-z])0([A-Za-z])\b', r'\1O\2', text) 
+    text = re.sub(r'\b0([A-Za-z]+)\b', r'O\1', text)
+    text = re.sub(r'\b([A-Za-z]+)0\b', r'\1O', text)  
     text = re.sub(r'\b([A-Za-z])1([A-Za-z])\b', r'\1I\2', text)
     text = re.sub(r'\b1([A-Za-z]+)\b', r'I\1', text)
-    
-    # Fix 6: Remove extra spaces around hyphens
     text = re.sub(r'\s*-\s*', '-', text)
-    
-    # Fix 7: Remove orphaned parentheses and brackets
     text = re.sub(r'\([^)]*\)', lambda m: m.group(0) if '(' in m.group(0) and ')' in m.group(0) else '', text)
     text = re.sub(r'\[[^]]*\]', lambda m: m.group(0) if '[' in m.group(0) and ']' in m.group(0) else '', text)
-    
-    # Final cleanup
+
     text = re.sub(r'\s+', ' ', text)
     text = text.strip()
     
@@ -313,28 +257,17 @@ def normalize_product_name(text: str, aggressive: bool = False) -> str:
     """
     if not text:
         return ""
-    
-    # Step 1: Fix OCR noise
+
     text = normalize_ocr_noise(text)
-    
-    # Step 2: Handle mixed scripts
     text = normalize_mixed_script(text)
-    
-    # Step 3: Apply Arabic normalization
     text = normalize_arabic(text)
-    
-    # Step 4: Optionally remove stop words
     if aggressive:
         text = remove_stop_words(text, 'both')
-    
-    # Step 5: Final cleanup
     text = re.sub(r'\s+', ' ', text)
     text = text.strip()
     
     return text
 
-
-# Test function to verify implementations
 def _test_normalization():
     """Run tests to verify normalization functions work correctly."""
     test_cases = [
@@ -359,10 +292,8 @@ def _test_normalization():
 
 
 if __name__ == "__main__":
-    # Run tests when module is executed directly
     _test_normalization()
     
-    # Example usage
     examples = [
         "إسكواش  فراولة ٥٠٠ جرام",
         "مياه معدنية   (natural water)",
