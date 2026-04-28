@@ -66,12 +66,16 @@ CLI:
 python main.py
 ```
 
+LangSmith Studio:
+```bash
+langgraph dev
+```
+
 API:
 ```bash
 python api.py
 ```
 
----
 
 ## Local Server
 
