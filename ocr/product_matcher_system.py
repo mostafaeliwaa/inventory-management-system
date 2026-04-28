@@ -1,12 +1,3 @@
-"""
-High-Accuracy Product Matching System for OCR-Extracted Invoice Items
-======================================================================
-
-A hybrid matching system for Egyptian market use cases with Arabic + English mixed text.
-Combines text normalization, candidate filtering, semantic similarity, fuzzy matching,
-and learning from user corrections for maximum accuracy.
-"""
-
 import re
 import json
 import pickle
@@ -19,7 +10,6 @@ import time
 from collections import defaultdict
 import warnings
 
-# Try to import optional dependencies with fallbacks
 try:
     from sentence_transformers import SentenceTransformer
     SENTENCE_TRANSFORMERS_AVAILABLE = True
@@ -41,16 +31,13 @@ except ImportError:
     FAISS_AVAILABLE = False
     warnings.warn("FAISS not installed. Install with: pip install faiss-cpu")
 
-# Import normalization functions from the separate module
 try:
     from .product_matcher import normalize_product_name, normalize_arabic, normalize_mixed_script
 except ImportError:
-    # Fallback if running standalone
     def normalize_product_name(text: str, aggressive: bool = False) -> str:
         """Fallback normalization if product_matcher not available."""
         if not text:
             return ""
-        # Simple normalization
         text = re.sub(r'\s+', ' ', text.strip())
         return text.lower()
     
@@ -77,7 +64,6 @@ class MatchResult:
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
         result = asdict(self)
-        # Ensure float values are serializable
         result['score'] = float(result['score'])
         for key in result['method_breakdown']:
             result['method_breakdown'][key] = float(result['method_breakdown'][key])
@@ -128,21 +114,17 @@ class ProductMatcher:
         self.cache_dir = Path(cache_dir) if cache_dir else Path(".") / ".product_matcher_cache"
         self.use_faiss = use_faiss and FAISS_AVAILABLE
         
-        # Create cache directory
         self.cache_dir.mkdir(exist_ok=True)
         
-        # User correction memory
         self.correction_memory: Dict[str, str] = {}
         self.correction_file = self.cache_dir / "corrections.json"
         self._load_corrections()
         
-        # Embeddings cache
         self.embeddings_cache_file = self.cache_dir / f"embeddings_{self._get_db_hash()}.pkl"
         self.embeddings = None
         self.faiss_index = None
         self.model = None
         
-        # Statistics
         self.stats = {
             "total_queries": 0,
             "matches_found": 0,
@@ -229,7 +211,6 @@ class ProductMatcher:
             if not product_words:
                 continue
             
-            # Calculate word overlap
             overlap = len(query_words.intersection(product_words))
             total_unique = len(query_words.union(product_words))
             
@@ -238,14 +219,12 @@ class ProductMatcher:
             
             jaccard_similarity = overlap / total_unique
             
-            # Also check for substring matches (important for Arabic)
             substring_match = any(qw in product for qw in query_words if len(qw) > 2) or \
                              any(pw in query for pw in product_words if len(pw) > 2)
             
             if jaccard_similarity > 0.1 or substring_match:
                 candidates.append((idx, product, jaccard_similarity))
         
-        # Sort by similarity and take top candidates
         candidates.sort(key=lambda x: x[2], reverse=True)
         return [(idx, product) for idx, product, _ in candidates[:max_candidates]]
     
@@ -278,7 +257,6 @@ class ProductMatcher:
         if self.embeddings is not None and not force_recompute:
             return self.embeddings
         
-        # Try to load from cache
         if not force_recompute and self.embeddings_cache_file.exists():
             try:
                 with open(self.embeddings_cache_file, 'rb') as f:
@@ -287,15 +265,13 @@ class ProductMatcher:
                     print(f"Loaded embeddings from cache: {self.embeddings.shape}")
                     return self.embeddings
             except (pickle.PickleError, IOError, KeyError):
-                pass  # Cache corrupted, recompute
+                pass 
         
-        # Compute embeddings
         self._load_model()
         
         print(f"Computing embeddings for {len(self.normalized_database)} products...")
         start_time = time.time()
         
-        # Batch processing for large databases
         batch_size = 64
         all_embeddings = []
         
@@ -305,19 +281,17 @@ class ProductMatcher:
                 batch,
                 convert_to_numpy=True,
                 show_progress_bar=False,
-                normalize_embeddings=True  # Normalize for cosine similarity
+                normalize_embeddings=True
             )
             all_embeddings.append(batch_embeddings)
         
         self.embeddings = np.vstack(all_embeddings)
         
-        # Build FAISS index if requested
         if self.use_faiss:
             dimension = self.embeddings.shape[1]
-            self.faiss_index = faiss.IndexFlatIP(dimension)  # Inner product for cosine similarity
+            self.faiss_index = faiss.IndexFlatIP(dimension)
             self.faiss_index.add(self.embeddings.astype('float32'))
-        
-        # Save to cache
+
         cache_data = {
             'embeddings': self.embeddings,
             'database_hash': self._get_db_hash(),
@@ -350,7 +324,6 @@ class ProductMatcher:
         self._load_model()
         self.compute_embeddings()
         
-        # Encode query
         query_embedding = self.model.encode(
             [query],
             convert_to_numpy=True,
@@ -358,22 +331,19 @@ class ProductMatcher:
         )[0]
         
         if candidate_indices is None:
-            # Score against all products
             if self.use_faiss and self.faiss_index is not None:
-                # Use FAISS for fast similarity search
                 query_embedding_32 = query_embedding.astype('float32').reshape(1, -1)
                 scores, indices = self.faiss_index.search(query_embedding_32, len(self.product_database))
                 results = [(int(idx), float(score)) for idx, score in zip(indices[0], scores[0])]
                 results.sort(key=lambda x: x[1], reverse=True)
                 return results
             else:
-                # Compute dot product (cosine similarity since embeddings are normalized)
                 scores = np.dot(self.embeddings, query_embedding)
                 results = [(i, float(score)) for i, score in enumerate(scores)]
                 results.sort(key=lambda x: x[1], reverse=True)
                 return results
         else:
-            # Score only candidates
+ 
             results = []
             for idx in candidate_indices:
                 if 0 <= idx < len(self.embeddings):
@@ -395,7 +365,6 @@ class ProductMatcher:
             List of (index, score) tuples sorted by score descending
         """
         if not RAPIDFUZZ_AVAILABLE:
-            # Fallback to simple string similarity
             results = []
             targets = self.normalized_database if candidate_indices is None else \
                      [self.normalized_database[i] for i in candidate_indices]
@@ -404,7 +373,7 @@ class ProductMatcher:
                 if not target:
                     score = 0.0
                 else:
-                    # Simple Jaccard similarity as fallback
+
                     query_words = set(query.split())
                     target_words = set(target.split())
                     if not query_words or not target_words:
@@ -420,7 +389,6 @@ class ProductMatcher:
             results.sort(key=lambda x: x[1], reverse=True)
             return results
         
-        # Use rapidfuzz for accurate fuzzy matching
         results = []
         
         if candidate_indices is None:
@@ -434,7 +402,6 @@ class ProductMatcher:
             if not target:
                 score = 0.0
             else:
-                # Use token sort ratio for better handling of word order
                 score = fuzz.token_sort_ratio(query, target) / 100.0
             
             results.append((idx, score))
@@ -456,12 +423,10 @@ class ProductMatcher:
         start_time = time.time()
         self.stats["total_queries"] += 1
         
-        # Step 0: Check user correction memory
         normalized_query = normalize_product_name(query, aggressive=aggressive_normalization)
         correction = self._apply_user_memory(query)
         
         if correction:
-            # Find the index of the corrected product
             try:
                 idx = self.normalized_database.index(correction)
                 matched_product = self.product_database[idx]
@@ -479,46 +444,28 @@ class ProductMatcher:
                 self.stats["matches_found"] += 1
                 return result
             except ValueError:
-                pass  # Correction not in database, continue with normal matching
+                pass  
         
-        # Step 1: Candidate filtering
         candidates = self.filter_candidates(normalized_query, self.normalized_database)
         candidate_indices = [idx for idx, _ in candidates]
         
         if not candidate_indices:
-            # No candidates found, fallback to full database
             candidate_indices = list(range(len(self.product_database)))
         
-        # Step 2: Compute semantic scores for candidates
         semantic_results = self.semantic_score(normalized_query, candidate_indices)
-        
-        # Step 3: Compute fuzzy scores for candidates
         fuzzy_results = self.fuzzy_score(normalized_query, candidate_indices)
-        
-        # Step 4: Combine scores using weighted fusion
-        # Create dictionaries for easy lookup
         semantic_scores = {idx: score for idx, score in semantic_results}
         fuzzy_scores = {idx: score for idx, score in fuzzy_results}
-        
-        # Combine scores for all candidates
         combined_scores = []
         for idx in candidate_indices:
             semantic = semantic_scores.get(idx, 0.0)
             fuzzy = fuzzy_scores.get(idx, 0.0)
-            
-            # Weighted combination
             combined = (self.semantic_weight * semantic) + (self.fuzzy_weight * fuzzy)
             combined_scores.append((idx, combined, semantic, fuzzy))
-        
-        # Sort by combined score
         combined_scores.sort(key=lambda x: x[1], reverse=True)
-        
-        # Step 5: Select best match
         if combined_scores:
             best_idx, best_score, best_semantic, best_fuzzy = combined_scores[0]
             matched_product = self.product_database[best_idx]
-            
-            # Check if score meets threshold
             if best_score >= self.match_threshold:
                 result = MatchResult(
                     original=query,
@@ -535,10 +482,9 @@ class ProductMatcher:
                 )
                 self.stats["matches_found"] += 1
             else:
-                # Below threshold, return original
                 result = MatchResult(
                     original=query,
-                    matched=query,  # Return original as matched
+                    matched=query, 
                     score=best_score,
                     method_breakdown={
                         "semantic": best_semantic,
@@ -550,7 +496,6 @@ class ProductMatcher:
                     is_correction=False
                 )
         else:
-            # No candidates at all (shouldn't happen)
             result = MatchResult(
                 original=query,
                 matched=query,
@@ -560,8 +505,7 @@ class ProductMatcher:
                 normalized_query=normalized_query,
                 is_correction=False
             )
-        
-        # Update statistics
+            
         elapsed_time = time.time() - start_time
         total_time = self.stats["avg_processing_time"] * (self.stats["total_queries"] - 1)
         self.stats["avg_processing_time"] = (total_time + elapsed_time) / self.stats["total_queries"]
