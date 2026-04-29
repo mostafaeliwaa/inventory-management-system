@@ -611,3 +611,172 @@ class ProductMatcher:
             imported = json.load(f)
         self.correction_memory.update(imported)
         self._save_corrections()
+    def get_all_matches(self, query: str, aggressive_normalization: bool = True, 
+                    min_score: float = 0.0) -> List[Dict[str, Any]]:
+              """
+               Get ALL matches for a query (no top-k limit).
+    
+              Args:
+              query: Original OCR-extracted product name
+              aggressive_normalization: Use aggressive normalization
+              min_score: Minimum score threshold
+        
+              Returns:
+               List of all matching products with scores, sorted by score descending
+              """
+              start_time = time.time()
+              self.stats["total_queries"] += 1
+    
+              normalized_query = normalize_product_name(query, aggressive=aggressive_normalization)
+    
+              # Check user correction memory first
+              correction = self._apply_user_memory(query)
+    
+              if correction:
+                try:
+                       idx = self.normalized_database.index(correction)
+                       matched_product = self.product_database[idx]
+                       return [{
+                        "name": matched_product,
+                        "score": 1.0,
+                        "semantic": 1.0,
+                        "fuzzy": 1.0,
+                        "rank": 1,
+                        "is_correction": True,
+                        "id": idx
+                         }]
+                except ValueError:
+                        pass
+    
+             # Get all candidates (no limit)
+              candidates = self.filter_candidates(normalized_query, self.normalized_database,
+                                        max_candidates=len(self.product_database))
+              candidate_indices = [idx for idx, _ in candidates]
+    
+              if not candidate_indices:
+                 candidate_indices = list(range(len(self.product_database)))
+    
+              # Get scores
+              semantic_results = self.semantic_score(normalized_query, candidate_indices)
+              fuzzy_results = self.fuzzy_score(normalized_query, candidate_indices)
+    
+              semantic_dict = {idx: score for idx, score in semantic_results}
+              fuzzy_dict = {idx: score for idx, score in fuzzy_results}
+    
+              # Combine and filter
+              all_results = []
+              for idx in candidate_indices:
+                  semantic = semantic_dict.get(idx, 0.0)
+                  fuzzy = fuzzy_dict.get(idx, 0.0)
+                  combined = (self.semantic_weight * semantic) + (self.fuzzy_weight * fuzzy)
+        
+                  if combined >= min_score:
+                      all_results.append({
+                          "name": self.product_database[idx],
+                          "score": float(combined),
+                          "semantic": float(semantic),
+                          "fuzzy": float(fuzzy),
+                          "id": idx
+                      })
+    
+              # Sort by score
+              all_results.sort(key=lambda x: x["score"], reverse=True)
+    
+              # Add rank
+              for i, result in enumerate(all_results):
+                  result["rank"] = i + 1
+    
+              # Update stats
+              elapsed_time = time.time() - start_time
+              total_time = self.stats["avg_processing_time"] * (self.stats["total_queries"] - 1)
+              self.stats["avg_processing_time"] = (total_time + elapsed_time) / self.stats["total_queries"]
+    
+              return all_results
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
