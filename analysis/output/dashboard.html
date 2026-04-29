@@ -90,7 +90,7 @@
 
         /* Alerts list */
         .alerts-list {
-            max-height: 300px;
+            max-height: 600px;
             overflow-y: auto;
             padding: 10px;
             background: #f9fafb;
@@ -328,6 +328,9 @@
         <div class="nav-label" style="margin-top:10px">التحليل التفصيلى</div>
         <a class="nav-link" data-tab="branch">أداء الفرع</a>
         <a class="nav-link" data-tab="item">توزيع الصنف</a>
+        <a class="nav-link" data-tab="category">تحليل الفئات</a>
+        <a class="nav-link" data-tab="supplier">أداء الموردين</a>
+        <a class="nav-link" data-tab="warehouse">المخازن</a>
     </div>
 </nav>
 
@@ -460,7 +463,7 @@
 
         <div id="item-content" style="display:none;">
             <div id="item-info" class="kpi-grid"></div>
-            
+
             <!-- New KPIs for best/worst branch -->
             <div class="row g-3 mb-4">
                 <div class="col-md1-6">
@@ -470,7 +473,7 @@
                     <div id="item-worst-branch" class="kpi-card danger"></div>
                 </div>
             </div>
-            
+
             <!-- Category and basic info -->
             <div class="row mb-4">
                 <div class="col-12">
@@ -503,10 +506,10 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Chart -->
             <div class="chart-container"><div id="chart-item-distribution"></div></div>
-            
+
             <!-- Detailed Table -->
             <div class="row mb-4">
                 <div class="col-12">
@@ -538,9 +541,64 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Enhanced Out of Stock Section -->
             <div id="item-risk" class="table-container"></div>
+        </div>
+    </div>
+
+    <!-- ===================== TAB 4: CATEGORY ANALYSIS ===================== -->
+    <div id="tab-category" class="tab-panel">
+        <h2 class="section-title">تحليل الفئات</h2>
+
+        <!-- Category KPIs -->
+        <div id="category-kpis" class="kpi-grid"></div>
+
+        <!-- Category Charts -->
+        <div class="row g-3">
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-category-treemap"></div></div></div>
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-category-bar"></div></div></div>
+        </div>
+
+        <!-- Main Category Breakdown -->
+        <h2 class="section-title">المجموعات الرئيسية</h2>
+        <div class="row g-3">
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-main-category-treemap"></div></div></div>
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-category-sell-through"></div></div></div>
+        </div>
+
+        <!-- Category Table -->
+        <div class="table-container" id="table-category-details"></div>
+    </div>
+
+    <!-- ===================== TAB 5: SUPPLIER PERFORMANCE ===================== -->
+    <div id="tab-supplier" class="tab-panel">
+        <h2 class="section-title">أداء الموردين</h2>
+
+        <!-- Supplier KPIs -->
+        <div id="supplier-kpis" class="kpi-grid"></div>
+
+        <!-- Supplier Charts -->
+        <div class="row g-3">
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-supplier-sales"></div></div></div>
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-supplier-products"></div></div></div>
+        </div>
+
+        <!-- Supplier Table -->
+        <div class="table-container" id="table-supplier-details"></div>
+    </div>
+
+    <!-- ===================== TAB 6: WAREHOUSE OVERVIEW ===================== -->
+    <div id="tab-warehouse" class="tab-panel">
+        <h2 class="section-title">نظرة عامة على المخازن</h2>
+
+        <!-- Warehouse KPIs -->
+        <div id="warehouse-kpis" class="kpi-grid"></div>
+
+        <!-- Warehouse Charts -->
+        <div class="row g-3">
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-warehouse-pie"></div></div></div>
+            <div class="col-lg-6"><div class="chart-container"><div id="chart-warehouse-vs-branch"></div></div></div>
         </div>
     </div>
 </div>
@@ -606,6 +664,11 @@ fetch('dashboard_data.json')
         renderInventoryValue(data.branch_stock_value);
         renderDeadStockChart(data.dead_stock);
         renderDeadStockTable(data.dead_stock);
+
+        // --- New tabs ---
+        if (data.category_analysis) renderCategoryTab(data.category_analysis, data.main_category_analysis);
+        if (data.supplier_performance) renderSupplierTab(data.supplier_performance);
+        if (data.warehouse_overview) renderWarehouseTab(data.warehouse_overview, data.branch_stock_value);
 
         // --- Populate branch dropdown ---
         populateBranchDropdown(data.sales_branches);
@@ -997,7 +1060,7 @@ function renderBranchDrilldown(branchName) {
     if (outOfStock.length === 0) {
         outOfStockHTML = '<div class="alert-item" style="background:#fef2f2;color:#dc2626;"><div class="alert-icon">✅</div><div class="alert-text">لا توجد منتجات نفد مخزونها</div></div>';
     } else {
-        outOfStock.slice(0, 10).forEach(item => {
+        outOfStock.forEach(item => {
             outOfStockHTML += `
                 <div class="alert-item" style="background:#fef2f2;color:#dc2626;">
                     <div class="alert-icon">🔴</div>
@@ -1008,9 +1071,6 @@ function renderBranchDrilldown(branchName) {
                 </div>
             `;
         });
-        if (outOfStock.length > 10) {
-            outOfStockHTML += `<div class="alert-item" style="background:#fef2f2;color:#dc2626;"><div class="alert-icon">📊</div><div class="alert-text">+ ${outOfStock.length - 10} منتجات أخرى</div></div>`;
-        }
     }
     document.getElementById('branch-alerts-out-of-stock').innerHTML = outOfStockHTML;
 
@@ -1019,7 +1079,7 @@ function renderBranchDrilldown(branchName) {
     if (lowStock.length === 0) {
         lowStockHTML = '<div class="alert-item" style="background:#fefce8;color:#ca8a04;"><div class="alert-icon">✅</div><div class="alert-text">لا توجد منتجات قرب نفاد المخزون</div></div>';
     } else {
-        lowStock.slice(0, 10).forEach(item => {
+        lowStock.forEach(item => {
             lowStockHTML += `
                 <div class="alert-item" style="background:#fefce8;color:#ca8a04;">
                     <div class="alert-icon">🟡</div>
@@ -1030,9 +1090,6 @@ function renderBranchDrilldown(branchName) {
                 </div>
             `;
         });
-        if (lowStock.length > 10) {
-            lowStockHTML += `<div class="alert-item" style="background:#fefce8;color:#ca8a04;"><div class="alert-icon">📊</div><div class="alert-text">+ ${lowStock.length - 10} منتجات أخرى</div></div>`;
-        }
     }
     document.getElementById('branch-alerts-low-stock').innerHTML = lowStockHTML;
 
@@ -1041,7 +1098,7 @@ function renderBranchDrilldown(branchName) {
     if (healthyStock.length === 0) {
         healthyStockHTML = '<div class="alert-item" style="background:#f0fdf4;color:#16a34a;"><div class="alert-icon">⚠️</div><div class="alert-text">لا توجد منتجات بمخزون كافي</div></div>';
     } else {
-        healthyStock.slice(0, 10).forEach(item => {
+        healthyStock.forEach(item => {
             healthyStockHTML += `
                 <div class="alert-item" style="background:#f0fdf4;color:#16a34a;">
                     <div class="alert-icon">🟢</div>
@@ -1052,9 +1109,6 @@ function renderBranchDrilldown(branchName) {
                 </div>
             `;
         });
-        if (healthyStock.length > 10) {
-            healthyStockHTML += `<div class="alert-item" style="background:#f0fdf4;color:#16a34a;"><div class="alert-icon">📊</div><div class="alert-text">+ ${healthyStock.length - 10} منتجات أخرى</div></div>`;
-        }
     }
     document.getElementById('branch-alerts-healthy-stock').innerHTML = healthyStockHTML;
 
@@ -1206,6 +1260,166 @@ function renderBranchDrilldown(branchName) {
             '<div class="empty-state"><div class="icon">📊</div><p>لا توجد بيانات كافية لعرض حركة المخزون</p></div>';
         document.getElementById('branch-inventory-summary').innerHTML =
             '<p>لا توجد بيانات كافية لعرض ملخص الحركة</p>';
+    }
+}
+
+// ============================================================
+// TAB 4: CATEGORY ANALYSIS
+// ============================================================
+function renderCategoryTab(cats, mainCats) {
+    // KPIs
+    const totalCats = cats.length;
+    const topCat = cats[0] || {};
+    const totalProducts = cats.reduce((s, c) => s + (c.product_count || 0), 0);
+    document.getElementById('category-kpis').innerHTML = `
+        <div class="kpi-card"><div class="value">${totalCats}</div><div class="label">عدد الفئات</div></div>
+        <div class="kpi-card accent"><div class="value">${fmt(totalProducts)}</div><div class="label">اجمالى المنتجات</div></div>
+        <div class="kpi-card success"><div class="value">${topCat.category_name || '-'}</div><div class="label">أعلى فئة مبيعاً</div></div>
+        <div class="kpi-card warning"><div class="value">${fmt(topCat.total_sales || 0)}</div><div class="label">مبيعات أعلى فئة</div></div>
+    `;
+
+    // Category treemap
+    const top20 = cats.filter(c => c.total_sales > 0).slice(0, 20);
+    Plotly.newPlot('chart-category-treemap', [{
+        type: 'treemap',
+        labels: top20.map(c => c.category_name),
+        parents: top20.map(() => ''),
+        values: top20.map(c => c.total_sales),
+        marker: {colorscale: 'Blues', colors: top20.map(c => c.total_sales)},
+        textinfo: 'label+value+percent root',
+        textfont: {size: 13, family: CHART_FONT},
+    }], {...CHART_LAYOUT, title: 'توزيع المبيعات حسب الفئة', height: 500}, CFG);
+
+    // Category bar chart (top 15)
+    const bar15 = cats.filter(c => c.total_sales > 0).slice(0, 15).reverse();
+    Plotly.newPlot('chart-category-bar', [{
+        type: 'bar', orientation: 'h',
+        x: bar15.map(c => c.total_sales),
+        y: bar15.map(c => c.category_name.substring(0, 30)),
+        marker: {color: '#0f3460'},
+        text: bar15.map(c => fmt(c.total_sales)),
+        textposition: 'outside',
+    }], {...CHART_LAYOUT, title: 'أعلى 15 فئة مبيعاً', xaxis: {...CHART_LAYOUT.xaxis, title: 'المبيعات (وحدة)'}, height: 550}, CFG);
+
+    // Main category treemap
+    if (mainCats && mainCats.length > 0) {
+        const mainTop = mainCats.filter(c => c.total_sales > 0).slice(0, 15);
+        Plotly.newPlot('chart-main-category-treemap', [{
+            type: 'treemap',
+            labels: mainTop.map(c => c.main_category_name),
+            parents: mainTop.map(() => ''),
+            values: mainTop.map(c => c.total_sales),
+            marker: {colorscale: 'Reds', colors: mainTop.map(c => c.total_sales)},
+            textinfo: 'label+value+percent root',
+            textfont: {size: 13, family: CHART_FONT},
+        }], {...CHART_LAYOUT, title: 'توزيع المبيعات حسب المجموعة الرئيسية', height: 500}, CFG);
+    }
+
+    // Sell-through by category (top 15 with sales)
+    const st15 = cats.filter(c => c.sell_through > 0).sort((a, b) => b.sell_through - a.sell_through).slice(0, 15).reverse();
+    Plotly.newPlot('chart-category-sell-through', [{
+        type: 'bar', orientation: 'h',
+        x: st15.map(c => c.sell_through),
+        y: st15.map(c => c.category_name.substring(0, 30)),
+        marker: {color: st15.map(c => c.sell_through >= 40 ? '#10b981' : c.sell_through >= 20 ? '#f97316' : '#ef4444')},
+        text: st15.map(c => c.sell_through + '%'),
+        textposition: 'outside',
+    }], {...CHART_LAYOUT, title: 'معدل البيع حسب الفئة (Sell-Through %)', xaxis: {...CHART_LAYOUT.xaxis, title: 'معدل البيع %'}, height: 550}, CFG);
+
+    // Category table
+    const rows = cats.filter(c => c.total_sales > 0 || c.total_stock > 0).slice(0, 30).map((c, i) =>
+        `<tr><td>${i + 1}</td><td>${c.category_name}</td><td>${fmt(c.product_count)}</td><td>${fmt(c.total_sales)}</td><td>${fmt(c.total_stock)}</td><td>${c.sell_through}%</td><td>${c.avg_price ? fmt(Math.round(c.avg_price)) : '-'}</td></tr>`
+    ).join('');
+    document.getElementById('table-category-details').innerHTML = `
+        <h5>تفاصيل الفئات (أعلى 30)</h5>
+        <table class="table table-striped table-hover"><thead class="table-dark"><tr><th>#</th><th>الفئة</th><th>عدد المنتجات</th><th>المبيعات</th><th>المخزون</th><th>معدل البيع</th><th>متوسط السعر</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// ============================================================
+// TAB 5: SUPPLIER PERFORMANCE
+// ============================================================
+function renderSupplierTab(suppliers) {
+    const totalSuppliers = suppliers.length;
+    const topSupplier = suppliers[0] || {};
+    const totalSupplierProducts = suppliers.reduce((s, sp) => s + (sp.product_count || 0), 0);
+
+    document.getElementById('supplier-kpis').innerHTML = `
+        <div class="kpi-card"><div class="value">${totalSuppliers}</div><div class="label">عدد الموردين</div></div>
+        <div class="kpi-card accent"><div class="value">${fmt(totalSupplierProducts)}</div><div class="label">اجمالى المنتجات الموردة</div></div>
+        <div class="kpi-card success"><div class="value">${topSupplier.supplier_name || '-'}</div><div class="label">أعلى مورد مبيعاً</div></div>
+        <div class="kpi-card warning"><div class="value">${fmt(topSupplier.total_sales || 0)}</div><div class="label">مبيعات أعلى مورد</div></div>
+    `;
+
+    // Top suppliers by sales
+    const salesTop = suppliers.filter(s => s.total_sales > 0).slice(0, 15).reverse();
+    Plotly.newPlot('chart-supplier-sales', [{
+        type: 'bar', orientation: 'h',
+        x: salesTop.map(s => s.total_sales),
+        y: salesTop.map(s => s.supplier_name.substring(0, 30)),
+        marker: {color: '#0f3460'},
+        text: salesTop.map(s => fmt(s.total_sales)),
+        textposition: 'outside',
+    }], {...CHART_LAYOUT, title: 'أعلى 15 مورد حسب المبيعات', xaxis: {...CHART_LAYOUT.xaxis, title: 'المبيعات (وحدة)'}, height: 550}, CFG);
+
+    // Top suppliers by product count
+    const prodTop = [...suppliers].sort((a, b) => b.product_count - a.product_count).slice(0, 15).reverse();
+    Plotly.newPlot('chart-supplier-products', [{
+        type: 'bar', orientation: 'h',
+        x: prodTop.map(s => s.product_count),
+        y: prodTop.map(s => s.supplier_name.substring(0, 30)),
+        marker: {color: '#e94560'},
+        text: prodTop.map(s => fmt(s.product_count)),
+        textposition: 'outside',
+    }], {...CHART_LAYOUT, title: 'أعلى 15 مورد حسب عدد المنتجات', xaxis: {...CHART_LAYOUT.xaxis, title: 'عدد المنتجات'}, height: 550}, CFG);
+
+    // Supplier table
+    const rows = suppliers.map((s, i) =>
+        `<tr><td>${i + 1}</td><td>${s.supplier_name}</td><td>${fmt(s.product_count)}</td><td>${fmt(s.total_sales)}</td><td>${fmt(s.total_stock)}</td></tr>`
+    ).join('');
+    document.getElementById('table-supplier-details').innerHTML = `
+        <h5>جدول أداء الموردين</h5>
+        <table class="table table-striped table-hover"><thead class="table-dark"><tr><th>#</th><th>المورد</th><th>عدد المنتجات</th><th>المبيعات</th><th>المخزون</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// ============================================================
+// TAB 6: WAREHOUSE OVERVIEW
+// ============================================================
+function renderWarehouseTab(wh, branchValue) {
+    document.getElementById('warehouse-kpis').innerHTML = `
+        <div class="kpi-card"><div class="value">${fmt(wh.total_inventory_qty)}</div><div class="label">اجمالى المخزون (كل المواقع)</div></div>
+        <div class="kpi-card accent"><div class="value">${fmt(wh.warehouse_qty)}</div><div class="label">مخزون المخازن</div></div>
+        <div class="kpi-card warning"><div class="value">${fmt(wh.branch_total_qty)}</div><div class="label">مخزون الفروع</div></div>
+        <div class="kpi-card success"><div class="value">${wh.warehouse_pct}%</div><div class="label">نسبة المخازن من الاجمالى</div></div>
+        <div class="kpi-card"><div class="value">${fmt(wh.warehouse_cost_value)}</div><div class="label">قيمة مخزون المخازن (تكلفة)</div></div>
+        <div class="kpi-card accent"><div class="value">${fmt(wh.warehouse_retail_value)}</div><div class="label">قيمة مخزون المخازن (بيع)</div></div>
+    `;
+
+    // Pie chart: warehouse vs branches
+    Plotly.newPlot('chart-warehouse-pie', [{
+        type: 'pie',
+        labels: ['المخازن', 'الفروع'],
+        values: [wh.warehouse_qty, wh.branch_total_qty],
+        marker: {colors: ['#0f3460', '#e94560']},
+        textinfo: 'label+percent',
+        textfont: {family: CHART_FONT, size: 14},
+        hole: 0.4,
+    }], {...CHART_LAYOUT, title: 'توزيع المخزون: المخازن مقابل الفروع', height: 450}, CFG);
+
+    // Bar: warehouse vs each branch stock
+    if (branchValue && branchValue.length > 0) {
+        const labels = ['المخزن الرئيسى', ...branchValue.map(b => b['الفرع'])];
+        const values = [wh.warehouse_qty, ...branchValue.map(b => b['الكمية'])];
+        const colors = ['#0f3460', ...branchValue.map(() => '#e94560')];
+        const sorted = labels.map((l, i) => ({label: l, value: values[i], color: colors[i]})).sort((a, b) => a.value - b.value);
+
+        Plotly.newPlot('chart-warehouse-vs-branch', [{
+            type: 'bar', orientation: 'h',
+            x: sorted.map(d => d.value),
+            y: sorted.map(d => d.label),
+            marker: {color: sorted.map(d => d.color)},
+            text: sorted.map(d => fmt(d.value)),
+            textposition: 'outside',
+        }], {...CHART_LAYOUT, title: 'مقارنة المخزون: المخزن مقابل كل فرع', xaxis: {...CHART_LAYOUT.xaxis, title: 'الكمية (وحدة)'}, height: 500}, CFG);
     }
 }
 
