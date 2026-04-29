@@ -279,70 +279,59 @@ async def process_invoice(file: UploadFile = File(...)) -> JSONResponse:
                     "original_name": product_name
                 }
         
-        # Build products list from matches
-        products_list = []
-        matches_summary = matches.get("summary", []) if isinstance(matches, dict) else []
-        
-        for match_item in matches_summary:
-            query = match_item.get("query", "")
-            matched_list = match_item.get("matched", [])
-            
-            # Best match (first one)
-            best_match = matched_list[0] if matched_list else None
-            
-            # 🔧 البحث عن الكمية وسعر الوحدة من بيانات الفاتورة
-            quantity = None
-            unit_price = None
-            item_total = None
-            
-            # البحث الأول: بالاسم المطابق تماماً
-            if query in items_dict:
-                quantity = items_dict[query].get("quantity")
-                unit_price = items_dict[query].get("unit_price")
-                item_total = items_dict[query].get("item_total")
-            else:
-                # البحث الثاني: بالتطبيع
-                normalized_query = normalize_product_name(query) if query else ""
-                if normalized_query in items_dict:
-                    quantity = items_dict[normalized_query].get("quantity")
-                    unit_price = items_dict[normalized_query].get("unit_price")
-                    item_total = items_dict[normalized_query].get("item_total")
-                else:
-                    # البحث الثالث: بجزء من الاسم
-                    for prod_name, details in items_dict.items():
-                        if query and prod_name and (query in prod_name or prod_name in query):
-                            quantity = details.get("quantity")
-                            unit_price = details.get("unit_price")
-                            item_total = details.get("item_total")
-                            break
-            
-            products_list.append({
-                "name": query,
-                "product_name": query,
-                "match": {
-                    "matched_product": best_match.get("name") if best_match else None,
-                    "score": best_match.get("score") if best_match else None,
-                    "similarity": best_match.get("score") if best_match else None,
-                },
-                "top_matches": matched_list,
-                "quantity": quantity,      # 🔧 الآن القيمة من الفاتورة
-                "unit_price": unit_price,  # 🔧 الآن القيمة من الفاتورة
-                "item_total": item_total,  # 🔧 الآن القيمة من الفاتورة
-            })
-        
-        # If no matches found, fallback to invoice items
-        if not products_list and items_from_invoice:
-            for item in items_from_invoice:
-                products_list.append({
-                    "name": item.get("product_name", ""),
-                    "product_name": item.get("product_name", ""),
-                    "quantity": item.get("quantity"),
-                    "unit_price": item.get("unit_price"),
-                    "item_total": item.get("item_total"),
-                    "match": {},
-                    "top_matches": [],
-                })
+            # Build products list from matches
+            products_list = []
+            matches_summary = matches.get("summary", []) if isinstance(matches, dict) else []
 
+            for match_item in matches_summary:
+                query = match_item.get("query", "")
+                matched_list = match_item.get("matched", [])  # Now contains ALL matches
+    
+                # Best match (first one in the list)
+                best_match = matched_list[0] if matched_list else None
+    
+                # Search for quantity and unit price from invoice data
+                quantity = None
+                unit_price = None
+                item_total = None
+    
+                # Search by exact match
+                if query in items_dict:
+                    quantity = items_dict[query].get("quantity")
+                    unit_price = items_dict[query].get("unit_price")
+                    item_total = items_dict[query].get("item_total")
+                else:
+                    # Search by normalized name
+                    normalized_query = normalize_product_name(query) if query else ""
+                    if normalized_query in items_dict:
+                        quantity = items_dict[normalized_query].get("quantity")
+                        unit_price = items_dict[normalized_query].get("unit_price")
+                        item_total = items_dict[normalized_query].get("item_total")
+                    else:
+                        # Partial match search
+                        for prod_name, details in items_dict.items():
+                            if query and prod_name and (query in prod_name or prod_name in query):
+                                quantity = details.get("quantity")
+                                unit_price = details.get("unit_price")
+                                item_total = details.get("item_total")
+                                break
+    
+                products_list.append({
+                    "name": query,
+                    "product_name": query,
+                    "match": {
+                        "matched_product": best_match.get("name") if best_match else None,
+                        "score": best_match.get("score") if best_match else None,
+                        "similarity": best_match.get("score") if best_match else None,
+                    },
+                    "all_matches": matched_list,  # ALL matches now included here
+                    "total_matches": match_item.get("total_matches", len(matched_list)),
+                    "top_matches": matched_list[:10] if len(matched_list) > 10 else matched_list,  # Keep top 10 for UI
+                    "quantity": quantity,
+                    "unit_price": unit_price,
+                    "item_total": item_total,
+                })
+                
         # Get processed files list
         processed_files = []
         if output_dir and Path(output_dir).exists():
