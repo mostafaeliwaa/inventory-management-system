@@ -83,14 +83,27 @@ def build_matcher():
 
 
 # -----------------------------
-# top-k matching - RETURNS ACTUAL PRODUCT NAMES
+# ALL matches - RETURNS ALL PRODUCTS (no limit)
 # -----------------------------
-def get_top_matches(matcher, query, top_k=10):
+def get_all_matches(matcher, query, min_score=0.0):
+    """
+    Get ALL matches for a query, sorted by score descending.
+    
+    Args:
+        matcher: ProductMatcher instance
+        query: Product name to match
+        min_score: Minimum score threshold (default 0.0 = return all)
+    
+    Returns:
+        List of all matches with scores
+    """
     normalized_query = normalize_product_name(query, aggressive=True)
 
+    # Get candidates (all products, no filtering limit)
     candidates = matcher.filter_candidates(
         normalized_query,
-        matcher.normalized_database
+        matcher.normalized_database,
+        max_candidates=len(matcher.product_database)  # Get ALL candidates
     )
 
     candidate_indices = [idx for idx, _ in candidates]
@@ -98,6 +111,7 @@ def get_top_matches(matcher, query, top_k=10):
     if not candidate_indices:
         candidate_indices = list(range(len(matcher.product_database)))
 
+    # Get semantic scores for all candidates
     semantic = matcher.semantic_score(normalized_query, candidate_indices)
     fuzzy = matcher.fuzzy_score(normalized_query, candidate_indices)
 
@@ -111,25 +125,29 @@ def get_top_matches(matcher, query, top_k=10):
         f = fuzzy_dict.get(idx, 0.0)
 
         score = matcher.semantic_weight * s + matcher.fuzzy_weight * f
+        
+        # Filter by minimum score if specified
+        if score >= min_score:
+            combined.append((idx, score, s, f))
 
-        combined.append((idx, score, s, f))
-
+    # Sort by combined score descending
     combined.sort(key=lambda x: x[1], reverse=True)
 
     results = []
 
-    for idx, score, s, f in combined[:top_k]:
-        # IMPORTANT: Get the ACTUAL product name from the database
+    for idx, score, s, f in combined:
+        # Get the ACTUAL product name from the database
         if idx < len(matcher.product_database):
             product_name = matcher.product_database[idx]
         else:
             product_name = f"unknown_{idx}"
         
         results.append({
-            "name": product_name,  # Now this is the actual product name, not an ID!
+            "name": product_name,  # This is the actual product name
             "score": float(score),
             "semantic": float(s),
             "fuzzy": float(f),
+            "rank": len(results) + 1,  # Add rank position
             "id": idx
         })
 
@@ -139,7 +157,16 @@ def get_top_matches(matcher, query, top_k=10):
 # -----------------------------
 # MAIN FUNCTION
 # -----------------------------
-def run_fallback_matching(extraction: dict, matcher, output_dir: Path, top_k=10):
+def run_fallback_matching(extraction: dict, matcher, output_dir: Path, min_score=0.0):
+    """
+    Run matching for all items and return ALL matches (no top-k limit).
+    
+    Args:
+        extraction: Extracted invoice data
+        matcher: ProductMatcher instance
+        output_dir: Output directory for results
+        min_score: Minimum score threshold (default 0.0 = return all)
+    """
     items = extraction.get("items", []) if isinstance(extraction, dict) else []
 
     summary = []
@@ -150,17 +177,24 @@ def run_fallback_matching(extraction: dict, matcher, output_dir: Path, top_k=10)
         if not name:
             continue
 
-        top = get_top_matches(matcher, name, top_k=top_k)
+        # Get ALL matches (no limit)
+        all_matches = get_all_matches(matcher, name, min_score=min_score)
 
         summary.append({
             "query": name,
-            "matched": top,
-            "top_score": float(top[0]["score"]) if top else 0.0
+            "matched": all_matches,  # Now contains ALL matches
+            "total_matches": len(all_matches),  # Total count
+            "top_score": float(all_matches[0]["score"]) if all_matches else 0.0
         })
 
     result = {
         "generated_at": datetime.now().isoformat(),
-        "summary": summary
+        "summary": summary,
+        "metadata": {
+            "total_queries": len(summary),
+            "min_score_threshold": min_score,
+            "total_products_in_db": len(matcher.product_database)
+        }
     }
 
     output_path = output_dir / "matches_summary_fallback.json"
@@ -188,4 +222,4 @@ def run_from_files(input_file: Path, output_file: Path):
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
 
-    print("Saved fallback matches to", output_file)
+    print("Saved all matches to", output_file)
