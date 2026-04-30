@@ -38,14 +38,25 @@ The OCR (Optical Character Recognition) feature automatically extracts data from
 
 ## 📁 Folder Structure
 ocr/
+
 ├── api/
+
 │ └── main.py # FastAPI backend
+
 ├── init.py # Package initialization
+
 ├── complete_ocr_pipeline.py # OCR & preprocessing pipeline
+
 ├── process_uploaded_image.py # Single image processing
+
 ├── product_matcher.py # Text normalization utilities
+
 ├── product_matcher_system.py # Main matching system
+
 ├── run_matching_fallback.py # Matching orchestration
+
 ├── supabase_client.py # Supabase database client
+
 ├── requirements.txt # Python dependencies
+
 └── README.md # This file
