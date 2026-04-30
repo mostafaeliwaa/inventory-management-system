@@ -8,9 +8,6 @@ black>=22.0.0
 mypy>=0.950
 arabic-reshaper>=2.1.0
 python-bidi>=0.4.0
-
-# Note: The system will work without FAISS for small to medium databases
-# FAISS provides significant speedup for databases with >1000 products
 streamlit>=1.28.0
 requests>=2.31.0
 pillow>=10.0.0

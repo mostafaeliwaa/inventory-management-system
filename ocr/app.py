@@ -1,8 +1,3 @@
-"""
-Invoice OCR & Product Matching — Streamlit Frontend
-All heavy lifting goes through the FastAPI backend; this file only calls the API.
-"""
-
 import base64
 import json
 from datetime import datetime
@@ -13,9 +8,7 @@ import requests
 import streamlit as st
 from PIL import Image
 
-# ---------------------------------------------------------------------------
-# Page config (must be first Streamlit call)
-# ---------------------------------------------------------------------------
+
 st.set_page_config(
     page_title="Invoice OCR & Product Matching",
     page_icon="📄",
@@ -23,9 +16,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ---------------------------------------------------------------------------
 # Custom CSS
-# ---------------------------------------------------------------------------
 st.markdown(
     """
 <style>
@@ -123,10 +114,7 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
-
-# ---------------------------------------------------------------------------
 # Session state defaults
-# ---------------------------------------------------------------------------
 def _init_state():
     defaults = {
         "api_base_url": "http://localhost:8000",
@@ -139,9 +127,8 @@ def _init_state():
 
 _init_state()
 
-# ---------------------------------------------------------------------------
 # API Client
-# ---------------------------------------------------------------------------
+
 
 class APIClient:
     def __init__(self, base_url: str):
@@ -206,11 +193,7 @@ class APIClient:
 def get_client(url: str) -> APIClient:
     return APIClient(url)
 
-
-# ---------------------------------------------------------------------------
 # Helper utilities
-# ---------------------------------------------------------------------------
-
 def _score_badge(score: float | None) -> str:
     if score is None:
         return '<span class="badge badge-low">N/A</span>'
@@ -238,10 +221,7 @@ def _add_to_history(filename: str, status: str, result: dict | None):
     st.session_state.history = st.session_state.history[:10]
 
 
-# ---------------------------------------------------------------------------
 # Sidebar
-# ---------------------------------------------------------------------------
-
 def render_sidebar(client: APIClient):
     with st.sidebar:
         st.markdown(
@@ -317,11 +297,7 @@ def render_sidebar(client: APIClient):
         )
         return page
 
-
-# ---------------------------------------------------------------------------
 # Dashboard page
-# ---------------------------------------------------------------------------
-
 def render_dashboard(client: APIClient):
     st.markdown(
         """
@@ -426,10 +402,8 @@ def render_dashboard(client: APIClient):
                 for idx, item in enumerate(products):
                     match = item.get("match") or {}
                     raw_name = item.get("name") or item.get("product_name", "N/A")
-
-                    # Determine candidate list (look for common keys returned by matcher or external top_matches)
                     candidates: list[tuple[str, float]] = []
-                    # First, check item-level 'top_matches' provided by the external fallback
+        
                     item_top = item.get("top_matches") or item.get("top_k") or item.get("candidates")
                     if item_top and isinstance(item_top, (list, tuple)):
                         for x in item_top:
@@ -439,8 +413,6 @@ def render_dashboard(client: APIClient):
                                 candidates.append((str(name), float(score)))
                             else:
                                 candidates.append((str(x), 0.0))
-
-                    # Next, check inside the match dict for top-k lists
                     if isinstance(match, dict):
                         for k in ("top_matches", "candidates", "matches", "alternatives", "top_k"):
                             if k in match and isinstance(match[k], (list, tuple)):
@@ -452,7 +424,6 @@ def render_dashboard(client: APIClient):
                                     else:
                                         candidates.append((str(x), 0.0))
                                 break
-                        # fallback: some matchers return a list under 'results' or 'items'
                         if not candidates:
                             for k in ("results", "items"):
                                 if k in match and isinstance(match[k], (list, tuple)):
@@ -462,14 +433,13 @@ def render_dashboard(client: APIClient):
                                         else:
                                             candidates.append((str(x), 0.0))
                                     break
-                    # Fallback to best match only
+
                     best = None
                     if isinstance(match, dict):
                         best = match.get("matched_product") or match.get("best_match") or match.get("best")
                     if not candidates and best:
                         candidates = [str(best)]
 
-                    # Ensure unique and limited to top-10 (keep score with name)
                     seen = set()
                     top_candidates: list[tuple[str, float]] = []
                     for name, score in candidates:
@@ -478,40 +448,32 @@ def render_dashboard(client: APIClient):
                             top_candidates.append((name, float(score)))
                         if len(top_candidates) >= 10:
                             break
-
-                    # UI: show extracted name, a selector for top candidates, and editable qty/unit
+                            
                     with st.container():
                         c1, c2, c3, c4, c5, c6 = st.columns([3, 3, 1.2, 1.2, 1.2, 1.2])
                         c1.markdown(f"**{raw_name}**")
 
                         selected = None
                         if top_candidates:
-                            # Render radio with score display for single selection
+
                             options = [f"{n} ({s:.2f})" for n, s in top_candidates]
-                            # include an explicit 'enter new' choice so user can type a new product
                             radio_options = ["New Item"] + options
                             selected_label = c2.radio("Top matches", options=radio_options, index=0, key=f"sel_{idx}")
                             if selected_label == "New Item":
-                                # allow user to type a new product name
                                 entered = c2.text_input("Enter new product", value="", key=f"other_{idx}")
                                 selected = entered.strip() if entered else ""
                             elif selected_label and selected_label != "(none)":
-                                # extract name before the last space-parenthesis
                                 selected = selected_label.rsplit(" (", 1)[0]
                         else:
-                            # show best match or empty
                             selected = c2.text_input("Match", value=str(best or ""), key=f"sel_{idx}")
 
                         score = match.get("score") or match.get("similarity") if isinstance(match, dict) else None
                         c3.markdown(_score_badge(score), unsafe_allow_html=True)
 
-                        # Editable quantity and unit price
                         qty_val = item.get("quantity") or item.get("qty") or ""
                         unit_val = item.get("unit_price") or item.get("price") or ""
                         q = c4.text_input("Qty", value=str(qty_val), key=f"qty_{idx}")
                         u = c5.text_input("Unit", value=str(unit_val), key=f"unit_{idx}")
-
-                        # Calculate total
                         try:
                             total = float(q) * float(u)
                             total_str = f"{total:.2f}"
@@ -519,14 +481,12 @@ def render_dashboard(client: APIClient):
                             total_str = ""
                         c6.markdown(f"**Total:** {total_str}")
 
-                        # Actions: confirm selection or edit
                         action_col = st.columns([1])[0]
                         if action_col.button("Save / Confirm", key=f"save_{idx}"):
-                            # prepare correction payload
+
                             correct_text = selected if isinstance(selected, str) and selected != "(none)" else (str(best) if best else "")
                             if correct_text:
                                 corrections_to_send.append({"wrong_text": raw_name, "correct_text": correct_text})
-                            # persist edited qty/unit in session for export
                             if "edited_products" not in st.session_state:
                                 st.session_state.edited_products = {}
                             st.session_state.edited_products[idx] = {"quantity": q, "unit_price": u, "total": total_str}
@@ -550,7 +510,6 @@ def render_dashboard(client: APIClient):
                 width="stretch",
             )
 
-            # CSV of products
             products = results.get("products", [])
             if products:
                 rows = []
@@ -572,11 +531,7 @@ def render_dashboard(client: APIClient):
                     width="stretch",
                 )
 
-
-# ---------------------------------------------------------------------------
 # History page
-# ---------------------------------------------------------------------------
-
 def render_history():
     st.markdown(
         "<h2 style='font-family:Syne,sans-serif;font-weight:700;'>🕘 Processing History</h2>",
@@ -603,11 +558,7 @@ def render_history():
             else:
                 st.warning("Processing failed for this file.")
 
-
-# ---------------------------------------------------------------------------
 # Settings page
-# ---------------------------------------------------------------------------
-
 def render_settings():
     st.markdown(
         "<h2 style='font-family:Syne,sans-serif;font-weight:700;'>⚙️ Settings</h2>",
@@ -633,11 +584,7 @@ def render_settings():
     )
     st.caption("To change the backend threshold, update `ProductMatcher` initialization in `api/main.py`.")
 
-
-# ---------------------------------------------------------------------------
 # Main entrypoint
-# ---------------------------------------------------------------------------
-
 def main():
     client = get_client(st.session_state.api_base_url)
     page = render_sidebar(client)
