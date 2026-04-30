@@ -30,7 +30,7 @@ class SupabaseProductDB:
     
     def get_all_products(self, 
                         table_name: str = "products", 
-                        product_name_column: str = "name",
+                        product_name_column: str = "product_name",
                         limit: Optional[int] = None) -> List[str]:
         """
         Get all product names from the database.
@@ -69,7 +69,7 @@ class SupabaseProductDB:
     def get_products_by_category(self, 
                                 category: Optional[str] = None,
                                 table_name: str = "products",
-                                product_name_column: str = "name",
+                                product_name_column: str = "product_name",
                                 category_column: str = "category") -> List[str]:
         """
         Get products filtered by category.
