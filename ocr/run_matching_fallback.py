@@ -5,7 +5,6 @@ from datetime import datetime
 import os
 import sys
 
-# Add parent directory to path for imports
 REPO_ROOT = Path(__file__).resolve().parents[1] if "__file__" in locals() else Path.cwd().parent
 sys.path.insert(0, str(REPO_ROOT))
 
@@ -14,9 +13,6 @@ from ocr.product_matcher import normalize_product_name
 from ocr.supabase_client import get_supabase_client
 
 
-# -----------------------------
-# Load product database from Supabase
-# -----------------------------
 def load_product_database_from_supabase(table_name: str = "products", 
                                         product_column: str = None):
     """
@@ -31,21 +27,15 @@ def load_product_database_from_supabase(table_name: str = "products",
         - product_lookup: Dict[int, str] (mapping from index to product name)
     """
     try:
-        # Get Supabase client
         supabase = get_supabase_client()
-        
-        # Get all products (column will be auto-detected)
+
         product_names = supabase.get_all_products(
             table_name=table_name,
             product_name_column=product_column
         )
-        
-        # Create lookup dictionary
         product_lookup = {idx: name for idx, name in enumerate(product_names)}
         
         print(f"✅ Loaded {len(product_names)} products from Supabase table '{table_name}'")
-        
-        # Optional: Print sample products for verification
         if product_names:
             print(f"📋 Sample products: {product_names[:5]}")
         
@@ -57,9 +47,8 @@ def load_product_database_from_supabase(table_name: str = "products",
         return load_product_database_from_csv()
 
 
-# -----------------------------
+
 # Fallback to CSV if Supabase fails
-# -----------------------------
 def load_product_database_from_csv():
     """Fallback method to load products from CSV file"""
     master_csv = REPO_ROOT / 'cleaning' / 'output' / 'master_dataframe.csv'
@@ -74,18 +63,13 @@ def load_product_database_from_csv():
         reader = csv.DictReader(f)
 
         for row_id, row in enumerate(reader):
-            # Try to find the column that contains product names
             name = None
-            
-            # Common column names for product name column
             possible_columns = ['اسم الصنف', 'product_name', 'name', 'Product', 'الصنف', 'اسم المنتج']
             
             for col in possible_columns:
                 if col in row and row[col] and str(row[col]).strip():
                     name = str(row[col]).strip()
                     break
-            
-            # Fallback: use first non-empty column if no match found
             if not name:
                 for col in row:
                     val = row[col]
@@ -104,9 +88,6 @@ def load_product_database_from_csv():
     return product_names, product_lookup
 
 
-# -----------------------------
-# Init matcher once
-# -----------------------------
 def build_matcher(use_supabase: bool = True, 
                   table_name: str = "products", 
                   product_column: str = None):
@@ -138,17 +119,12 @@ def build_matcher(use_supabase: bool = True,
     matcher.compute_embeddings()
     return matcher
 
-
-# -----------------------------
-# Get ALL matches (no limit)
-# -----------------------------
 def get_all_matches(matcher, query, min_score=0.0):
     """
     Get ALL matches for a query, sorted by score descending.
     """
     normalized_query = normalize_product_name(query, aggressive=True)
 
-    # Get candidates (all products, no filtering limit)
     candidates = matcher.filter_candidates(
         normalized_query,
         matcher.normalized_database,
@@ -160,7 +136,6 @@ def get_all_matches(matcher, query, min_score=0.0):
     if not candidate_indices:
         candidate_indices = list(range(len(matcher.product_database)))
 
-    # Get semantic scores for all candidates
     semantic = matcher.semantic_score(normalized_query, candidate_indices)
     fuzzy = matcher.fuzzy_score(normalized_query, candidate_indices)
 
@@ -198,10 +173,6 @@ def get_all_matches(matcher, query, min_score=0.0):
 
     return results
 
-
-# -----------------------------
-# MAIN FUNCTION
-# -----------------------------
 def run_fallback_matching(extraction: dict, matcher, output_dir: Path, min_score=0.0):
     """
     Run matching for all items and return ALL matches.
@@ -243,10 +214,6 @@ def run_fallback_matching(extraction: dict, matcher, output_dir: Path, min_score
 
     return result, output_path
 
-
-# -----------------------------
-# OPTIONAL: file runner (for testing only)
-# -----------------------------
 def run_from_files(input_file: Path, output_file: Path):
     matcher = build_matcher(use_supabase=True)
 
@@ -262,12 +229,7 @@ def run_from_files(input_file: Path, output_file: Path):
 
     print("✅ Saved all matches from Supabase to", output_file)
 
-
-# -----------------------------
-# For direct testing
-# -----------------------------
 if __name__ == "__main__":
-    # Test the matcher
     matcher = build_matcher(use_supabase=True)
     
     test_queries = ["موز", "خبز", "حليب"]
