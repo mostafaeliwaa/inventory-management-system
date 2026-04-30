@@ -1,0 +1,61 @@
+{
+  "task": "dead_stock_prediction",
+  "n_train": 1821,
+  "n_test": 607,
+  "positive_rate_train": 0.0489,
+  "f1_dead_stock": 1.0,
+  "roc_auc": 1.0,
+  "accuracy": 1.0,
+  "per_class": {
+    "not_dead": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 577.0
+    },
+    "dead": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 30.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      577,
+      0
+    ],
+    [
+      0,
+      30
+    ]
+  ],
+  "feature_importances": {
+    "total_sales": 0.0,
+    "total_stock": 0.1074,
+    "branches_with_sales": 0.0,
+    "branches_with_stock": 0.0642,
+    "max_branch_sales": 0.0,
+    "max_branch_stock": 0.0291,
+    "sales_concentration": 0.0,
+    "stock_to_sales_ratio": 0.4986,
+    "sell_through": 0.3007,
+    "cost_price": 0.0,
+    "retail_price": 0.0,
+    "margin_pct": 0.0
+  },
+  "feature_columns": [
+    "total_sales",
+    "total_stock",
+    "branches_with_sales",
+    "branches_with_stock",
+    "max_branch_sales",
+    "max_branch_stock",
+    "sales_concentration",
+    "stock_to_sales_ratio",
+    "sell_through",
+    "cost_price",
+    "retail_price",
+    "margin_pct"
+  ]
+}

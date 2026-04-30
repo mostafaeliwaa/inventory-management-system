@@ -52,7 +52,14 @@ inventory-management-system/
 │   ├── output/             # Cleaned datasets (before final /data/)
 │   └── ...
 │
-├── forcasting models/       # ⚠️ Empty - Requires time-series data
+├── ML models/               # Demand classifier + dead-stock predictor + FastAPI
+│   ├── README.md
+│   ├── api.py              # FastAPI service (port 8003)
+│   ├── src/                # data loader, training, evaluation, inference
+│   ├── artifacts/          # serialized .joblib models
+│   └── reports/            # JSON evaluation reports
+│
+├── chatbot/                 # LangGraph chatbot + FastAPI (port 8002)
 │
 └── ocr/                     # ⚠️ Empty - OCR processing (future)
 ```
@@ -100,6 +107,23 @@ inventory-management-system/
 - ✅ **Anomaly Detection** - Find unusual stock/sales ratios
 - ✅ **Product Clustering** - Group similar products
 - ✅ **Supplier Ranking** - Performance metrics by supplier
+
+### Machine Learning Models (`/ML models/`)
+- ✅ **Demand Classification** — Random Forest predicts fast / medium / slow movers
+  (robust macro F1 = 0.87 with rule-defining features hidden)
+- ✅ **Dead-Stock Prediction** — Gradient Boosting predicts non-moving inventory
+  (robust F1 = 0.97, ROC-AUC = 0.999 with rule-defining features hidden)
+- ✅ **FastAPI service** on port 8003 with `/predict/demand`, `/predict/dead-stock`,
+  `/predict/by-code/{code}`, `/predict/batch`, `/metrics`, `/health`
+
+```bash
+cd "ML models"
+pip install -r requirements.txt
+python -m src.train_demand && python -m src.train_dead_stock && python -m src.evaluate
+uvicorn api:app --port 8003 --reload   # then visit http://localhost:8003/docs
+```
+
+See [ML models/README.md](ML%20models/README.md) for full details.
 
 ### Dashboards
 - Interactive Plotly visualizations in `/analysis/output/`
