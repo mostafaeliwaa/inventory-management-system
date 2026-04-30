@@ -13,14 +13,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-OCR_DIR = REPO_ROOT / "ocr"
-sys.path.insert(0, str(OCR_DIR))
+# Add the parent directory to sys.path
+REPO_ROOT = Path(__file__).resolve().parents[2]  # This goes up to inventory-management-system/
 sys.path.insert(0, str(REPO_ROOT))
+sys.path.insert(0, str(REPO_ROOT / "ocr"))
 
-from complete_ocr_pipeline import setup_gemini
-from product_matcher_system import ProductMatcher
+# Now import using absolute paths
+from ocr.complete_ocr_pipeline import setup_gemini
+from ocr.product_matcher_system import ProductMatcher
 from ocr.process_uploaded_image import process_image
+from ocr.supabase_client import get_supabase_client
 
 # إضافة دالة تطبيع بسيطة للمنتجات
 def normalize_product_name(text: str) -> str:
@@ -61,59 +63,90 @@ async def lifespan(app: FastAPI):
     except Exception as exc:
         log.error("Failed to load Gemini model: %s", exc)
 
-    # Product database + matcher
+    # Product database from Supabase
     try:
-        if PRODUCT_DB_PATH.exists():
-            df = pd.read_csv(PRODUCT_DB_PATH)
+        # Use Supabase instead of CSV
+        supabase = get_supabase_client()
+        
+        # Get table info first to verify connection
+        table_info = supabase.get_table_info(table_name="products")
+        
+        if table_info.get("exists"):
+            # Load products from Supabase
+            product_names = supabase.get_all_products(
+                table_name="products",
+                product_name_column="product_name"
+            )
             
-            product_names = []
-            
-            # Find the correct column for product names
-            possible_name_cols = ['اسم الصنف', 'product_name', 'name', 'Product', 'الصنف', 'اسم المنتج']
-            name_col = None
-            
-            for col in possible_name_cols:
-                if col in df.columns:
-                    name_col = col
-                    break
-            
-            if name_col is None and len(df.columns) > 0:
-                # Use first column as fallback, but skip if it's purely numeric IDs
-                first_col = df.columns[0]
-                sample_vals = df[first_col].dropna().head(10).astype(str)
-                # If most values are not just numbers, use this column
-                if not sample_vals.str.match(r'^\d+$').all():
-                    name_col = first_col
-                elif len(df.columns) > 1:
-                    name_col = df.columns[1]  # Try second column
-            
-            if name_col:
-                product_names = df[name_col].dropna().astype(str).str.strip().tolist()
-                # Filter out empty strings and 'nan'
-                product_names = [p for p in product_names if p and p.lower() != 'nan']
+            if product_names:
+                _state["product_matcher"] = ProductMatcher(product_database=product_names)
+                _state["product_matcher"].compute_embeddings()
+                log.info("✅ ProductMatcher ready with %d products from Supabase.", len(product_names))
+                log.info("📋 Sample products: %s", product_names[:5])
             else:
-                # Fallback: collect all non-numeric values from all columns
-                for col in df.columns:
-                    for val in df[col].dropna():
-                        str_val = str(val).strip()
-                        if str_val and not str_val.isdigit() and str_val.lower() != 'nan':
-                            product_names.append(str_val)
-            
-            if not product_names:
-                log.warning("No product names found, using IDs as fallback")
-                # Last resort: use first column even if numeric
-                first_col = df.columns[0]
-                product_names = df[first_col].dropna().astype(str).str.strip().tolist()
-                product_names = [p for p in product_names if p and p.lower() != 'nan']
-            
-            _state["product_matcher"] = ProductMatcher(product_database=product_names)
-            _state["product_matcher"].compute_embeddings()
-            log.info("ProductMatcher ready with %d products.", len(product_names))
-            log.info("Sample products: %s", product_names[:5])
+                log.warning("⚠️ No products found in Supabase table 'products'")
+                _state["product_matcher"] = None
         else:
-            log.warning("Product database not found at %s", PRODUCT_DB_PATH)
+            log.warning("⚠️ Table 'products' not found in Supabase")
+            _state["product_matcher"] = None
+            
     except Exception as exc:
-        log.error("Failed to initialise ProductMatcher: %s", exc)
+        log.error("❌ Failed to load products from Supabase: %s", exc)
+        log.info("🔄 Falling back to CSV file...")
+        
+        # Fallback to CSV
+        try:
+            if PRODUCT_DB_PATH.exists():
+                df = pd.read_csv(PRODUCT_DB_PATH)
+                
+                product_names = []
+                
+                # Find the correct column for product names
+                possible_name_cols = ['اسم الصنف', 'product_name', 'name', 'Product', 'الصنف', 'اسم المنتج']
+                name_col = None
+                
+                for col in possible_name_cols:
+                    if col in df.columns:
+                        name_col = col
+                        break
+                
+                if name_col is None and len(df.columns) > 0:
+                    # Use first column as fallback
+                    first_col = df.columns[0]
+                    sample_vals = df[first_col].dropna().head(10).astype(str)
+                    # If most values are not just numbers, use this column
+                    if not sample_vals.str.match(r'^\d+$').all():
+                        name_col = first_col
+                    elif len(df.columns) > 1:
+                        name_col = df.columns[1]  # Try second column
+                
+                if name_col:
+                    product_names = df[name_col].dropna().astype(str).str.strip().tolist()
+                    # Filter out empty strings and 'nan'
+                    product_names = [p for p in product_names if p and p.lower() != 'nan']
+                else:
+                    # Fallback: collect all non-numeric values from all columns
+                    for col in df.columns:
+                        for val in df[col].dropna():
+                            str_val = str(val).strip()
+                            if str_val and not str_val.isdigit() and str_val.lower() != 'nan':
+                                product_names.append(str_val)
+                
+                if not product_names:
+                    log.warning("No product names found, using IDs as fallback")
+                    # Last resort: use first column even if numeric
+                    first_col = df.columns[0]
+                    product_names = df[first_col].dropna().astype(str).str.strip().tolist()
+                    product_names = [p for p in product_names if p and p.lower() != 'nan']
+                
+                _state["product_matcher"] = ProductMatcher(product_database=product_names)
+                _state["product_matcher"].compute_embeddings()
+                log.info("ProductMatcher ready with %d products from CSV.", len(product_names))
+                log.info("Sample products: %s", product_names[:5])
+            else:
+                log.warning("Product database not found at %s", PRODUCT_DB_PATH)
+        except Exception as csv_exc:
+            log.error("Failed to load from CSV as well: %s", csv_exc)
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     _state["ready"] = _state["gemini_model"] is not None and _state["product_matcher"] is not None
@@ -257,19 +290,16 @@ async def process_invoice(file: UploadFile = File(...)) -> JSONResponse:
         invoice_data = sample.get("extracted", {})
         items_from_invoice = invoice_data.get("items", [])
         
-        # 🔧 إنشاء قاموس للبحث عن المنتجات بالاسم (لربط الكميات والأسعار)
-        # تطبيع الأسماء لتسهيل المطابقة
+        # 🔧 Create dictionary for searching products by name
         items_dict = {}
         for item in items_from_invoice:
             product_name = item.get("product_name", "")
-            # تخزين البيانات حسب الاسم الأصلي
             if product_name:
                 items_dict[product_name] = {
                     "quantity": item.get("quantity"),
                     "unit_price": item.get("unit_price"),
                     "item_total": item.get("item_total")
                 }
-            # أيضاً تخزين نسخة مطبعة للبحث
             normalized_name = normalize_product_name(product_name) if product_name else ""
             if normalized_name:
                 items_dict[normalized_name] = {
@@ -285,30 +315,27 @@ async def process_invoice(file: UploadFile = File(...)) -> JSONResponse:
         
         for match_item in matches_summary:
             query = match_item.get("query", "")
-            matched_list = match_item.get("matched", [])
+            matched_list = match_item.get("matched", [])  # Now contains ALL matches
             
-            # Best match (first one)
+            # Best match (first one in the list)
             best_match = matched_list[0] if matched_list else None
             
-            # 🔧 البحث عن الكمية وسعر الوحدة من بيانات الفاتورة
+            # Search for quantity and unit price from invoice data
             quantity = None
             unit_price = None
             item_total = None
             
-            # البحث الأول: بالاسم المطابق تماماً
             if query in items_dict:
                 quantity = items_dict[query].get("quantity")
                 unit_price = items_dict[query].get("unit_price")
                 item_total = items_dict[query].get("item_total")
             else:
-                # البحث الثاني: بالتطبيع
                 normalized_query = normalize_product_name(query) if query else ""
                 if normalized_query in items_dict:
                     quantity = items_dict[normalized_query].get("quantity")
                     unit_price = items_dict[normalized_query].get("unit_price")
                     item_total = items_dict[normalized_query].get("item_total")
                 else:
-                    # البحث الثالث: بجزء من الاسم
                     for prod_name, details in items_dict.items():
                         if query and prod_name and (query in prod_name or prod_name in query):
                             quantity = details.get("quantity")
@@ -324,10 +351,12 @@ async def process_invoice(file: UploadFile = File(...)) -> JSONResponse:
                     "score": best_match.get("score") if best_match else None,
                     "similarity": best_match.get("score") if best_match else None,
                 },
-                "top_matches": matched_list,
-                "quantity": quantity,      # 🔧 الآن القيمة من الفاتورة
-                "unit_price": unit_price,  # 🔧 الآن القيمة من الفاتورة
-                "item_total": item_total,  # 🔧 الآن القيمة من الفاتورة
+                "all_matches": matched_list,  # ALL matches
+                "total_matches": match_item.get("total_matches", len(matched_list)),
+                "top_matches": matched_list[:10] if len(matched_list) > 10 else matched_list,
+                "quantity": quantity,
+                "unit_price": unit_price,
+                "item_total": item_total,
             })
         
         # If no matches found, fallback to invoice items
@@ -340,6 +369,7 @@ async def process_invoice(file: UploadFile = File(...)) -> JSONResponse:
                     "unit_price": item.get("unit_price"),
                     "item_total": item.get("item_total"),
                     "match": {},
+                    "all_matches": [],
                     "top_matches": [],
                 })
 
@@ -384,59 +414,13 @@ def confirm_items(body: ConfirmItemsRequest) -> dict:
     applied: list[dict] = []
     failed: list[dict] = []
 
-    # Load master CSV
-    try:
-        if PRODUCT_DB_PATH.exists():
-            master_df = pd.read_csv(PRODUCT_DB_PATH)
-        else:
-            master_df = pd.DataFrame()
-    except Exception as e:
-        log.exception("Failed to read product DB CSV, continuing with empty DataFrame: %s", e)
-        master_df = pd.DataFrame()
-
     for corr in body.corrections:
         try:
-            # Add correction to matcher
             _state["product_matcher"].add_correction(corr.wrong_text, corr.correct_text)
             applied.append({"wrong_text": corr.wrong_text, "correct_text": corr.correct_text})
-
-            # Append to master CSV if product not present
-            try:
-                col_candidates = [c for c in master_df.columns if "اسم" in c or "صنف" in c or "name" in c.lower()]
-                target_col = col_candidates[0] if col_candidates else None
-                
-                if target_col is None:
-                    target_col = "اسم الصنف"
-                    if target_col not in master_df.columns:
-                        master_df[target_col] = []
-
-                # Check if product already exists
-                exists = False
-                if not master_df.empty:
-                    exists = master_df[target_col].astype(str).str.strip().eq(str(corr.correct_text).strip()).any()
-
-                # Add new product if it doesn't exist
-                if not exists:
-                    if master_df.empty and len(master_df.columns) == 0:
-                        master_df = pd.DataFrame([{target_col: corr.correct_text}])
-                    else:
-                        new_row = {c: "" for c in master_df.columns}
-                        new_row[target_col] = corr.correct_text
-                        master_df = pd.concat([master_df, pd.DataFrame([new_row])], ignore_index=True)
-            except Exception as e:
-                log.warning("Failed to persist correction to CSV: %s", e)
-                
         except Exception as exc:
             log.error("Failed to add correction %s → %s: %s", corr.wrong_text, corr.correct_text, exc)
             failed.append({"wrong_text": corr.wrong_text, "error": str(exc)})
-
-    # Save updated master CSV
-    try:
-        if not master_df.empty:
-            master_df.to_csv(PRODUCT_DB_PATH, index=False)
-            log.info(f"Saved {len(applied)} corrections to CSV")
-    except Exception as e:
-        log.warning("Failed to save updated master product CSV: %s", e)
 
     return {
         "status": "ok",
