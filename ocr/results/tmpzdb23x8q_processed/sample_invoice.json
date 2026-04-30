@@ -1,0 +1,133 @@
+{
+  "source_image": "D:\\AI 4\\Graduation Project\\inventory-management-system\\results\\tmpzdb23x8q.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": "2024/5/6",
+    "invoice_number": "2183",
+    "total_amount": "4840",
+    "items": [
+      {
+        "product_name": "اى تيكل",
+        "quantity": "6",
+        "unit_price": "25",
+        "item_total": "150"
+      },
+      {
+        "product_name": "افتح موضوع",
+        "quantity": "1",
+        "unit_price": "35",
+        "item_total": "35"
+      },
+      {
+        "product_name": "بوبيل طويل",
+        "quantity": "6",
+        "unit_price": "25",
+        "item_total": "150"
+      },
+      {
+        "product_name": "رويال",
+        "quantity": "2",
+        "unit_price": "180",
+        "item_total": "360"
+      },
+      {
+        "product_name": "بوبيل اسيرو",
+        "quantity": "12",
+        "unit_price": "40",
+        "item_total": "480"
+      },
+      {
+        "product_name": "ونق",
+        "quantity": "4",
+        "unit_price": "40",
+        "item_total": "160"
+      },
+      {
+        "product_name": "اقول وافل",
+        "quantity": "6",
+        "unit_price": "25",
+        "item_total": "150"
+      },
+      {
+        "product_name": "مشحور",
+        "quantity": "6",
+        "unit_price": "25",
+        "item_total": "150"
+      },
+      {
+        "product_name": "1*5",
+        "quantity": "2",
+        "unit_price": "140",
+        "item_total": "280"
+      },
+      {
+        "product_name": "ليدو",
+        "quantity": "2",
+        "unit_price": "35",
+        "item_total": "70"
+      },
+      {
+        "product_name": "شنك كظة",
+        "quantity": "2",
+        "unit_price": "40",
+        "item_total": "80"
+      },
+      {
+        "product_name": "تون تون",
+        "quantity": "2",
+        "unit_price": "100",
+        "item_total": "200"
+      },
+      {
+        "product_name": "ديسمنت",
+        "quantity": "14",
+        "unit_price": "20",
+        "item_total": "280"
+      },
+      {
+        "product_name": "اسير",
+        "quantity": "12",
+        "unit_price": "40",
+        "item_total": "480"
+      },
+      {
+        "product_name": "اسير",
+        "quantity": "6",
+        "unit_price": "20",
+        "item_total": "120"
+      },
+      {
+        "product_name": "اسير",
+        "quantity": "1",
+        "unit_price": "90",
+        "item_total": "90"
+      },
+      {
+        "product_name": "مري صابون",
+        "quantity": "3",
+        "unit_price": "75",
+        "item_total": "225"
+      },
+      {
+        "product_name": "مري صابون",
+        "quantity": "2",
+        "unit_price": "120",
+        "item_total": "240"
+      },
+      {
+        "product_name": "صبور باجتور",
+        "quantity": "1",
+        "unit_price": "170",
+        "item_total": "170"
+      },
+      {
+        "product_name": "صبور باجتور",
+        "quantity": "1",
+        "unit_price": "195",
+        "item_total": "195"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مستخرجة من فاتورة مكتوبة بخط اليد، وقد تحتوي بعض الأسماء على أخطاء في التقدير الصوتي."
+  }
+}
