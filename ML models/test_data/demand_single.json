@@ -1,0 +1,14 @@
+{
+  "total_sales": 500,
+  "total_stock": 80,
+  "branches_with_sales": 10,
+  "branches_with_stock": 8,
+  "max_branch_sales": 90,
+  "max_branch_stock": 20,
+  "sales_concentration": 0.18,
+  "stock_to_sales_ratio": 0.16,
+  "sell_through": 0.86,
+  "cost_price": 50,
+  "retail_price": 120,
+  "margin_pct": 0.58
+}
