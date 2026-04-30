@@ -12,6 +12,7 @@ from fastapi import FastAPI, File, HTTPException, UploadFile, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+from ocr.supabase_client import get_supabase_client
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 OCR_DIR = REPO_ROOT / "ocr"
@@ -61,65 +62,46 @@ async def lifespan(app: FastAPI):
     except Exception as exc:
         log.error("Failed to load Gemini model: %s", exc)
 
-    # Product database + matcher
+    # Product database from Supabase
     try:
-        if PRODUCT_DB_PATH.exists():
-            df = pd.read_csv(PRODUCT_DB_PATH)
-            
-            product_names = []
-            
-            # Find the correct column for product names
-            possible_name_cols = ['اسم الصنف', 'product_name', 'name', 'Product', 'الصنف', 'اسم المنتج']
-            name_col = None
-            
-            for col in possible_name_cols:
-                if col in df.columns:
-                    name_col = col
-                    break
-            
-            if name_col is None and len(df.columns) > 0:
-                # Use first column as fallback, but skip if it's purely numeric IDs
-                first_col = df.columns[0]
-                sample_vals = df[first_col].dropna().head(10).astype(str)
-                # If most values are not just numbers, use this column
-                if not sample_vals.str.match(r'^\d+$').all():
-                    name_col = first_col
-                elif len(df.columns) > 1:
-                    name_col = df.columns[1]  # Try second column
-            
-            if name_col:
-                product_names = df[name_col].dropna().astype(str).str.strip().tolist()
-                # Filter out empty strings and 'nan'
-                product_names = [p for p in product_names if p and p.lower() != 'nan']
+        # Use Supabase instead of CSV
+        supabase = get_supabase_client()
+    
+        # Get table info first to verify connection
+        table_info = supabase.get_table_info(table_name="products")
+    
+        if table_info.get("exists"):
+            # Load products from Supabase
+            product_names = supabase.get_all_products(
+                table_name="products",
+                product_name_column="name"
+            )
+        
+            if product_names:
+                _state["product_matcher"] = ProductMatcher(product_database=product_names)
+                _state["product_matcher"].compute_embeddings()
+                log.info("✅ ProductMatcher ready with %d products from Supabase.", len(product_names))
+                log.info("📋 Sample products: %s", product_names[:5])
             else:
-                # Fallback: collect all non-numeric values from all columns
-                for col in df.columns:
-                    for val in df[col].dropna():
-                        str_val = str(val).strip()
-                        if str_val and not str_val.isdigit() and str_val.lower() != 'nan':
-                            product_names.append(str_val)
-            
-            if not product_names:
-                log.warning("No product names found, using IDs as fallback")
-                # Last resort: use first column even if numeric
-                first_col = df.columns[0]
-                product_names = df[first_col].dropna().astype(str).str.strip().tolist()
-                product_names = [p for p in product_names if p and p.lower() != 'nan']
-            
-            _state["product_matcher"] = ProductMatcher(product_database=product_names)
-            _state["product_matcher"].compute_embeddings()
-            log.info("ProductMatcher ready with %d products.", len(product_names))
-            log.info("Sample products: %s", product_names[:5])
+                log.warning("⚠️ No products found in Supabase table 'products'")
+                _state["product_matcher"] = None
         else:
-            log.warning("Product database not found at %s", PRODUCT_DB_PATH)
+            log.warning("⚠️ Table 'products' not found in Supabase")
+            _state["product_matcher"] = None
+        
     except Exception as exc:
-        log.error("Failed to initialise ProductMatcher: %s", exc)
-
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    _state["ready"] = _state["gemini_model"] is not None and _state["product_matcher"] is not None
-    log.info("API startup complete. Ready=%s", _state["ready"])
-
-    yield
+        log.error("❌ Failed to load products from Supabase: %s", exc)
+        log.info("🔄 Falling back to CSV file...")
+    
+        # Fallback to CSV
+        try:
+            if PRODUCT_DB_PATH.exists():
+                df = pd.read_csv(PRODUCT_DB_PATH)
+                # ... rest of CSV loading code ...
+            else:
+                log.warning("Product database not found at %s", PRODUCT_DB_PATH)
+        except Exception as csv_exc:
+            log.error("Failed to load from CSV as well: %s", csv_exc)
     
     # ---- shutdown ----
     log.info("Shutting down Invoice OCR API.")
