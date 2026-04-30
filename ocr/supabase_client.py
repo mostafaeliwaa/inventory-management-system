@@ -1,6 +1,3 @@
-"""
-Supabase Database Manager for Product Database
-"""
 import os
 from typing import List, Dict, Any, Optional
 from supabase import create_client, Client
@@ -8,7 +5,7 @@ from supabase import create_client, Client
 class SupabaseProductDB:
     """Manager for product database operations using Supabase"""
     
-    def __init__(self, url: str = None, key: str = None):
+    def __init__(self, url: Optional[str] = None, key: Optional[str] = None):
         """
         Initialize Supabase client.
         
@@ -16,8 +13,9 @@ class SupabaseProductDB:
             url: Supabase project URL
             key: Supabase API key (anon or service_role)
         """
-        self.url = url or os.getenv("SUPABASE_URL", "https://yrkfcjksnuodzwidphjq.supabase.co")
-        self.key = key or os.getenv("SUPABASE_KEY", "sb_publishable_L60pGO9-tYfB4Z-r8pXMNg_d7W2TMTX")
+        # Provide default values if None
+        self.url = url if url is not None else os.getenv("SUPABASE_URL", "https://yrkfcjksnuodzwidphjq.supabase.co")
+        self.key = key if key is not None else os.getenv("SUPABASE_KEY", "sb_publishable_L60pGO9-tYfB4Z-r8pXMNg_d7W2TMTX")
         self.client: Optional[Client] = None
         self._connect()
     
@@ -30,9 +28,10 @@ class SupabaseProductDB:
             print(f"❌ Failed to connect to Supabase: {e}")
             raise
     
-    def get_all_products(self, table_name: str = "products", 
+    def get_all_products(self, 
+                        table_name: str = "products", 
                         product_name_column: str = "name",
-                        limit: int = None) -> List[str]:
+                        limit: Optional[int] = None) -> List[str]:
         """
         Get all product names from the database.
         
@@ -47,7 +46,7 @@ class SupabaseProductDB:
         try:
             query = self.client.table(table_name).select(product_name_column)
             
-            if limit:
+            if limit is not None:
                 query = query.limit(limit)
             
             response = query.execute()
@@ -67,18 +66,19 @@ class SupabaseProductDB:
             print(f"❌ Error fetching products from Supabase: {e}")
             return []
     
-    def get_products_by_category(self, table_name: str = "products",
+    def get_products_by_category(self, 
+                                category: Optional[str] = None,
+                                table_name: str = "products",
                                 product_name_column: str = "name",
-                                category_column: str = "category",
-                                category: str = None) -> List[str]:
+                                category_column: str = "category") -> List[str]:
         """
         Get products filtered by category.
         
         Args:
+            category: Category to filter by
             table_name: Name of the table
             product_name_column: Column with product names
             category_column: Column with categories
-            category: Category to filter by
             
         Returns:
             List of product names in the specified category
@@ -86,7 +86,7 @@ class SupabaseProductDB:
         try:
             query = self.client.table(table_name).select(product_name_column)
             
-            if category:
+            if category is not None:
                 query = query.eq(category_column, category)
             
             response = query.execute()
@@ -103,17 +103,18 @@ class SupabaseProductDB:
             print(f"❌ Error fetching products by category: {e}")
             return []
     
-    def search_products(self, table_name: str = "products",
+    def search_products(self, 
+                       search_term: Optional[str] = None,
+                       table_name: str = "products",
                        product_name_column: str = "name",
-                       search_term: str = None,
                        limit: int = 20) -> List[Dict[str, Any]]:
         """
         Search for products by name (case-insensitive).
         
         Args:
+            search_term: Text to search for
             table_name: Name of the table
             product_name_column: Column with product names
-            search_term: Text to search for
             limit: Maximum number of results
             
         Returns:
@@ -123,7 +124,7 @@ class SupabaseProductDB:
             # Using ilike for case-insensitive search
             query = self.client.table(table_name).select("*")
             
-            if search_term:
+            if search_term is not None:
                 query = query.ilike(product_name_column, f"%{search_term}%")
             
             response = query.limit(limit).execute()
@@ -137,15 +138,16 @@ class SupabaseProductDB:
             print(f"❌ Error searching products: {e}")
             return []
     
-    def add_product(self, table_name: str = "products",
+    def add_product(self, 
                    product_name: str,
-                   additional_data: Dict[str, Any] = None) -> bool:
+                   table_name: str = "products",
+                   additional_data: Optional[Dict[str, Any]] = None) -> bool:
         """
         Add a new product to the database.
         
         Args:
-            table_name: Name of the table
             product_name: Name of the product to add
+            table_name: Name of the table
             additional_data: Additional fields to insert
             
         Returns:
@@ -153,7 +155,7 @@ class SupabaseProductDB:
         """
         try:
             data = {"name": product_name}
-            if additional_data:
+            if additional_data is not None:
                 data.update(additional_data)
             
             response = self.client.table(table_name).insert(data).execute()
@@ -167,16 +169,17 @@ class SupabaseProductDB:
             print(f"❌ Error adding product: {e}")
             return False
     
-    def update_product(self, table_name: str = "products",
+    def update_product(self, 
                       product_id: str,
-                      updates: Dict[str, Any]) -> bool:
+                      updates: Dict[str, Any],
+                      table_name: str = "products") -> bool:
         """
         Update an existing product.
         
         Args:
-            table_name: Name of the table
             product_id: ID of the product to update
             updates: Dictionary of fields to update
+            table_name: Name of the table
             
         Returns:
             True if successful, False otherwise
