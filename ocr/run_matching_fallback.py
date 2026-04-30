@@ -6,7 +6,7 @@ import os
 import sys
 
 # Add parent directory to path for imports
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[1] if "__file__" in locals() else Path.cwd().parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from product_matcher_system import ProductMatcher
@@ -15,15 +15,16 @@ from ocr.supabase_client import get_supabase_client
 
 
 # -----------------------------
-# Load product database as a LIST of product NAMES (strings)
+# Load product database from Supabase
 # -----------------------------
-def load_product_database():
+def load_product_database_from_supabase(table_name: str = "products", 
+                                        product_column: str = None):
     """
     Load product database from Supabase instead of CSV.
     
     Args:
         table_name: Name of the table in Supabase (default: "products")
-        product_column: Column name containing product names (default: "name")
+        product_column: Column name containing product names (auto-detected if None)
     
     Returns:
         - product_names: List[str] (actual product names for the matcher)
@@ -33,7 +34,7 @@ def load_product_database():
         # Get Supabase client
         supabase = get_supabase_client()
         
-        # Get all products
+        # Get all products (column will be auto-detected)
         product_names = supabase.get_all_products(
             table_name=table_name,
             product_name_column=product_column
@@ -73,14 +74,18 @@ def load_product_database_from_csv():
         reader = csv.DictReader(f)
 
         for row_id, row in enumerate(reader):
+            # Try to find the column that contains product names
             name = None
             
+            # Common column names for product name column
             possible_columns = ['اسم الصنف', 'product_name', 'name', 'Product', 'الصنف', 'اسم المنتج']
             
             for col in possible_columns:
                 if col in row and row[col] and str(row[col]).strip():
                     name = str(row[col]).strip()
                     break
+            
+            # Fallback: use first non-empty column if no match found
             if not name:
                 for col in row:
                     val = row[col]
@@ -98,16 +103,31 @@ def load_product_database_from_csv():
     print(f"📦 Loaded {len(product_names)} products from CSV (fallback)")
     return product_names, product_lookup
 
+
+# -----------------------------
 # Init matcher once
 # -----------------------------
-def build_matcher():
-    product_names, _ = load_product_database()
+def build_matcher(use_supabase: bool = True, 
+                  table_name: str = "products", 
+                  product_column: str = None):
+    """
+    Build and initialize the product matcher.
+    
+    Args:
+        use_supabase: Whether to use Supabase (default: True)
+        table_name: Supabase table name (if use_supabase=True)
+        product_column: Supabase product column name (auto-detected if None)
+    """
+    if use_supabase:
+        product_names, _ = load_product_database_from_supabase(table_name, product_column)
+    else:
+        product_names, _ = load_product_database_from_csv()
 
     if not product_names:
         raise ValueError("No products loaded from database")
 
     matcher = ProductMatcher(
-        product_database=product_names,  # Now this is a list of actual names!
+        product_database=product_names,
         model_name="paraphrase-multilingual-MiniLM-L12-v2",
         semantic_weight=0.7,
         fuzzy_weight=0.3,
@@ -120,9 +140,12 @@ def build_matcher():
 
 
 # -----------------------------
-# top-k matching - RETURNS ACTUAL PRODUCT NAMES
+# Get ALL matches (no limit)
 # -----------------------------
-def get_top_matches(matcher, query, top_k=10):
+def get_all_matches(matcher, query, min_score=0.0):
+    """
+    Get ALL matches for a query, sorted by score descending.
+    """
     normalized_query = normalize_product_name(query, aggressive=True)
 
     # Get candidates (all products, no filtering limit)
@@ -158,22 +181,14 @@ def get_top_matches(matcher, query, top_k=10):
 
     results = []
 
-<<<<<<< HEAD
-    for idx, score, s, f in combined[:top_k]:
-=======
     for idx, score, s, f in combined:
->>>>>>> OCR_Handwritten_Invoices
         if idx < len(matcher.product_database):
             product_name = matcher.product_database[idx]
         else:
             product_name = f"unknown_{idx}"
         
         results.append({
-<<<<<<< HEAD
-            "name": product_name, 
-=======
             "name": product_name,
->>>>>>> OCR_Handwritten_Invoices
             "score": float(score),
             "semantic": float(s),
             "fuzzy": float(f),
@@ -183,16 +198,14 @@ def get_top_matches(matcher, query, top_k=10):
 
     return results
 
+
+# -----------------------------
 # MAIN FUNCTION
-<<<<<<< HEAD
-def run_fallback_matching(extraction: dict, matcher, output_dir: Path, top_k=10):
-=======
 # -----------------------------
 def run_fallback_matching(extraction: dict, matcher, output_dir: Path, min_score=0.0):
     """
     Run matching for all items and return ALL matches.
     """
->>>>>>> OCR_Handwritten_Invoices
     items = extraction.get("items", []) if isinstance(extraction, dict) else []
 
     summary = []
@@ -230,7 +243,10 @@ def run_fallback_matching(extraction: dict, matcher, output_dir: Path, min_score
 
     return result, output_path
 
+
+# -----------------------------
 # OPTIONAL: file runner (for testing only)
+# -----------------------------
 def run_from_files(input_file: Path, output_file: Path):
     matcher = build_matcher(use_supabase=True)
 
@@ -238,17 +254,26 @@ def run_from_files(input_file: Path, output_file: Path):
         data = json.load(f)
 
     extraction = data.get('extracted') or data
-<<<<<<< HEAD
-=======
 
->>>>>>> OCR_Handwritten_Invoices
     result, _ = run_fallback_matching(extraction, matcher, output_file.parent)
 
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
 
-<<<<<<< HEAD
-    print("Saved fallback matches to", output_file)
-=======
     print("✅ Saved all matches from Supabase to", output_file)
->>>>>>> OCR_Handwritten_Invoices
+
+
+# -----------------------------
+# For direct testing
+# -----------------------------
+if __name__ == "__main__":
+    # Test the matcher
+    matcher = build_matcher(use_supabase=True)
+    
+    test_queries = ["موز", "خبز", "حليب"]
+    for query in test_queries:
+        matches = get_all_matches(matcher, query)
+        print(f"\nQuery: '{query}'")
+        print(f"Found {len(matches)} matches")
+        for i, m in enumerate(matches[:5]):
+            print(f"  {i+1}. {m['name']} (score: {m['score']:.3f})")
