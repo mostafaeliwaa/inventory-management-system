@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2026-04-29T15:51:37.890075",
+    "generated_at": "2026-04-30T18:54:52.520982",
     "version": "4.0",
     "source": "Supabase"
   },
@@ -425836,145 +425836,145 @@
   "supplier_performance": [
     {
       "supplier_name": "جرد",
-      "product_count": 3002,
+      "product_count": 250,
       "total_sales": 2266.0,
       "total_stock": 7235.0
     },
     {
       "supplier_name": "احمد الشاويش",
-      "product_count": 79,
+      "product_count": 2,
       "total_sales": 686.1,
       "total_stock": 393.9
     },
     {
       "supplier_name": "سليمان",
-      "product_count": 608,
+      "product_count": 39,
       "total_sales": 647.0,
       "total_stock": 1796.0
     },
     {
       "supplier_name": "المستقبل ( النزهه )",
-      "product_count": 401,
+      "product_count": 45,
       "total_sales": 611.0,
       "total_stock": 870.0
     },
     {
       "supplier_name": "ياقوت",
-      "product_count": 282,
+      "product_count": 56,
       "total_sales": 589.0,
       "total_stock": 2601.0
     },
     {
       "supplier_name": "كريستال",
-      "product_count": 241,
+      "product_count": 65,
       "total_sales": 427.0,
       "total_stock": 2167.0
     },
     {
       "supplier_name": "ليفوال للمحجبات",
-      "product_count": 219,
+      "product_count": 64,
       "total_sales": 322.0,
       "total_stock": 1006.0
     },
     {
       "supplier_name": "الهلال",
-      "product_count": 551,
+      "product_count": 48,
       "total_sales": 290.0,
       "total_stock": 463.0
     },
     {
       "supplier_name": "رومان",
-      "product_count": 1007,
+      "product_count": 53,
       "total_sales": 212.0,
       "total_stock": 1158.0
     },
     {
       "supplier_name": "elle scarf",
-      "product_count": 57,
+      "product_count": 11,
       "total_sales": 209.1,
       "total_stock": 1019.9
     },
     {
       "supplier_name": "لارا",
-      "product_count": 25,
+      "product_count": 15,
       "total_sales": 203.0,
       "total_stock": 897.0
     },
     {
       "supplier_name": "metals",
-      "product_count": 23,
+      "product_count": 12,
       "total_sales": 185.0,
       "total_stock": 834.0
     },
     {
       "supplier_name": "ابراهيم فهد",
-      "product_count": 113,
+      "product_count": 10,
       "total_sales": 180.0,
       "total_stock": 106.0
     },
     {
       "supplier_name": "احمر شفايف",
-      "product_count": 232,
+      "product_count": 11,
       "total_sales": 177.0,
       "total_stock": 286.0
     },
     {
       "supplier_name": "مرتجع مشتريات سبورتينج",
-      "product_count": 13,
+      "product_count": 5,
       "total_sales": 155.0,
       "total_stock": 865.0
     },
     {
       "supplier_name": "مرتجع مشتريات التجمع",
-      "product_count": 34,
+      "product_count": 10,
       "total_sales": 144.0,
       "total_stock": 1643.0
     },
     {
       "supplier_name": "FANCY",
-      "product_count": 238,
+      "product_count": 9,
       "total_sales": 144.0,
       "total_stock": 619.0
     },
     {
       "supplier_name": "ويدو تويز",
-      "product_count": 74,
+      "product_count": 7,
       "total_sales": 108.0,
       "total_stock": 276.0
     },
     {
       "supplier_name": "الفريد",
-      "product_count": 533,
+      "product_count": 34,
       "total_sales": 84.0,
       "total_stock": 116.0
     },
     {
       "supplier_name": "الادارة",
-      "product_count": 118,
+      "product_count": 9,
       "total_sales": 83.0,
       "total_stock": 476.0
     },
     {
       "supplier_name": "بيت العز",
-      "product_count": 155,
+      "product_count": 41,
       "total_sales": 82.0,
       "total_stock": 124.0
     },
     {
       "supplier_name": "تعديل",
-      "product_count": 43,
+      "product_count": 6,
       "total_sales": 78.0,
       "total_stock": 368.0
     },
     {
       "supplier_name": "مرتجع مشتريات محرم",
-      "product_count": 53,
+      "product_count": 6,
       "total_sales": 77.0,
       "total_stock": 360.0
     },
     {
       "supplier_name": "العميد ادوات منزلية",
-      "product_count": 91,
+      "product_count": 19,
       "total_sales": 65.0,
       "total_stock": 106.0
     },
@@ -425986,7 +425986,7 @@
     },
     {
       "supplier_name": "محل الحظاظات",
-      "product_count": 23,
+      "product_count": 7,
       "total_sales": 59.0,
       "total_stock": 161.0
     },
@@ -425998,29 +425998,29 @@
     },
     {
       "supplier_name": "كيتى",
-      "product_count": 79,
+      "product_count": 5,
       "total_sales": 48.0,
       "total_stock": 288.0
     },
     {
       "supplier_name": "ضحكة دبى",
-      "product_count": 409,
+      "product_count": 14,
       "total_sales": 41.0,
       "total_stock": 23.0
     },
     {
       "supplier_name": "Ringo",
-      "product_count": 364,
+      "product_count": 14,
       "total_sales": 38.0,
       "total_stock": 31.0
     }
   ],
   "warehouse_overview": {
-    "warehouse_qty": 21420,
-    "warehouse_cost_value": 629436,
-    "warehouse_retail_value": 1558270,
+    "warehouse_qty": 13884,
+    "warehouse_cost_value": 360443,
+    "warehouse_retail_value": 962955,
     "branch_total_qty": 39091,
-    "total_inventory_qty": 60511,
-    "warehouse_pct": 35.4
+    "total_inventory_qty": 52975,
+    "warehouse_pct": 26.2
   }
 }

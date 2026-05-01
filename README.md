@@ -52,7 +52,17 @@ inventory-management-system/
 │   ├── output/             # Cleaned datasets (before final /data/)
 │   └── ...
 │
-├── forcasting models/       # ⚠️ Empty - Requires time-series data
+├── ML models/               # Demand classifier + dead-stock predictor
+│   ├── README.md
+│   ├── streamlit_app.py    # Streamlit UI (port 8501) — manual testing
+│   ├── api.py              # FastAPI service (port 8003)
+│   ├── src/                # data loader (CSV or Supabase), training, evaluation, inference
+│   ├── notebooks/          # demo_and_evaluation.ipynb walkthrough
+│   ├── test_data/          # JSON payloads + API suite runner
+│   ├── artifacts/          # serialized .joblib models
+│   └── reports/            # JSON evaluation reports
+│
+├── chatbot/                 # LangGraph chatbot + FastAPI (port 8002)
 │
 └── ocr/                     # ⚠️ Empty - OCR processing (future)
 ```
@@ -100,6 +110,34 @@ inventory-management-system/
 - ✅ **Anomaly Detection** - Find unusual stock/sales ratios
 - ✅ **Product Clustering** - Group similar products
 - ✅ **Supplier Ranking** - Performance metrics by supplier
+
+### Machine Learning Models (`/ML models/`)
+- ✅ **Demand Classification** — Random Forest predicts fast / medium / slow movers
+  (robust macro F1 ≈ 0.87–0.91 with rule-defining features hidden)
+- ✅ **Dead-Stock Prediction** — Gradient Boosting predicts non-moving inventory
+  (robust F1 ≈ 0.95–0.97, ROC-AUC ≈ 0.998 with rule-defining features hidden)
+- ✅ **Streamlit UI** on port 8501 — pick a product, manual feature entry, batch test, eval reports
+- ✅ **FastAPI service** on port 8003 with `/predict/demand`, `/predict/dead-stock`,
+  `/predict/by-code/{code}`, `/predict/batch`, `/metrics`, `/health`
+- ✅ **Data source switch** — `DATA_SOURCE=csv` (default) or `DATA_SOURCE=supabase`
+  reads directly from the normalized Supabase schema in `data/schema.sql`
+
+```bash
+cd "ML models"
+pip install -r requirements.txt
+python -m src.train_demand && python -m src.train_dead_stock && python -m src.evaluate
+
+# UI (recommended first step)
+streamlit run streamlit_app.py            # http://localhost:8501
+
+# API
+uvicorn api:app --port 8003 --reload      # http://localhost:8003/docs
+
+# Pull data from Supabase instead of the CSVs:
+DATA_SOURCE=supabase streamlit run streamlit_app.py
+```
+
+See [ML models/README.md](ML%20models/README.md) for full details.
 
 ### Dashboards
 - Interactive Plotly visualizations in `/analysis/output/`

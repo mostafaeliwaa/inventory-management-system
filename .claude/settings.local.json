@@ -8,7 +8,22 @@
       "Bash(pip show *)",
       "Bash(python analysis/generate_dashboard.py)",
       "Bash(python -m http.server 8888)",
-      "Bash(start *)"
+      "Bash(start *)",
+      "Bash(python -c \"import sklearn, joblib, pandas, numpy; print\\(sklearn.__version__, pandas.__version__, numpy.__version__\\)\")",
+      "Bash(python -m src.train_demand)",
+      "Bash(python -m src.train_dead_stock)",
+      "Bash(python -m src.evaluate)",
+      "Bash(pip install *)",
+      "Bash(python -X utf8 -c ' *)",
+      "Bash(python -m jupyter nbconvert --to notebook --execute notebooks/demo_and_evaluation.ipynb --output demo_and_evaluation.ipynb --ExecutePreprocessor.timeout=300)",
+      "Bash(python)",
+      "Bash(python notebooks/_append_section7.py)",
+      "Bash(python -X utf8)",
+      "Bash(python -m uvicorn api:app --port 8003 --log-level warning)",
+      "Bash(curl -s -X POST http://localhost:8003/predict/demand -H \"Content-Type: application/json\" --data-binary @test_data/demand_single.json)",
+      "Bash(curl -s -X POST http://localhost:8003/predict/dead-stock -H \"Content-Type: application/json\" --data-binary @test_data/dead_stock_single.json)",
+      "Bash(python -X utf8 test_data/run_test_suite.py)",
+      "Bash(python *)"
     ]
   }
 }
