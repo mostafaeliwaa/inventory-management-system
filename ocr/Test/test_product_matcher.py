@@ -3,12 +3,12 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import json
 
-from product_matcher_system import ProductMatcher, MatchResult
+from ocr.Models.product_matcher_system import ProductMatcher, MatchResult
 
 
 def test_normalization():
     """Test Arabic text normalization."""
-    from product_matcher import normalize_product_name, normalize_arabic, normalize_mixed_script
+    from ocr.Models.product_matcher import normalize_product_name, normalize_arabic, normalize_mixed_script
     
     test_cases = [
         ("إسكواش  فراولة ٥٠٠ جرام", "اسكواش فراولة 500 جرام"),

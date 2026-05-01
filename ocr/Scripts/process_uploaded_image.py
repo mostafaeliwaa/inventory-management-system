@@ -8,11 +8,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "ocr"))
 sys.path.insert(0, str(REPO_ROOT))
 
-from complete_ocr_pipeline import (
+from ocr.Models.complete_ocr_pipeline import (
     preprocess_full_pipeline,
     extract_invoice_data_gemini
 )
-from run_matching_fallback import run_fallback_matching
+from ocr.Scripts.run_matching_fallback import run_fallback_matching
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 log = logging.getLogger("process_uploaded_image")

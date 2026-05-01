@@ -19,10 +19,10 @@ sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(REPO_ROOT / "ocr"))
 
 # Now import using absolute paths
-from ocr.complete_ocr_pipeline import setup_gemini
-from ocr.product_matcher_system import ProductMatcher
-from ocr.process_uploaded_image import process_image
-from ocr.supabase_client import get_supabase_client
+from ocr.Models.complete_ocr_pipeline import setup_gemini
+from ocr.Models.product_matcher_system import ProductMatcher
+from ocr.Scripts.process_uploaded_image import process_image
+from ocr.Scripts.supabase_client import get_supabase_client
 
 # إضافة دالة تطبيع بسيطة للمنتجات
 def normalize_product_name(text: str) -> str:

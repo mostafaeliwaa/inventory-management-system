@@ -8,9 +8,9 @@ import sys
 REPO_ROOT = Path(__file__).resolve().parents[1] if "__file__" in locals() else Path.cwd().parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from product_matcher_system import ProductMatcher
-from ocr.product_matcher import normalize_product_name
-from ocr.supabase_client import get_supabase_client
+from ocr.Models.product_matcher_system import ProductMatcher
+from ocr.Models.product_matcher import normalize_product_name
+from ocr.Scripts.supabase_client import get_supabase_client
 
 
 def load_product_database_from_supabase(table_name: str = "products", 
