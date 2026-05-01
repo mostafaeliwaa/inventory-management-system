@@ -1,6 +1,14 @@
+"""
+Supabase Database Client for Product Management
+"""
 import os
 from typing import List, Dict, Any, Optional
 from supabase import create_client, Client
+from dotenv import load_dotenv
+
+load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 
 class SupabaseProductDB:
     """Manager for product database operations using Supabase"""
@@ -13,14 +21,22 @@ class SupabaseProductDB:
             url: Supabase project URL
             key: Supabase API key (anon or service_role)
         """
-        # Provide default values if None
-        self.url = url if url is not None else os.getenv("SUPABASE_URL", "https://yrkfcjksnuodzwidphjq.supabase.co")
-        self.key = key if key is not None else os.getenv("SUPABASE_KEY", "sb_publishable_L60pGO9-tYfB4Z-r8pXMNg_d7W2TMTX")
+        self.url = url if url is not None else os.getenv("SUPABASE_URL")
+        self.key = key if key is not None else os.getenv("SUPABASE_KEY")
+        
+        print(f"🔧 SUPABASE_URL loaded: {'✅' if self.url else '❌'}")
+        print(f"🔧 SUPABASE_KEY loaded: {'✅' if self.key else '❌'}")
+        
         self.client: Optional[Client] = None
         self._connect()
     
     def _connect(self) -> None:
         """Establish connection to Supabase"""
+        if not self.url or not self.key:
+            print("❌ Missing Supabase credentials. Please check your .env file")
+            print("   Expected variables: SUPABASE_URL and SUPABASE_KEY")
+            raise ValueError("supabase_url and supabase_key are required")
+        
         try:
             self.client = create_client(self.url, self.key)
             print("✅ Connected to Supabase successfully")
@@ -54,9 +70,10 @@ class SupabaseProductDB:
             if response.data:
                 products = [row.get(product_name_column) for row in response.data 
                            if row.get(product_name_column)]
-                # Filter out empty or None values
-                products = [p.strip() for p in products if p and str(p).strip()]
+                products = [str(p).strip() for p in products if p and str(p).strip()]
                 print(f"📦 Loaded {len(products)} products from Supabase table '{table_name}'")
+                if products:
+                    print(f"📋 Sample: {products[:3]}")
                 return products
             else:
                 print(f"⚠️ No products found in table '{table_name}'")
@@ -94,7 +111,7 @@ class SupabaseProductDB:
             if response.data:
                 products = [row.get(product_name_column) for row in response.data 
                            if row.get(product_name_column)]
-                products = [p.strip() for p in products if p and str(p).strip()]
+                products = [str(p).strip() for p in products if p and str(p).strip()]
                 print(f"📦 Loaded {len(products)} products from category '{category}'")
                 return products
             return []
@@ -106,7 +123,7 @@ class SupabaseProductDB:
     def search_products(self, 
                        search_term: Optional[str] = None,
                        table_name: str = "products",
-                       product_name_column: str = "name",
+                       product_name_column: str = "product_name",
                        limit: int = 20) -> List[Dict[str, Any]]:
         """
         Search for products by name (case-insensitive).
@@ -121,7 +138,6 @@ class SupabaseProductDB:
             List of matching products with details
         """
         try:
-            # Using ilike for case-insensitive search
             query = self.client.table(table_name).select("*")
             
             if search_term is not None:
@@ -154,7 +170,12 @@ class SupabaseProductDB:
             True if successful, False otherwise
         """
         try:
-            data = {"name": product_name}
+            if not self.product_name_column:
+                self._detect_columns(table_name)
+            
+            column_name = self.product_name_column if self.product_name_column else "product_name"
+            
+            data = {column_name: product_name}
             if additional_data is not None:
                 data.update(additional_data)
             
@@ -207,11 +228,9 @@ class SupabaseProductDB:
             Dictionary with table information
         """
         try:
-            # Get row count
             count_response = self.client.table(table_name).select("*", count="exact").limit(0).execute()
             row_count = count_response.count if hasattr(count_response, 'count') else 0
             
-            # Get sample data to infer columns
             sample_response = self.client.table(table_name).select("*").limit(1).execute()
             
             columns = []
@@ -232,13 +251,43 @@ class SupabaseProductDB:
                 "exists": False,
                 "error": str(e)
             }
-
+    
+    def _detect_columns(self, table_name: str = "products") -> None:
+        """
+        Detect available columns in the products table.
+        """
+        try:
+            response = self.client.table(table_name).select("*").limit(1).execute()
+            if response.data and len(response.data) > 0:
+                self.available_columns = list(response.data[0].keys())
+                print(f"📊 Detected columns: {self.available_columns}")
+                
+                possible_name_columns = ['product_name', 'name', 'product', 'title', 'اسم', 'اسم_المنتج', 'name_ar']
+                self.product_name_column = None
+                
+                for col in possible_name_columns:
+                    if col in self.available_columns:
+                        self.product_name_column = col
+                        print(f"✅ Using '{col}' as product name column")
+                        break
+                
+                if not self.product_name_column and self.available_columns:
+                    self.product_name_column = self.available_columns[0]
+                    print(f"⚠️ Using '{self.product_name_column}' as fallback product name column")
+            else:
+                self.available_columns = []
+                self.product_name_column = "product_name"
+                print("⚠️ No data found in products table, using default column name 'product_name'")
+                
+        except Exception as e:
+            print(f"❌ Error detecting columns: {e}")
+            self.available_columns = []
+            self.product_name_column = "product_name"
+    
     def close(self) -> None:
         """Close the connection"""
         print("🔌 Supabase connection closed")
 
-
-# Singleton instance
 _supabase_instance = None
 
 def get_supabase_client() -> SupabaseProductDB:
