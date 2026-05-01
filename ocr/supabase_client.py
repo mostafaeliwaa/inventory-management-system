@@ -14,8 +14,8 @@ class SupabaseProductDB:
             key: Supabase API key (anon or service_role)
         """
         # Provide default values if None
-        self.url = url if url is not None else os.getenv("SUPABASE_URL", "https://yrkfcjksnuodzwidphjq.supabase.co")
-        self.key = key if key is not None else os.getenv("SUPABASE_KEY", "sb_publishable_L60pGO9-tYfB4Z-r8pXMNg_d7W2TMTX")
+        self.url = url if url is not None else os.getenv("SUPABASE_URL")
+        self.key = key if key is not None else os.getenv("SUPABASE_KEY")
         self.client: Optional[Client] = None
         self._connect()
     
