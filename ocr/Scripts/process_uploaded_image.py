@@ -31,7 +31,7 @@ def process_image(img_path: Path, matcher, model) -> dict:
 
     log.info("Processing image: %s", img_path)
 
-    out_dir = REPO_ROOT / "ocr" / "results" / (img_path.stem + "_processed")
+    out_dir = REPO_ROOT / "results" / (img_path.stem + "_processed")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     with Image.open(img_path) as im:
