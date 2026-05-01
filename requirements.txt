@@ -16,7 +16,6 @@ rapidfuzz>=3.0.0
 scikit-learn>=1.0.0
 faiss-cpu>=1.7.0
 arabic-reshaper>=2.1.0
-python-bidi>=0.4.0
 pillow>=10.0.0
 
 # LLM & AI
