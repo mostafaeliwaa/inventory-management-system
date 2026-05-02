@@ -1,4 +1,4 @@
-from config import get_settings
+from chatbot.config import get_settings
 from langchain_google_genai import ChatGoogleGenerativeAI
 import json
 import os

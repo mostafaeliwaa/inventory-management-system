@@ -1,0 +1,139 @@
+{
+  "source_image": "D:\\project grad 2\\results\\tmp1croaa98.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "1268",
+    "total_amount": "1124",
+    "items": [
+      {
+        "product_name": "برجر إسكوتشي",
+        "quantity": "1",
+        "unit_price": "260",
+        "item_total": "260"
+      },
+      {
+        "product_name": "هدل إسكوتشي",
+        "quantity": "1",
+        "unit_price": "260",
+        "item_total": "260"
+      },
+      {
+        "product_name": "سوف كوم",
+        "quantity": "3",
+        "unit_price": "260",
+        "item_total": "780"
+      },
+      {
+        "product_name": "قلب إسكوتشي",
+        "quantity": "1",
+        "unit_price": "260",
+        "item_total": "260"
+      },
+      {
+        "product_name": "بتية",
+        "quantity": "1",
+        "unit_price": "54",
+        "item_total": "54"
+      },
+      {
+        "product_name": "جزه إسكوتشي",
+        "quantity": "12",
+        "unit_price": "65",
+        "item_total": "780"
+      },
+      {
+        "product_name": "سكوت إسكوتشي",
+        "quantity": "24",
+        "unit_price": "60",
+        "item_total": "1440"
+      },
+      {
+        "product_name": "كيكة سمسم",
+        "quantity": "1",
+        "unit_price": "40",
+        "item_total": "40"
+      },
+      {
+        "product_name": "عضم إسكوتشي",
+        "quantity": "1",
+        "unit_price": "40",
+        "item_total": "40"
+      },
+      {
+        "product_name": "كيكة ألوم",
+        "quantity": "1",
+        "unit_price": "40",
+        "item_total": "40"
+      },
+      {
+        "product_name": "فرولة",
+        "quantity": "1",
+        "unit_price": "40",
+        "item_total": "40"
+      },
+      {
+        "product_name": "إسكوتشي كلونكة",
+        "quantity": "12",
+        "unit_price": "27.5",
+        "item_total": "330"
+      },
+      {
+        "product_name": "سوسيس",
+        "quantity": "12",
+        "unit_price": "40",
+        "item_total": "480"
+      },
+      {
+        "product_name": "كورة ألوم",
+        "quantity": "24",
+        "unit_price": "40",
+        "item_total": "960"
+      },
+      {
+        "product_name": "كورة عهد إسكوتشي",
+        "quantity": "12",
+        "unit_price": "20",
+        "item_total": "240"
+      },
+      {
+        "product_name": "إسكوتشي زقزاق",
+        "quantity": "12",
+        "unit_price": "20",
+        "item_total": "240"
+      },
+      {
+        "product_name": "كُوريا",
+        "quantity": "12",
+        "unit_price": "40",
+        "item_total": "480"
+      },
+      {
+        "product_name": "كف",
+        "quantity": "12",
+        "unit_price": "40",
+        "item_total": "480"
+      },
+      {
+        "product_name": "وافل",
+        "quantity": "12",
+        "unit_price": "47.5",
+        "item_total": "570"
+      },
+      {
+        "product_name": "دوتيز",
+        "quantity": "12",
+        "unit_price": "47.5",
+        "item_total": "570"
+      },
+      {
+        "product_name": "طرسة",
+        "quantity": "12",
+        "unit_price": "47.5",
+        "item_total": "570"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "تمت قراءة الأرقام بناءً على السياق، ملاحظة أن خانات الإجمالي في الفاتورة قد تحتوي على أخطاء حسابية في المجموع الكلي المكتوب يدوياً (1124) مقارنة بجمع العناصر."
+  }
+}

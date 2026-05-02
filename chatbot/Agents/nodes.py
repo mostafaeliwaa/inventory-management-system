@@ -1,11 +1,11 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
-from config import get_settings
+from chatbot.config import get_settings
 from langchain_core.messages import HumanMessage, AIMessage, BaseMessage
 from typing import Dict, Any, TypedDict, List
-from models import LLMManager
-from DB_Management import DatabaseManager
-from models import PromptTemplates
-from Tools import SQLExecutionTool
+from chatbot.models import LLMManager
+from chatbot.DB_Management import DatabaseManager
+from chatbot.models import PromptTemplates
+from chatbot.Tools import SQLExecutionTool
 
 
 settings = get_settings()

@@ -3,10 +3,10 @@ from pydantic import BaseModel
 from typing import Optional
 import logging
 from datetime import datetime
-from config import get_settings
-from DB_Management import DatabaseManager
-from models import LLMManager
-from Agents import GraphNodes, GraphBuilder
+from chatbot.config import get_settings
+from chatbot.DB_Management import DatabaseManager
+from chatbot.models import LLMManager
+from chatbot.Agents import GraphNodes, GraphBuilder
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

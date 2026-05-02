@@ -1,4 +1,4 @@
-from Agents import InventoryAssistant
+from chatbot.Agents import InventoryAssistant
 
 def main():
     assistant = InventoryAssistant()

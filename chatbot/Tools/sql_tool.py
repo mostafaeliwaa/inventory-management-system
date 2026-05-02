@@ -1,6 +1,6 @@
 from typing import List, Tuple
 from .tools_base import Tool
-from DB_Management import DatabaseManager
+from chatbot.DB_Management import DatabaseManager
 
 class SQLExecutionTool(Tool):
     

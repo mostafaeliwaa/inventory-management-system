@@ -1,0 +1,55 @@
+{
+  "source_image": "D:\\project grad 2\\results\\tmpri_y_hvb.jpg",
+  "extracted": {
+    "store_name": "بيان",
+    "invoice_date": "2025/4/7",
+    "invoice_number": "0004418",
+    "total_amount": "2450",
+    "items": [
+      {
+        "product_name": "بسكويت بونجور",
+        "quantity": "1",
+        "unit_price": "45",
+        "item_total": "45"
+      },
+      {
+        "product_name": "بسكويت أوريو",
+        "quantity": "1",
+        "unit_price": "25",
+        "item_total": "25"
+      },
+      {
+        "product_name": "تونه مية",
+        "quantity": "2",
+        "unit_price": "35",
+        "item_total": "70"
+      },
+      {
+        "product_name": "ساعة كاسيو",
+        "quantity": "1",
+        "unit_price": "500",
+        "item_total": "500"
+      },
+      {
+        "product_name": "استك بريشل",
+        "quantity": "2",
+        "unit_price": "25",
+        "item_total": "50"
+      },
+      {
+        "product_name": "عربية ريموت فالكون",
+        "quantity": "1",
+        "unit_price": "700",
+        "item_total": "700"
+      },
+      {
+        "product_name": "استر مدن",
+        "quantity": "1",
+        "unit_price": "60",
+        "item_total": "60"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وبها بعض الاختصارات والأسعار قد تكون تقديرية بناءً على قراءة الخط"
+  }
+}

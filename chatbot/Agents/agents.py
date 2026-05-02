@@ -1,9 +1,9 @@
-from config import get_settings
+from chatbot.config import get_settings
 from .nodes import GraphNodes
 from .graph import GraphBuilder
-from DB_Management import DatabaseManager
-from models import LLMManager
-from Tools import SQLExecutionTool
+from chatbot.DB_Management import DatabaseManager
+from chatbot.models import LLMManager
+from chatbot.Tools import SQLExecutionTool
 
 settings = get_settings()
 

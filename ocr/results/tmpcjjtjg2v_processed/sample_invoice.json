@@ -1,0 +1,97 @@
+{
+  "source_image": "D:\\project grad 2\\results\\tmpcjjtjg2v.jpg",
+  "extracted": {
+    "store_name": null,
+    "invoice_date": null,
+    "invoice_number": "0004171",
+    "total_amount": "820",
+    "items": [
+      {
+        "product_name": "برج اسكوتش",
+        "quantity": "1",
+        "unit_price": "260",
+        "item_total": "260"
+      },
+      {
+        "product_name": "هلال اسكوتش",
+        "quantity": "1",
+        "unit_price": "260",
+        "item_total": "260"
+      },
+      {
+        "product_name": "موني كورة",
+        "quantity": "2",
+        "unit_price": "130",
+        "item_total": "260"
+      },
+      {
+        "product_name": "قلب اسكوتش",
+        "quantity": "1",
+        "unit_price": "260",
+        "item_total": "260"
+      },
+      {
+        "product_name": "سنة",
+        "quantity": "1",
+        "unit_price": "54",
+        "item_total": "54"
+      },
+      {
+        "product_name": "ذرة اسكوتش",
+        "quantity": "2",
+        "unit_price": "60",
+        "item_total": "120"
+      },
+      {
+        "product_name": "بسكوت اسكوتش",
+        "quantity": "2",
+        "unit_price": "60",
+        "item_total": "120"
+      },
+      {
+        "product_name": "كيكة سمسم",
+        "quantity": "1",
+        "unit_price": "45",
+        "item_total": "45"
+      },
+      {
+        "product_name": "كيكة ألوان",
+        "quantity": "1",
+        "unit_price": "45",
+        "item_total": "45"
+      },
+      {
+        "product_name": "عينة اسكوتش",
+        "quantity": "1",
+        "unit_price": "45",
+        "item_total": "45"
+      },
+      {
+        "product_name": "فراولة",
+        "quantity": "1",
+        "unit_price": "45",
+        "item_total": "45"
+      },
+      {
+        "product_name": "اسكوتش فلوكة",
+        "quantity": "12",
+        "unit_price": "2.5",
+        "item_total": "30"
+      },
+      {
+        "product_name": "سوسيس",
+        "quantity": "18",
+        "unit_price": "25",
+        "item_total": "450"
+      },
+      {
+        "product_name": "كورة ألوان",
+        "quantity": "24",
+        "unit_price": "2.5",
+        "item_total": "60"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "تم استخراج الإجمالي من أسفل الفاتورة (820)، يلاحظ وجود تباين بين جمع السطور المذكورة والمجموع الكلي المدون."
+  }
+}
