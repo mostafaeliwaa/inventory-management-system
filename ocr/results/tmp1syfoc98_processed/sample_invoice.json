@@ -1,0 +1,31 @@
+{
+  "source_image": "D:\\project grad 2\\results\\tmp1syfoc98.jpg",
+  "extracted": {
+    "store_name": "",
+    "invoice_date": "2009/8/5",
+    "invoice_number": "2715",
+    "total_amount": "444",
+    "items": [
+      {
+        "product_name": "سويتر صوف",
+        "quantity": "8",
+        "unit_price": "33",
+        "item_total": "264"
+      },
+      {
+        "product_name": "سويتر مقدم",
+        "quantity": "3",
+        "unit_price": "30",
+        "item_total": "90"
+      },
+      {
+        "product_name": "سويتر سكر",
+        "quantity": "2",
+        "unit_price": "45",
+        "item_total": "90"
+      }
+    ],
+    "currency": "جنيه",
+    "notes": "البيانات مكتوبة بخط اليد وتتضمن اختصارات للسلع (سويتر)."
+  }
+}
