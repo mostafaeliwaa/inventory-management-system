@@ -1,13 +1,14 @@
-.idea/
-# Environment
+# ===== Environment =====
 .env
 .env.local
-# Virtual environment
+.env.*.local
+
+# ===== Virtual environments =====
 .venv/
 venv/
 ENV/
 
-# Python
+# ===== Python =====
 __pycache__/
 *.py[cod]
 *$py.class
@@ -17,26 +18,50 @@ build/
 dist/
 *.egg-info/
 
-# IDE
-.vscode/
+# ===== IDE =====
 .idea/
+.vscode/
 *.swp
 *.swo
 
-# OS
+# ===== OS =====
 .DS_Store
 Thumbs.db
 
-# Logs
+# ===== Logs =====
 *.log
 
-# Testing
+# ===== Testing / type-checkers =====
 .pytest_cache/
 .coverage
-htmlcov/.langgraph_api/
+htmlcov/
+.mypy_cache/
 
-
+# ===== LangGraph / Jupyter =====
 .langgraph_api/
-.venv/
-__pycache__/
-.env
+.ipynb_checkpoints/
+
+# ===== Project-specific: large data & generated artifacts (do NOT deploy to Render) =====
+# Raw/processed OCR images and outputs
+ocr/original_data/
+ocr/processing_images/
+ocr/results/
+ocr/resultsOfModel/
+ocr/ocr/
+
+# Top-level results dir (created at runtime by routers/ocr.py — ephemeral on Render)
+results/
+
+# Analysis dashboards — kept tracked for reference, not served by the API
+# analysis/output/  ← intentionally NOT ignored
+
+# Cleaning intermediate output — KEEP master_dataframe.csv (used as CSV fallback in routers/ocr.py)
+# cleaning/output/  ← intentionally NOT ignored
+
+# Backup / dump files
+data/Backup/
+*.dump
+*.sql.gz
+
+# Streamlit cache
+.streamlit/

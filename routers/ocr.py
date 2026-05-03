@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 import tempfile
 import json
@@ -38,7 +39,9 @@ log = logging.getLogger("invoice_api")
 
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tiff"}
 PRODUCT_DB_PATH = REPO_ROOT / "cleaning" / "output" / "master_dataframe.csv"
-RESULTS_DIR = REPO_ROOT / "results"
+# Use the system tempdir on hosted environments (Render, etc.) where the
+# repo path is read-only. Fall back to <repo>/results locally if explicitly set.
+RESULTS_DIR = Path(os.environ.get("RESULTS_DIR", tempfile.gettempdir())) / "ims_results"
 
 _state: dict[str, Any] = {
     "gemini_model": None,

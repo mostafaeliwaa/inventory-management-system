@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: inventory-management-api
+    runtime: python
+    region: frankfurt
+    plan: starter  # 'free' tier (512MB) is too small for torch/sentence-transformers
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /ocr/health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      # Hugging Face cache — keep model downloads on the persistent path so
+      # cold starts don't redownload sentence-transformers weights.
+      - key: HF_HOME
+        value: /opt/render/project/.cache/huggingface
+      - key: TRANSFORMERS_CACHE
+        value: /opt/render/project/.cache/huggingface
+      # Set these in the Render dashboard (mark as secret):
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: LANGCHAIN_API_KEY
+        sync: false
