@@ -24,8 +24,9 @@ class SupabaseProductDB:
         self.url = url if url is not None else os.getenv("SUPABASE_URL")
         self.key = key if key is not None else os.getenv("SUPABASE_KEY")
         
-        print(f"🔧 SUPABASE_URL loaded: {'✅' if self.url else '❌'}")
-        print(f"🔧 SUPABASE_KEY loaded: {'✅' if self.key else '❌'}")
+        # Use text instead of emojis for Windows compatibility
+        print(f"[SUPABASE] URL loaded: {'OK' if self.url else 'FAILED'}")
+        print(f"[SUPABASE] KEY loaded: {'OK' if self.key else 'FAILED'}")
         
         self.client: Optional[Client] = None
         self._connect()
@@ -39,9 +40,9 @@ class SupabaseProductDB:
         
         try:
             self.client = create_client(self.url, self.key)
-            print("✅ Connected to Supabase successfully")
+            print("[SUPABASE] Connected to Supabase successfully")
         except Exception as e:
-            print(f"❌ Failed to connect to Supabase: {e}")
+            print(f"[SUPABASE] Failed to connect to Supabase: {e}")
             raise
     
     def get_all_products(self, 
@@ -71,16 +72,16 @@ class SupabaseProductDB:
                 products = [row.get(product_name_column) for row in response.data 
                            if row.get(product_name_column)]
                 products = [str(p).strip() for p in products if p and str(p).strip()]
-                print(f"📦 Loaded {len(products)} products from Supabase table '{table_name}'")
+                print(f"[SUPABASE] Loaded {len(products)} products from Supabase table '{table_name}'")
                 if products:
-                    print(f"📋 Sample: {products[:3]}")
+                    print(f"[SUPABASE] Sample: {products[:3]}")
                 return products
             else:
-                print(f"⚠️ No products found in table '{table_name}'")
+                print(f"[SUPABASE] No products found in table '{table_name}'")
                 return []
                 
         except Exception as e:
-            print(f"❌ Error fetching products from Supabase: {e}")
+            print(f"[SUPABASE] Error fetching products from Supabase: {e}")
             return []
     
     def get_products_by_category(self, 
