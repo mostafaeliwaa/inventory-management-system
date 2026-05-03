@@ -23,7 +23,10 @@
       "Bash(curl -s -X POST http://localhost:8003/predict/demand -H \"Content-Type: application/json\" --data-binary @test_data/demand_single.json)",
       "Bash(curl -s -X POST http://localhost:8003/predict/dead-stock -H \"Content-Type: application/json\" --data-binary @test_data/dead_stock_single.json)",
       "Bash(python -X utf8 test_data/run_test_suite.py)",
-      "Bash(python *)"
+      "Bash(python *)",
+      "Bash(ls -la .env*)",
+      "Bash(ls ocr/.env*)",
+      "Bash(ls ocr/api/.env*)"
     ]
   }
 }
