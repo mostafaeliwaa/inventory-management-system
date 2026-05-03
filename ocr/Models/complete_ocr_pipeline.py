@@ -134,9 +134,59 @@ def get_all_images_from_folders(folders: List[str] = None) -> List[str]:
     return sorted(list(set(all_images)))
 
 # GEMINI API INTEGRATION
-def setup_gemini(api_key: str = None):
+def resolve_gemini_model(preferred: Optional[str] = None) -> Optional[str]:
     """
-    Setup Gemini API with optional API key.
+    Pick an available Gemini model that supports generateContent.
+
+    Order:
+      1. `preferred` arg, if given and supported.
+      2. $GEMINI_MODEL env var, if set and supported.
+      3. First match from a prioritized candidate list.
+      4. Any listed model whose name contains 'flash' and supports generateContent.
+    """
+    candidates = [
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
+        "gemini-flash-latest",
+        "gemini-2.0-flash",
+        "gemini-1.5-flash",
+    ]
+
+    try:
+        available = []
+        for m in genai.list_models():
+            methods = getattr(m, "supported_generation_methods", []) or []
+            if "generateContent" in methods:
+                # API returns names like "models/gemini-2.5-flash"
+                available.append(m.name.removeprefix("models/"))
+    except Exception as e:
+        logger.error(f"Failed to list Gemini models: {e}")
+        return preferred or os.environ.get("GEMINI_MODEL")
+
+    def _pick(name: Optional[str]) -> Optional[str]:
+        if not name:
+            return None
+        bare = name.removeprefix("models/")
+        return bare if bare in available else None
+
+    chosen = (
+        _pick(preferred)
+        or _pick(os.environ.get("GEMINI_MODEL"))
+        or next((c for c in candidates if c in available), None)
+        or next((n for n in available if "flash" in n), None)
+        or (available[0] if available else None)
+    )
+
+    if chosen:
+        logger.info(f"Resolved Gemini model: {chosen}")
+    else:
+        logger.error("No Gemini model with generateContent support found")
+    return chosen
+
+
+def setup_gemini(api_key: str = None, model_name: Optional[str] = None):
+    """
+    Setup Gemini API. Dynamically resolves an available model.
     """
     try:
         if api_key:
@@ -146,9 +196,13 @@ def setup_gemini(api_key: str = None):
         else:
             logger.warning("No Gemini API key provided. Set GEMINI_API_KEY environment variable.")
             return None
-        #models/gemini-flash-latest   
-        model = genai.GenerativeModel("models/gemini-3.1-flash-lite-preview")
-        logger.info("Gemini API configured successfully")
+
+        resolved = resolve_gemini_model(model_name)
+        if not resolved:
+            return None
+
+        model = genai.GenerativeModel(resolved)
+        logger.info(f"Gemini API configured successfully with model: {resolved}")
         return model
     except Exception as e:
         logger.error(f"Failed to setup Gemini API: {e}")
