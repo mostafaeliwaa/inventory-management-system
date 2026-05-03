@@ -189,13 +189,11 @@ def setup_gemini(api_key: str = None, model_name: Optional[str] = None):
     Setup Gemini API. Dynamically resolves an available model.
     """
     try:
-        if api_key:
-            genai.configure(api_key=api_key)
-        elif "GEMINI_API_KEY" in os.environ:
-            genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-        else:
-            logger.warning("No Gemini API key provided. Set GEMINI_API_KEY environment variable.")
+        key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+        if not key:
+            logger.warning("No Gemini API key provided. Set GEMINI_API_KEY or GOOGLE_API_KEY environment variable.")
             return None
+        genai.configure(api_key=key)
 
         resolved = resolve_gemini_model(model_name)
         if not resolved:
