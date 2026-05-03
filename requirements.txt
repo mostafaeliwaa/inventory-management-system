@@ -1,4 +1,6 @@
-# ===== Production runtime requirements (Render) =====
+# ===== Production runtime requirements (Render free tier) =====
+# Fuzzy-only matching mode — no torch / no sentence-transformers.
+# Set FUZZY_ONLY_MATCHING=true in Render env vars.
 
 # --- API & web server ---
 fastapi
@@ -22,12 +24,10 @@ langchain-google-genai
 langchain-community
 langgraph
 
-# --- OCR pipeline ---
+# --- OCR pipeline (lightweight) ---
 opencv-python-headless>=4.8.0
 pillow>=10.0.0
-sentence-transformers>=2.2.0
 rapidfuzz>=3.0.0
-scikit-learn>=1.0.0
 arabic-reshaper>=2.1.0
 json-repair
 tqdm

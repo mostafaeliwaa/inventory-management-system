@@ -1,9 +1,36 @@
+import os
+import numpy as np
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from routers.chatbot import router as chatbot_router
 from routers.ocr import router as ocr_router, _state, log, setup_gemini, ProductMatcher, get_supabase_client, PRODUCT_DB_PATH, RESULTS_DIR
 import pandas as pd
+
+FUZZY_ONLY = os.getenv("FUZZY_ONLY_MATCHING", "false").lower() == "true"
+
+
+def _build_matcher(product_names: list[str]) -> ProductMatcher:
+    """Build a ProductMatcher. In FUZZY_ONLY mode, skip embeddings entirely
+    so we never import torch/sentence-transformers (saves ~500MB RAM)."""
+    if FUZZY_ONLY:
+        matcher = ProductMatcher(
+            product_database=product_names,
+            semantic_weight=0.0,
+            fuzzy_weight=1.0,
+        )
+        # Stub out embedding methods so hybrid_match never tries to load a model.
+        matcher.compute_embeddings = lambda force_recompute=False: np.zeros((len(product_names), 1))
+        matcher._load_model = lambda: None
+        matcher.semantic_score = lambda query, candidate_indices=None: [
+            (idx, 0.0) for idx in (candidate_indices or range(len(product_names)))
+        ]
+        log.info("🪶 FUZZY_ONLY_MATCHING enabled — skipping embedding model.")
+        return matcher
+
+    matcher = ProductMatcher(product_database=product_names)
+    matcher.compute_embeddings()
+    return matcher
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -28,8 +55,7 @@ async def lifespan(app: FastAPI):
             )
             
             if product_names:
-                _state["product_matcher"] = ProductMatcher(product_database=product_names)
-                _state["product_matcher"].compute_embeddings()
+                _state["product_matcher"] = _build_matcher(product_names)
                 log.info("✅ ProductMatcher ready with %d products from Supabase.", len(product_names))
                 log.info("📋 Sample products: %s", product_names[:5])
             else:
@@ -81,8 +107,7 @@ async def lifespan(app: FastAPI):
                     product_names = df[first_col].dropna().astype(str).str.strip().tolist()
                     product_names = [p for p in product_names if p and p.lower() != 'nan']
                 
-                _state["product_matcher"] = ProductMatcher(product_database=product_names)
-                _state["product_matcher"].compute_embeddings()
+                _state["product_matcher"] = _build_matcher(product_names)
                 log.info("ProductMatcher ready with %d products from CSV.", len(product_names))
                 log.info("Sample products: %s", product_names[:5])
             else:
