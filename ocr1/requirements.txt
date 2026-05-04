@@ -1,0 +1,12 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+pillow==10.4.0
+opencv-python-headless==4.10.0.84
+numpy==1.26.4
+sentence-transformers==3.0.1
+rapidfuzz==3.9.7
+google-generativeai==0.7.2
+python-dotenv==1.0.1
+json-repair==0.28.0
+tqdm==4.66.5

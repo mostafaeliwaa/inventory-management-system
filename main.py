@@ -1,132 +1,77 @@
 import os
-import numpy as np
+import logging
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
+
+from routers.ocr import router as ocr_router, initialize_router
 from routers.chatbot import router as chatbot_router
-from routers.ocr import router as ocr_router, _state, log, setup_gemini, ProductMatcher, get_supabase_client, PRODUCT_DB_PATH, RESULTS_DIR
-import pandas as pd
+from ocr1.Models.complete_ocr_pipeline import setup_gemini
+from ocr1.Models.product_matcher_system import ProductMatcher
+from ocr1.Scripts.database_matching_utils import (
+    load_product_database_from_supabase,
+    load_product_database_from_excel
+)
 
-FUZZY_ONLY = os.getenv("FUZZY_ONLY_MATCHING", "false").lower() == "true"
-
-
-def _build_matcher(product_names: list[str]) -> ProductMatcher:
-    """Build a ProductMatcher. In FUZZY_ONLY mode, skip embeddings entirely
-    so we never import torch/sentence-transformers (saves ~500MB RAM)."""
-    if FUZZY_ONLY:
-        matcher = ProductMatcher(
-            product_database=product_names,
-            semantic_weight=0.0,
-            fuzzy_weight=1.0,
-        )
-        # Stub out embedding methods so hybrid_match never tries to load a model.
-        matcher.compute_embeddings = lambda force_recompute=False: np.zeros((len(product_names), 1))
-        matcher._load_model = lambda: None
-        matcher.semantic_score = lambda query, candidate_indices=None: [
-            (idx, 0.0) for idx in (candidate_indices or range(len(product_names)))
-        ]
-        log.info("🪶 FUZZY_ONLY_MATCHING enabled — skipping embedding model.")
-        return matcher
-
-    matcher = ProductMatcher(product_database=product_names)
-    matcher.compute_embeddings()
-    return matcher
+logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    log.info("Starting up Inventory Management System...")
+    logger.info("🚀 Starting app…")
 
-    # OCR Services
-    try:
-        _state["gemini_model"] = setup_gemini()
-        log.info("Gemini model loaded successfully.")
-    except Exception as exc:
-        log.error("Failed to load Gemini model: %s", exc)
-
+    supabase_success = False
+    product_db = None
     
     try:
-        supabase = get_supabase_client()
-        table_info = supabase.get_table_info(table_name="products")
-        
-        if table_info.get("exists"):
-            product_names = supabase.get_all_products(
-                table_name="products",
-                product_name_column="product_name"
-            )
-            
-            if product_names:
-                _state["product_matcher"] = _build_matcher(product_names)
-                log.info("✅ ProductMatcher ready with %d products from Supabase.", len(product_names))
-                log.info("📋 Sample products: %s", product_names[:5])
-            else:
-                log.warning("⚠️ No products found in Supabase table 'products'")
-                _state["product_matcher"] = None
-        else:
-            log.warning("⚠️ Table 'products' not found in Supabase")
-            _state["product_matcher"] = None
-            
+        logger.info("📡 Attempting to load products from Supabase...")
+        product_db, _ = load_product_database_from_supabase(table_name="products")
+        supabase_success = True
+        logger.info(f"✅ Loaded {len(product_db)} products from Supabase")
     except Exception as exc:
-        log.error("❌ Failed to load products from Supabase: %s", exc)
-        log.info("🔄 Falling back to CSV file...")
-        
+        logger.warning(f"⚠️ Supabase connection failed: {exc}")
+        logger.info("🔄 Falling back to CSV file...")
+
+    if not supabase_success:
         try:
-            if PRODUCT_DB_PATH.exists():
-                df = pd.read_csv(PRODUCT_DB_PATH)
-                
-                product_names = []
-                
-                possible_name_cols = ['اسم الصنف', 'product_name', 'name', 'Product', 'الصنف', 'اسم المنتج']
-                name_col = None
-                
-                for col in possible_name_cols:
-                    if col in df.columns:
-                        name_col = col
-                        break
-                
-                if name_col is None and len(df.columns) > 0:
-                    first_col = df.columns[0]
-                    sample_vals = df[first_col].dropna().head(10).astype(str)
-                    if not sample_vals.str.match(r'^\d+$').all():
-                        name_col = first_col
-                    elif len(df.columns) > 1:
-                        name_col = df.columns[1]
-                
-                if name_col:
-                    product_names = df[name_col].dropna().astype(str).str.strip().tolist()
-                    product_names = [p for p in product_names if p and p.lower() != 'nan']
-                else:
-                    for col in df.columns:
-                        for val in df[col].dropna():
-                            str_val = str(val).strip()
-                            if str_val and not str_val.isdigit() and str_val.lower() != 'nan':
-                                product_names.append(str_val)
-                
-                if not product_names:
-                    log.warning("No product names found, using IDs as fallback")
-                    first_col = df.columns[0]
-                    product_names = df[first_col].dropna().astype(str).str.strip().tolist()
-                    product_names = [p for p in product_names if p and p.lower() != 'nan']
-                
-                _state["product_matcher"] = _build_matcher(product_names)
-                log.info("ProductMatcher ready with %d products from CSV.", len(product_names))
-                log.info("Sample products: %s", product_names[:5])
+            csv_path = "ocr1/data/supabaseData.csv"
+            if os.path.exists(csv_path):
+                product_db, _ = load_product_database_from_excel(
+                    file_path=csv_path,
+                    product_column="product_name"
+                )
+                logger.info(f"✅ Loaded {len(product_db)} products from CSV fallback")
             else:
-                log.warning("Product database not found at %s", PRODUCT_DB_PATH)
-        except Exception as csv_exc:
-            log.error("Failed to load from CSV as well: %s", csv_exc)
+                raise FileNotFoundError(f"CSV file not found at {csv_path}")
+        except Exception as exc:
+            logger.error(f"❌ Failed to load product database: {exc}")
+            raise RuntimeError("Cannot start without product database") from exc
 
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    _state["ready"] = _state["gemini_model"] is not None and _state["product_matcher"] is not None
-    log.info("API startup complete. Ready=%s", _state["ready"])
+    if not product_db or len(product_db) == 0:
+        raise RuntimeError("Product database is empty")
 
+    product_matcher = ProductMatcher(product_database=product_db, threshold=0.6)
+    logger.info(f"✅ Product matcher initialized with {len(product_db)} products")
+
+    gemini_model = setup_gemini()
+    if gemini_model is None:
+        logger.warning("⚠️ Gemini model unavailable — OCR endpoint will fail.")
+    else:
+        logger.info("✅ Gemini model ready")
+
+    initialize_router(product_matcher, gemini_model)
+
+    app.state.product_matcher = product_matcher
+    app.state.gemini_model = gemini_model
+
+    logger.info(f"✅ System fully ready — {len(product_db)} products loaded.")
+    
     yield
     
-    # ---- shutdown ----
-    log.info("Shutting down Inventory Management System.")
+    logger.info("🛑 Shutting down…")
 
 app = FastAPI(title="Inventory Management System", lifespan=lifespan)
 
-# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -134,14 +79,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(
-    chatbot_router,
-    prefix="/chatbot",
-    tags=["Chatbot"]
-)
+app.include_router(ocr_router, prefix="/ocr", tags=["OCR"])
+app.include_router(chatbot_router, prefix="/chatbot", tags=["Chatbot"])
 
-app.include_router(
-    ocr_router,
-    prefix="/ocr",
-    tags=["OCR"]
-)
+@app.get("/")
+async def root():
+    return {"message": "Inventory Management System API", "status": "running"}
