@@ -27,6 +27,7 @@ langgraph
 # --- OCR pipeline (lightweight) ---
 opencv-python-headless>=4.8.0
 pillow>=10.0.0
+sentence-transformers==3.0.1
 rapidfuzz>=3.0.0
 arabic-reshaper>=2.1.0
 json-repair
