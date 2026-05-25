@@ -26,7 +26,9 @@
       "Bash(python *)",
       "Bash(ls -la .env*)",
       "Bash(ls ocr/.env*)",
-      "Bash(ls ocr/api/.env*)"
+      "Bash(ls ocr/api/.env*)",
+      "Bash(PYTHONIOENCODING=utf-8 python -c ' *)",
+      "Bash(PYTHONIOENCODING=utf-8 python cleaning/merge_new_data.py)"
     ]
   }
 }
