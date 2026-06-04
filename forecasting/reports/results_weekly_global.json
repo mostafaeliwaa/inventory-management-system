@@ -1,0 +1,92 @@
+{
+  "config": {
+    "model": "global_lgbm_dev_dualobj_seedbag",
+    "horizon_weeks": 4,
+    "first_train_weeks": 78,
+    "folds": 23,
+    "seeds": [
+      11,
+      23,
+      47,
+      89,
+      137,
+      211,
+      313
+    ],
+    "lags": [
+      1,
+      2,
+      3,
+      4,
+      8,
+      13,
+      26,
+      52
+    ],
+    "rolling_windows": [
+      4,
+      8,
+      13,
+      26
+    ],
+    "fourier_yearly_k": 4,
+    "first_test_week": "2025-12-01",
+    "last_test_week": "2026-05-25"
+  },
+  "overall": {
+    "mae": 18384.52,
+    "wape": 0.2856,
+    "smape": 0.2858,
+    "n": 736
+  },
+  "per_branch": {
+    "Nakheel": {
+      "mae": 31581.54,
+      "wape": 0.3033,
+      "smape": 0.3221,
+      "n": 92
+    },
+    "Maadi": {
+      "mae": 23551.39,
+      "wape": 0.2619,
+      "smape": 0.2817,
+      "n": 92
+    },
+    "October": {
+      "mae": 14449.32,
+      "wape": 0.236,
+      "smape": 0.2463,
+      "n": 92
+    },
+    "Sheraton": {
+      "mae": 17789.44,
+      "wape": 0.4531,
+      "smape": 0.4144,
+      "n": 92
+    },
+    "MiniStore_Mehrem": {
+      "mae": 12570.37,
+      "wape": 0.239,
+      "smape": 0.2325,
+      "n": 92
+    },
+    "Mehrem": {
+      "mae": 15033.26,
+      "wape": 0.3257,
+      "smape": 0.2962,
+      "n": 92
+    },
+    "Asyut": {
+      "mae": 20424.16,
+      "wape": 0.3243,
+      "smape": 0.3038,
+      "n": 92
+    },
+    "Madinaty": {
+      "mae": 11676.68,
+      "wape": 0.1991,
+      "smape": 0.1893,
+      "n": 92
+    }
+  }
+}

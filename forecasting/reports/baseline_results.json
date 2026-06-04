@@ -1,0 +1,157 @@
+{
+  "config": {
+    "horizon": 7,
+    "first_train_days": 60,
+    "step": 7,
+    "folds": 12,
+    "cv_first_test": "2026-03-02",
+    "cv_last_test": "2026-05-24",
+    "target": "revenue"
+  },
+  "per_branch": {
+    "Nakheel": {
+      "seasonal_naive": {
+        "mae": 10131.43,
+        "mape": 123.9971,
+        "wape": 0.6322,
+        "smape": 0.5921,
+        "n": 84
+      },
+      "naive": {
+        "mae": 10812.92,
+        "mape": 129.7567,
+        "wape": 0.6747,
+        "smape": 0.5703,
+        "n": 84
+      }
+    },
+    "Maadi": {
+      "seasonal_naive": {
+        "mae": 8349.11,
+        "mape": 53.395,
+        "wape": 0.6401,
+        "smape": 0.6686,
+        "n": 84
+      },
+      "naive": {
+        "mae": 8837.08,
+        "mape": 63.3741,
+        "wape": 0.6775,
+        "smape": 0.6832,
+        "n": 84
+      }
+    },
+    "October": {
+      "seasonal_naive": {
+        "mae": 5507.38,
+        "mape": 3.5298,
+        "wape": 0.56,
+        "smape": 0.6125,
+        "n": 84
+      },
+      "naive": {
+        "mae": 6186.01,
+        "mape": 4.4826,
+        "wape": 0.629,
+        "smape": 0.6614,
+        "n": 84
+      }
+    },
+    "Sheraton": {
+      "seasonal_naive": {
+        "mae": 4014.11,
+        "mape": 271.1112,
+        "wape": 0.7131,
+        "smape": 0.7179,
+        "n": 84
+      },
+      "naive": {
+        "mae": 4502.86,
+        "mape": 855.5934,
+        "wape": 0.7999,
+        "smape": 0.6908,
+        "n": 84
+      }
+    },
+    "MiniStore_Mehrem": {
+      "seasonal_naive": {
+        "mae": 5757.92,
+        "mape": 117.6797,
+        "wape": 0.7161,
+        "smape": 0.6883,
+        "n": 84
+      },
+      "naive": {
+        "mae": 5860.71,
+        "mape": 117.8284,
+        "wape": 0.7289,
+        "smape": 0.6518,
+        "n": 84
+      }
+    },
+    "Mehrem": {
+      "seasonal_naive": {
+        "mae": 3462.68,
+        "mape": 96.4149,
+        "wape": 0.5086,
+        "smape": 0.5157,
+        "n": 84
+      },
+      "naive": {
+        "mae": 3698.63,
+        "mape": 96.376,
+        "wape": 0.5432,
+        "smape": 0.5263,
+        "n": 84
+      }
+    },
+    "Asyut": {
+      "seasonal_naive": {
+        "mae": 8241.43,
+        "mape": 169.2157,
+        "wape": 0.8455,
+        "smape": 0.8038,
+        "n": 84
+      },
+      "naive": {
+        "mae": 12664.88,
+        "mape": 821.3767,
+        "wape": 1.2993,
+        "smape": 0.9126,
+        "n": 84
+      }
+    },
+    "Madinaty": {
+      "seasonal_naive": {
+        "mae": 6309.4,
+        "mape": 71.6024,
+        "wape": 0.4495,
+        "smape": 0.4233,
+        "n": 84
+      },
+      "naive": {
+        "mae": 6323.39,
+        "mape": 71.542,
+        "wape": 0.4505,
+        "smape": 0.4931,
+        "n": 84
+      }
+    }
+  },
+  "overall": {
+    "seasonal_naive": {
+      "mae": 6471.68,
+      "mape": 113.3682,
+      "wape": 0.6225,
+      "smape": 0.6278,
+      "n": 672
+    },
+    "naive": {
+      "mae": 7360.81,
+      "mape": 270.0412,
+      "wape": 0.7081,
+      "smape": 0.6487,
+      "n": 672
+    }
+  }
+}

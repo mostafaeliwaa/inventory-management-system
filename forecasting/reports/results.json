@@ -1,0 +1,472 @@
+{
+  "config": {
+    "horizon": 7,
+    "first_train_days": 60,
+    "step": 7,
+    "folds": 26,
+    "cv_first_test": "2025-12-03",
+    "cv_last_test": "2026-06-02",
+    "target": "revenue"
+  },
+  "per_branch": {
+    "Nakheel": {
+      "seasonal_naive": {
+        "mae": 8386.9,
+        "mape": 116.6918,
+        "wape": 0.5408,
+        "smape": 0.5539,
+        "n": 182
+      },
+      "naive": {
+        "mae": 8084.18,
+        "mape": 44.1636,
+        "wape": 0.5213,
+        "smape": 0.5782,
+        "n": 182
+      },
+      "prophet": {
+        "mae": 6448.32,
+        "mape": 96.5704,
+        "wape": 0.4158,
+        "smape": 0.4471,
+        "n": 182
+      },
+      "lgbm": {
+        "mae": 7407.47,
+        "mape": 87.6929,
+        "wape": 0.4777,
+        "smape": 0.5384,
+        "n": 182
+      },
+      "lgbm_direct": {
+        "mae": 7067.05,
+        "mape": 103.5105,
+        "wape": 0.4557,
+        "smape": 0.4857,
+        "n": 182
+      },
+      "ensemble": {
+        "mae": 6520.13,
+        "mape": 100.0229,
+        "wape": 0.4204,
+        "smape": 0.4482,
+        "n": 182
+      },
+      "smart_ensemble": {
+        "mae": 6448.32,
+        "mape": 96.5704,
+        "wape": 0.4158,
+        "smape": 0.4471,
+        "n": 182
+      }
+    },
+    "Maadi": {
+      "seasonal_naive": {
+        "mae": 7534.81,
+        "mape": 115.0092,
+        "wape": 0.5569,
+        "smape": 0.5754,
+        "n": 182
+      },
+      "naive": {
+        "mae": 7220.33,
+        "mape": 48.0775,
+        "wape": 0.5337,
+        "smape": 0.5964,
+        "n": 182
+      },
+      "prophet": {
+        "mae": 5458.41,
+        "mape": 75.6672,
+        "wape": 0.4034,
+        "smape": 0.4257,
+        "n": 182
+      },
+      "lgbm": {
+        "mae": 6154.59,
+        "mape": 76.0543,
+        "wape": 0.4549,
+        "smape": 0.4977,
+        "n": 182
+      },
+      "lgbm_direct": {
+        "mae": 5781.37,
+        "mape": 86.4771,
+        "wape": 0.4273,
+        "smape": 0.445,
+        "n": 182
+      },
+      "ensemble": {
+        "mae": 5519.93,
+        "mape": 81.061,
+        "wape": 0.408,
+        "smape": 0.4242,
+        "n": 182
+      },
+      "smart_ensemble": {
+        "mae": 5458.41,
+        "mape": 75.6672,
+        "wape": 0.4034,
+        "smape": 0.4257,
+        "n": 182
+      }
+    },
+    "October": {
+      "seasonal_naive": {
+        "mae": 4925.44,
+        "mape": 65.9002,
+        "wape": 0.5344,
+        "smape": 0.576,
+        "n": 182
+      },
+      "naive": {
+        "mae": 4649.26,
+        "mape": 20.3661,
+        "wape": 0.5044,
+        "smape": 0.5796,
+        "n": 182
+      },
+      "prophet": {
+        "mae": 3783.89,
+        "mape": 42.293,
+        "wape": 0.4105,
+        "smape": 0.4441,
+        "n": 182
+      },
+      "lgbm": {
+        "mae": 3863.54,
+        "mape": 48.8935,
+        "wape": 0.4192,
+        "smape": 0.4662,
+        "n": 182
+      },
+      "lgbm_direct": {
+        "mae": 3652.6,
+        "mape": 59.7501,
+        "wape": 0.3963,
+        "smape": 0.4286,
+        "n": 182
+      },
+      "ensemble": {
+        "mae": 3593.51,
+        "mape": 51.0065,
+        "wape": 0.3899,
+        "smape": 0.4207,
+        "n": 182
+      },
+      "smart_ensemble": {
+        "mae": 3652.6,
+        "mape": 59.7501,
+        "wape": 0.3963,
+        "smape": 0.4286,
+        "n": 182
+      }
+    },
+    "Sheraton": {
+      "seasonal_naive": {
+        "mae": 3640.91,
+        "mape": 247.24,
+        "wape": 0.6437,
+        "smape": 0.6691,
+        "n": 182
+      },
+      "naive": {
+        "mae": 3608.38,
+        "mape": 98.0019,
+        "wape": 0.638,
+        "smape": 0.7442,
+        "n": 182
+      },
+      "prophet": {
+        "mae": 2469.02,
+        "mape": 182.7009,
+        "wape": 0.4365,
+        "smape": 0.4834,
+        "n": 182
+      },
+      "lgbm": {
+        "mae": 2831.95,
+        "mape": 162.4321,
+        "wape": 0.5007,
+        "smape": 0.5555,
+        "n": 182
+      },
+      "lgbm_direct": {
+        "mae": 3032.92,
+        "mape": 277.4552,
+        "wape": 0.5362,
+        "smape": 0.5515,
+        "n": 182
+      },
+      "ensemble": {
+        "mae": 2562.52,
+        "mape": 230.0412,
+        "wape": 0.4531,
+        "smape": 0.4886,
+        "n": 182
+      },
+      "smart_ensemble": {
+        "mae": 2469.02,
+        "mape": 182.7009,
+        "wape": 0.4365,
+        "smape": 0.4834,
+        "n": 182
+      }
+    },
+    "MiniStore_Mehrem": {
+      "seasonal_naive": {
+        "mae": 4649.59,
+        "mape": 34.4126,
+        "wape": 0.5966,
+        "smape": 0.6061,
+        "n": 182
+      },
+      "naive": {
+        "mae": 4579.92,
+        "mape": 25.4112,
+        "wape": 0.5876,
+        "smape": 0.6848,
+        "n": 182
+      },
+      "prophet": {
+        "mae": 3642.28,
+        "mape": 35.6879,
+        "wape": 0.4673,
+        "smape": 0.4875,
+        "n": 182
+      },
+      "lgbm": {
+        "mae": 3535.66,
+        "mape": 35.9958,
+        "wape": 0.4537,
+        "smape": 0.4941,
+        "n": 182
+      },
+      "lgbm_direct": {
+        "mae": 3393.28,
+        "mape": 43.8097,
+        "wape": 0.4354,
+        "smape": 0.4562,
+        "n": 182
+      },
+      "ensemble": {
+        "mae": 3417.29,
+        "mape": 39.7351,
+        "wape": 0.4385,
+        "smape": 0.4576,
+        "n": 182
+      },
+      "smart_ensemble": {
+        "mae": 3393.28,
+        "mape": 43.8097,
+        "wape": 0.4354,
+        "smape": 0.4562,
+        "n": 182
+      }
+    },
+    "Mehrem": {
+      "seasonal_naive": {
+        "mae": 3209.53,
+        "mape": 35.2067,
+        "wape": 0.453,
+        "smape": 0.488,
+        "n": 182
+      },
+      "naive": {
+        "mae": 3451.68,
+        "mape": 25.4668,
+        "wape": 0.4872,
+        "smape": 0.5701,
+        "n": 182
+      },
+      "prophet": {
+        "mae": 2914.09,
+        "mape": 29.8227,
+        "wape": 0.4113,
+        "smape": 0.4451,
+        "n": 182
+      },
+      "lgbm": {
+        "mae": 2896.81,
+        "mape": 42.6455,
+        "wape": 0.4089,
+        "smape": 0.4434,
+        "n": 182
+      },
+      "lgbm_direct": {
+        "mae": 2957.56,
+        "mape": 54.0076,
+        "wape": 0.4175,
+        "smape": 0.4201,
+        "n": 182
+      },
+      "ensemble": {
+        "mae": 2653.42,
+        "mape": 41.8699,
+        "wape": 0.3745,
+        "smape": 0.3925,
+        "n": 182
+      },
+      "smart_ensemble": {
+        "mae": 2896.81,
+        "mape": 42.6455,
+        "wape": 0.4089,
+        "smape": 0.4434,
+        "n": 182
+      }
+    },
+    "Asyut": {
+      "seasonal_naive": {
+        "mae": 6581.62,
+        "mape": 209.0946,
+        "wape": 0.6954,
+        "smape": 0.6928,
+        "n": 182
+      },
+      "naive": {
+        "mae": 7288.9,
+        "mape": 33.3907,
+        "wape": 0.7701,
+        "smape": 0.9022,
+        "n": 182
+      },
+      "prophet": {
+        "mae": 4558.01,
+        "mape": 103.7318,
+        "wape": 0.4816,
+        "smape": 0.5829,
+        "n": 182
+      },
+      "lgbm": {
+        "mae": 4957.96,
+        "mape": 134.5505,
+        "wape": 0.5239,
+        "smape": 0.5889,
+        "n": 182
+      },
+      "lgbm_direct": {
+        "mae": 5133.98,
+        "mape": 140.8184,
+        "wape": 0.5425,
+        "smape": 0.5954,
+        "n": 182
+      },
+      "ensemble": {
+        "mae": 4713.53,
+        "mape": 122.229,
+        "wape": 0.498,
+        "smape": 0.5523,
+        "n": 182
+      },
+      "smart_ensemble": {
+        "mae": 4558.01,
+        "mape": 103.7318,
+        "wape": 0.4816,
+        "smape": 0.5829,
+        "n": 182
+      }
+    },
+    "Madinaty": {
+      "seasonal_naive": {
+        "mae": 3744.64,
+        "mape": 0.5611,
+        "wape": 0.4306,
+        "smape": 0.4396,
+        "n": 182
+      },
+      "naive": {
+        "mae": 3712.28,
+        "mape": 0.5138,
+        "wape": 0.4269,
+        "smape": 0.4344,
+        "n": 182
+      },
+      "prophet": {
+        "mae": 2770.88,
+        "mape": 0.3916,
+        "wape": 0.3186,
+        "smape": 0.3365,
+        "n": 182
+      },
+      "lgbm": {
+        "mae": 3269.02,
+        "mape": 0.4326,
+        "wape": 0.3759,
+        "smape": 0.4301,
+        "n": 182
+      },
+      "lgbm_direct": {
+        "mae": 2733.7,
+        "mape": 0.4059,
+        "wape": 0.3144,
+        "smape": 0.3274,
+        "n": 182
+      },
+      "ensemble": {
+        "mae": 2658.96,
+        "mape": 0.3883,
+        "wape": 0.3058,
+        "smape": 0.3214,
+        "n": 182
+      },
+      "smart_ensemble": {
+        "mae": 2733.7,
+        "mape": 0.4059,
+        "wape": 0.3144,
+        "smape": 0.3274,
+        "n": 182
+      }
+    }
+  },
+  "overall": {
+    "seasonal_naive": {
+      "mae": 5334.18,
+      "mape": 103.0145,
+      "wape": 0.5546,
+      "smape": 0.5751,
+      "n": 1456
+    },
+    "naive": {
+      "mae": 5324.36,
+      "mape": 36.924,
+      "wape": 0.5535,
+      "smape": 0.6362,
+      "n": 1456
+    },
+    "prophet": {
+      "mae": 4005.61,
+      "mape": 70.8582,
+      "wape": 0.4164,
+      "smape": 0.4565,
+      "n": 1456
+    },
+    "lgbm": {
+      "mae": 4364.63,
+      "mape": 73.5871,
+      "wape": 0.4538,
+      "smape": 0.5018,
+      "n": 1456
+    },
+    "lgbm_direct": {
+      "mae": 4219.06,
+      "mape": 95.7793,
+      "wape": 0.4386,
+      "smape": 0.4637,
+      "n": 1456
+    },
+    "ensemble": {
+      "mae": 3954.91,
+      "mape": 83.2942,
+      "wape": 0.4112,
+      "smape": 0.4382,
+      "n": 1456
+    },
+    "smart_ensemble": {
+      "mae": 3951.27,
+      "mape": 75.6602,
+      "wape": 0.4108,
+      "smape": 0.4493,
+      "n": 1456
+    }
+  }
+}

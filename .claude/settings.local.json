@@ -28,7 +28,23 @@
       "Bash(ls ocr/.env*)",
       "Bash(ls ocr/api/.env*)",
       "Bash(PYTHONIOENCODING=utf-8 python -c ' *)",
-      "Bash(PYTHONIOENCODING=utf-8 python cleaning/merge_new_data.py)"
+      "Bash(PYTHONIOENCODING=utf-8 python cleaning/merge_new_data.py)",
+      "Bash(git checkout *)",
+      "Bash(conda install *)",
+      "Bash(conda list *)",
+      "Bash(jupyter nbconvert *)",
+      "Bash(PYTHONIOENCODING=utf-8 jupyter nbconvert --to notebook --execute forecasting/notebooks/results.ipynb --inplace --ExecutePreprocessor.timeout=600)",
+      "Bash(npm *)",
+      "Bash(where claude *)",
+      "Bash(cp data/merged_new_sales.csv data/merged_new_sales.OLD.csv)",
+      "Bash(cp data/merged_new_sales.parquet data/merged_new_sales.OLD.parquet)",
+      "Bash(PYTHONIOENCODING=utf-8 python -m forecasting.src.evaluate)",
+      "Bash(PYTHONIOENCODING=utf-8 python -m forecasting.src.features)",
+      "Bash(PYTHONIOENCODING=utf-8 python -m forecasting.src.weekly)",
+      "Bash(PYTHONIOENCODING=utf-8 python -m forecasting.src.weekly_global)",
+      "Bash(PYTHONIOENCODING=utf-8 python -m forecasting.src.accuracy_levels)",
+      "Bash(PYTHONIOENCODING=utf-8 python -m forecasting.src.monthly_global)",
+      "Bash(PYTHONIOENCODING=utf-8 python -m forecasting.src.monthly_stack)"
     ]
   }
 }

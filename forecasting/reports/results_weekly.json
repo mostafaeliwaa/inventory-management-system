@@ -1,0 +1,354 @@
+{
+  "config": {
+    "horizon_weeks": 4,
+    "first_train_weeks": 78,
+    "folds": 23,
+    "first_test_week": "2025-12-01",
+    "last_test_week": "2026-05-25",
+    "weekly_observations_total": 104
+  },
+  "per_branch": {
+    "Nakheel": {
+      "naive_lag1": {
+        "mae": 39480.6,
+        "wape": 0.3791,
+        "smape": 0.3917,
+        "n": 92
+      },
+      "naive_mean4": {
+        "mae": 35855.41,
+        "wape": 0.3443,
+        "smape": 0.3561,
+        "n": 92
+      },
+      "prophet_weekly": {
+        "mae": 28694.65,
+        "wape": 0.2756,
+        "smape": 0.2836,
+        "n": 92
+      },
+      "lgbm_weekly": {
+        "mae": 30140.22,
+        "wape": 0.2894,
+        "smape": 0.3002,
+        "n": 92
+      },
+      "ensemble_weekly": {
+        "mae": 28815.75,
+        "wape": 0.2808,
+        "smape": 0.2899,
+        "n": 348
+      },
+      "ensemble3_weekly": {
+        "mae": 30416.05,
+        "wape": 0.2982,
+        "smape": 0.3056,
+        "n": 1352
+      }
+    },
+    "Maadi": {
+      "naive_lag1": {
+        "mae": 29722.12,
+        "wape": 0.3305,
+        "smape": 0.3491,
+        "n": 92
+      },
+      "naive_mean4": {
+        "mae": 26882.34,
+        "wape": 0.299,
+        "smape": 0.3215,
+        "n": 92
+      },
+      "prophet_weekly": {
+        "mae": 24138.29,
+        "wape": 0.2684,
+        "smape": 0.2773,
+        "n": 92
+      },
+      "lgbm_weekly": {
+        "mae": 21870.77,
+        "wape": 0.2432,
+        "smape": 0.2603,
+        "n": 92
+      },
+      "ensemble_weekly": {
+        "mae": 20874.99,
+        "wape": 0.236,
+        "smape": 0.25,
+        "n": 348
+      },
+      "ensemble3_weekly": {
+        "mae": 21584.21,
+        "wape": 0.2456,
+        "smape": 0.2604,
+        "n": 1352
+      }
+    },
+    "October": {
+      "naive_lag1": {
+        "mae": 16764.35,
+        "wape": 0.2738,
+        "smape": 0.3032,
+        "n": 92
+      },
+      "naive_mean4": {
+        "mae": 14412.09,
+        "wape": 0.2354,
+        "smape": 0.2487,
+        "n": 92
+      },
+      "prophet_weekly": {
+        "mae": 23428.31,
+        "wape": 0.3827,
+        "smape": 0.3503,
+        "n": 92
+      },
+      "lgbm_weekly": {
+        "mae": 15109.22,
+        "wape": 0.2468,
+        "smape": 0.2583,
+        "n": 92
+      },
+      "ensemble_weekly": {
+        "mae": 16658.72,
+        "wape": 0.2771,
+        "smape": 0.2746,
+        "n": 348
+      },
+      "ensemble3_weekly": {
+        "mae": 14632.54,
+        "wape": 0.2454,
+        "smape": 0.2497,
+        "n": 1352
+      }
+    },
+    "Sheraton": {
+      "naive_lag1": {
+        "mae": 15102.39,
+        "wape": 0.3846,
+        "smape": 0.3842,
+        "n": 92
+      },
+      "naive_mean4": {
+        "mae": 14771.66,
+        "wape": 0.3762,
+        "smape": 0.3831,
+        "n": 92
+      },
+      "prophet_weekly": {
+        "mae": 10195.92,
+        "wape": 0.2597,
+        "smape": 0.2509,
+        "n": 92
+      },
+      "lgbm_weekly": {
+        "mae": 15838.39,
+        "wape": 0.4034,
+        "smape": 0.3864,
+        "n": 92
+      },
+      "ensemble_weekly": {
+        "mae": 12360.61,
+        "wape": 0.3142,
+        "smape": 0.314,
+        "n": 348
+      },
+      "ensemble3_weekly": {
+        "mae": 12304.47,
+        "wape": 0.3121,
+        "smape": 0.3196,
+        "n": 1352
+      }
+    },
+    "MiniStore_Mehrem": {
+      "naive_lag1": {
+        "mae": 16119.57,
+        "wape": 0.3065,
+        "smape": 0.2851,
+        "n": 92
+      },
+      "naive_mean4": {
+        "mae": 15996.55,
+        "wape": 0.3041,
+        "smape": 0.2966,
+        "n": 92
+      },
+      "prophet_weekly": {
+        "mae": 15961.23,
+        "wape": 0.3035,
+        "smape": 0.2886,
+        "n": 92
+      },
+      "lgbm_weekly": {
+        "mae": 13115.05,
+        "wape": 0.2494,
+        "smape": 0.2537,
+        "n": 92
+      },
+      "ensemble_weekly": {
+        "mae": 12878.08,
+        "wape": 0.2468,
+        "smape": 0.2402,
+        "n": 348
+      },
+      "ensemble3_weekly": {
+        "mae": 13229.57,
+        "wape": 0.2546,
+        "smape": 0.244,
+        "n": 1352
+      }
+    },
+    "Mehrem": {
+      "naive_lag1": {
+        "mae": 12271.41,
+        "wape": 0.2658,
+        "smape": 0.2734,
+        "n": 92
+      },
+      "naive_mean4": {
+        "mae": 11123.4,
+        "wape": 0.241,
+        "smape": 0.2397,
+        "n": 92
+      },
+      "prophet_weekly": {
+        "mae": 13938.56,
+        "wape": 0.302,
+        "smape": 0.3134,
+        "n": 92
+      },
+      "lgbm_weekly": {
+        "mae": 16988.29,
+        "wape": 0.368,
+        "smape": 0.3371,
+        "n": 92
+      },
+      "ensemble_weekly": {
+        "mae": 11906.4,
+        "wape": 0.2631,
+        "smape": 0.2544,
+        "n": 348
+      },
+      "ensemble3_weekly": {
+        "mae": 10200.19,
+        "wape": 0.2274,
+        "smape": 0.2226,
+        "n": 1352
+      }
+    },
+    "Asyut": {
+      "naive_lag1": {
+        "mae": 31359.24,
+        "wape": 0.4979,
+        "smape": 0.4315,
+        "n": 92
+      },
+      "naive_mean4": {
+        "mae": 24191.66,
+        "wape": 0.3841,
+        "smape": 0.3548,
+        "n": 92
+      },
+      "prophet_weekly": {
+        "mae": 19503.54,
+        "wape": 0.3097,
+        "smape": 0.2903,
+        "n": 92
+      },
+      "lgbm_weekly": {
+        "mae": 19998.72,
+        "wape": 0.3175,
+        "smape": 0.3001,
+        "n": 92
+      },
+      "ensemble_weekly": {
+        "mae": 18902.6,
+        "wape": 0.3027,
+        "smape": 0.2854,
+        "n": 348
+      },
+      "ensemble3_weekly": {
+        "mae": 20067.2,
+        "wape": 0.3216,
+        "smape": 0.3036,
+        "n": 1352
+      }
+    },
+    "Madinaty": {
+      "naive_lag1": {
+        "mae": 15927.5,
+        "wape": 0.2716,
+        "smape": 0.2465,
+        "n": 92
+      },
+      "naive_mean4": {
+        "mae": 13903.97,
+        "wape": 0.2371,
+        "smape": 0.2266,
+        "n": 92
+      },
+      "prophet_weekly": {
+        "mae": 12192.64,
+        "wape": 0.2079,
+        "smape": 0.2046,
+        "n": 92
+      },
+      "lgbm_weekly": {
+        "mae": 11871.82,
+        "wape": 0.2024,
+        "smape": 0.1932,
+        "n": 92
+      },
+      "ensemble_weekly": {
+        "mae": 10569.65,
+        "wape": 0.1821,
+        "smape": 0.1754,
+        "n": 348
+      },
+      "ensemble3_weekly": {
+        "mae": 10667.83,
+        "wape": 0.1845,
+        "smape": 0.1754,
+        "n": 1352
+      }
+    }
+  },
+  "overall": {
+    "naive_lag1": {
+      "mae": 22093.4,
+      "wape": 0.3432,
+      "smape": 0.3331,
+      "n": 736
+    },
+    "naive_mean4": {
+      "mae": 19642.13,
+      "wape": 0.3052,
+      "smape": 0.3034,
+      "n": 736
+    },
+    "prophet_weekly": {
+      "mae": 18506.64,
+      "wape": 0.2875,
+      "smape": 0.2824,
+      "n": 736
+    },
+    "lgbm_weekly": {
+      "mae": 18116.56,
+      "wape": 0.2815,
+      "smape": 0.2862,
+      "n": 736
+    },
+    "ensemble_weekly": {
+      "mae": 16620.85,
+      "wape": 0.2615,
+      "smape": 0.2605,
+      "n": 2784
+    },
+    "ensemble3_weekly": {
+      "mae": 16637.76,
+      "wape": 0.2631,
+      "smape": 0.2601,
+      "n": 10816
+    }
+  }
+}

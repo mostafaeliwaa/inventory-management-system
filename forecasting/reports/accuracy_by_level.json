@@ -1,0 +1,154 @@
+{
+  "model": "global_lgbm_dev_dualobj_seedbag",
+  "test_window": {
+    "first_week": "2025-12-01",
+    "last_week": "2026-05-25",
+    "weeks": 26
+  },
+  "overall_by_level": [
+    {
+      "level": "per_branch_weekly",
+      "n": 208,
+      "wape": 0.2788,
+      "accuracy": 0.7212,
+      "mae": 18551.66
+    },
+    {
+      "level": "per_branch_monthly",
+      "n": 48,
+      "wape": 0.1974,
+      "accuracy": 0.8026,
+      "mae": 56914.25
+    },
+    {
+      "level": "company_weekly",
+      "n": 26,
+      "wape": 0.1877,
+      "accuracy": 0.8123,
+      "mae": 99884.81
+    },
+    {
+      "level": "company_monthly",
+      "n": 6,
+      "wape": 0.0964,
+      "accuracy": 0.9036,
+      "mae": 222413.49
+    }
+  ],
+  "per_branch_weekly": [
+    {
+      "branch": "Asyut",
+      "n": 26,
+      "wape": 0.3183,
+      "accuracy": 0.6817,
+      "mae": 20776.11
+    },
+    {
+      "branch": "Maadi",
+      "n": 26,
+      "wape": 0.2692,
+      "accuracy": 0.7308,
+      "mae": 25211.74
+    },
+    {
+      "branch": "Madinaty",
+      "n": 26,
+      "wape": 0.1692,
+      "accuracy": 0.8308,
+      "mae": 10213.53
+    },
+    {
+      "branch": "Mehrem",
+      "n": 26,
+      "wape": 0.309,
+      "accuracy": 0.691,
+      "mae": 14948.1
+    },
+    {
+      "branch": "MiniStore_Mehrem",
+      "n": 26,
+      "wape": 0.2324,
+      "accuracy": 0.7676,
+      "mae": 12468.33
+    },
+    {
+      "branch": "Nakheel",
+      "n": 26,
+      "wape": 0.3074,
+      "accuracy": 0.6926,
+      "mae": 33150.31
+    },
+    {
+      "branch": "October",
+      "n": 26,
+      "wape": 0.2259,
+      "accuracy": 0.7741,
+      "mae": 14396.34
+    },
+    {
+      "branch": "Sheraton",
+      "n": 26,
+      "wape": 0.4381,
+      "accuracy": 0.5619,
+      "mae": 17248.78
+    }
+  ],
+  "per_branch_monthly": [
+    {
+      "branch": "Asyut",
+      "n": 6,
+      "wape": 0.1702,
+      "accuracy": 0.8298,
+      "mae": 48136.67
+    },
+    {
+      "branch": "Maadi",
+      "n": 6,
+      "wape": 0.1709,
+      "accuracy": 0.8291,
+      "mae": 69363.86
+    },
+    {
+      "branch": "Madinaty",
+      "n": 6,
+      "wape": 0.1251,
+      "accuracy": 0.8749,
+      "mae": 32727.89
+    },
+    {
+      "branch": "Mehrem",
+      "n": 6,
+      "wape": 0.309,
+      "accuracy": 0.691,
+      "mae": 64775.11
+    },
+    {
+      "branch": "MiniStore_Mehrem",
+      "n": 6,
+      "wape": 0.1299,
+      "accuracy": 0.8701,
+      "mae": 30197.27
+    },
+    {
+      "branch": "Nakheel",
+      "n": 6,
+      "wape": 0.1933,
+      "accuracy": 0.8067,
+      "mae": 90348.02
+    },
+    {
+      "branch": "October",
+      "n": 6,
+      "wape": 0.2087,
+      "accuracy": 0.7913,
+      "mae": 57643.59
+    },
+    {
+      "branch": "Sheraton",
+      "n": 6,
+      "wape": 0.3641,
+      "accuracy": 0.6359,
+      "mae": 62121.59
+    }
+  ]
+}

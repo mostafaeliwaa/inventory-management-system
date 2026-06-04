@@ -68,21 +68,39 @@ def main() -> None:
     except Exception:
         pass
 
-    files = sorted(glob.glob(str(SRC_DIR / "*.xlsx")))
+    files = sorted(glob.glob(str(SRC_DIR / "*.xlsx")) +
+                   glob.glob(str(SRC_DIR / "*.xls")))
     if not files:
-        raise SystemExit(f"No .xlsx files in {SRC_DIR}")
+        raise SystemExit(f"No .xlsx/.xls files in {SRC_DIR}")
 
     frames = []
     for f in files:
         path = Path(f)
-        df = pd.read_excel(path).rename(columns=COL_MAP)
+        # Some exports come as cp1256-encoded TSV with an .xls extension
+        # (they're not OLE compound files). Detect via magic bytes and parse as TSV.
+        try:
+            with open(path, "rb") as fh:
+                magic = fh.read(8)
+            is_real_xls = magic.startswith(b"\xd0\xcf\x11\xe0")
+            is_xlsx = magic.startswith(b"PK\x03\x04")
+            if path.suffix.lower() == ".xls" and not is_real_xls and not is_xlsx:
+                df = pd.read_csv(path, sep="\t", encoding="cp1256", engine="python")
+            else:
+                df = pd.read_excel(path)
+        except Exception as e:
+            print(f"  WARN: could not read {path.name} ({e}); skipping")
+            continue
+        df = df.rename(columns=COL_MAP)
         df["source_file"] = path.name
 
         # drop subtotal rows (no date / no branch)
         df = df.dropna(subset=["posting_date", "branch_code"]).copy()
 
-        # parse date, normalise text
-        df["posting_date"] = pd.to_datetime(df["posting_date"], errors="coerce").dt.normalize()
+        # parse date, normalise text. Use dayfirst=True because cp1256 TSV exports
+        # write dates as dd/mm/yyyy (xlsx files come through as real datetimes already).
+        df["posting_date"] = pd.to_datetime(
+            df["posting_date"], errors="coerce", dayfirst=True
+        ).dt.normalize()
         df = df.dropna(subset=["posting_date"])
         df["branch_name"] = df["branch_name"].astype(str).str.strip()
         df["branch_name_en"] = df["branch_name"].map(BRANCH_NAME_MAP).fillna(df["branch_name"])
