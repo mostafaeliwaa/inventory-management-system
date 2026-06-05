@@ -14,8 +14,8 @@ class SupabaseProductDB:
         self.url = url if url is not None else os.getenv("SUPABASE_URL")
         self.key = key if key is not None else os.getenv("SUPABASE_KEY")
         
-        print(f"🔧 SUPABASE_URL loaded: {'✅' if self.url else '❌'}")
-        print(f"🔧 SUPABASE_KEY loaded: {'✅' if self.key else '❌'}")
+        print(f"[CONFIG] SUPABASE_URL loaded: {'OK' if self.url else 'MISSING'}")
+        print(f"[CONFIG] SUPABASE_KEY loaded: {'OK' if self.key else 'MISSING'}")
         
         self.client: Optional[Client] = None
         self._connect()
@@ -23,15 +23,15 @@ class SupabaseProductDB:
     def _connect(self) -> None:
         """Establish connection to Supabase"""
         if not self.url or not self.key:
-            print("❌ Missing Supabase credentials. Please check your .env file")
+            print("[ERROR] Missing Supabase credentials. Please check your .env file")
             print("   Expected variables: SUPABASE_URL and SUPABASE_KEY")
             raise ValueError("supabase_url and supabase_key are required")
         
         try:
             self.client = create_client(self.url, self.key)
-            print("✅ Connected to Supabase successfully")
+            print("[OK] Connected to Supabase successfully")
         except Exception as e:
-            print(f"❌ Failed to connect to Supabase: {e}")
+            print(f"[ERROR] Failed to connect to Supabase: {e}")
             raise
     
     def get_all_products(self, 
@@ -60,7 +60,7 @@ class SupabaseProductDB:
                     products = [row.get(product_name_column) for row in response.data 
                                if row.get(product_name_column)]
                     products = [str(p).strip() for p in products if p and str(p).strip()]
-                    print(f"📦 Loaded {len(products)} products from Supabase table '{table_name}'")
+                    print(f"[OK] Loaded {len(products)} products from Supabase table '{table_name}'")
                     return products
                 return []
         
@@ -68,7 +68,7 @@ class SupabaseProductDB:
             start = 0
             page_count = 0
         
-            print(f"🔄 Fetching products from '{table_name}' in batches of {batch_size}...")
+            print(f"[INFO] Fetching products from '{table_name}' in batches of {batch_size}...")
         
             while True:
                 end = start + batch_size - 1
@@ -106,14 +106,13 @@ class SupabaseProductDB:
             if limit is not None and len(all_products) > limit:
                 all_products = all_products[:limit]
         
-            print(f"📦 Loaded {len(all_products)} products from Supabase table '{table_name}' (fetched in {page_count} batches)")
-            if all_products:
-                print(f"📋 Sample: {all_products[:3]}")
+            print(f"[OK] Loaded {len(all_products)} products from Supabase table '{table_name}' (fetched in {page_count} batches)")
+            pass
         
             return all_products
         
         except Exception as e:
-            print(f"❌ Error fetching products from Supabase: {e}")
+            print(f"[ERROR] Error fetching products from Supabase: {e}")
             return []
 
 _supabase_instance = None

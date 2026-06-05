@@ -27,14 +27,13 @@ def load_product_database_from_excel(
         )
         product_lookup = {idx: name for idx, name in enumerate(product_names)}
 
-        print(f"✅ Loaded {len(product_names)} products from CSV file '{file_path}'")
-        if product_names:
-            print(f"📋 Sample products: {product_names[:5]}")
+        print(f"[OK] Loaded {len(product_names)} products from CSV file '{file_path}'")
+        pass
 
         return product_names, product_lookup
 
     except Exception as e:
-        print(f"❌ Error loading CSV file: {e}")
+        print(f"[ERROR] Error loading CSV file: {e}")
         return [], {}
 
 
@@ -52,9 +51,8 @@ def load_product_database_from_supabase(
 
     product_lookup = {idx: name for idx, name in enumerate(product_names)}
 
-    print(f"✅ Loaded {len(product_names)} products from Supabase table '{table_name}'")
-    if product_names:
-        print(f"📋 Sample products: {product_names[:5]}")
+    print(f"[OK] Loaded {len(product_names)} products from Supabase table '{table_name}'")
+    pass
 
     return product_names, product_lookup
 
