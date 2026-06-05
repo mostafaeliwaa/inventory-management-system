@@ -1,220 +1,137 @@
-# Inventory Management System 📦
+<div align="center">
+  
+# 📦 AI-Powered Retail Inventory Management System
 
-A Python-based inventory management system for retail distribution business with 13 branches across Egypt. Includes data analysis, visualization dashboards, and data cleaning pipelines.
+**A comprehensive, data-driven solution for retail distribution with 13 branches across Egypt.**
 
-## 🚀 Quick Start
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg?logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![LightGBM](https://img.shields.io/badge/LightGBM-Machine_Learning-orange)](#)
+[![Prophet](https://img.shields.io/badge/Prophet-Time_Series-blue)](#)
+[![Pandas](https://img.shields.io/badge/Pandas-Data_Analysis-150458?logo=pandas)](#)
+
+*Empowering decision-makers with Interactive Dashboards, Machine Learning, and Time-Series Forecasting.*
+
+</div>
+
+---
+
+## 🌟 Overview
+
+This project is a robust, end-to-end **Inventory Management System** designed to tackle real-world retail challenges. By integrating advanced **Data Analytics**, **Machine Learning**, and **Time-Series Forecasting**, the system moves beyond traditional inventory tracking to provide actionable insights, optimize stock levels, and predict future revenue.
+
+### 🎯 Key Objectives
+- **Minimize Dead Stock:** Identify non-moving inventory before it eats into profit margins.
+- **Optimize Distribution:** Classify product demand (Fast/Medium/Slow) to ensure the right products are at the right branches.
+- **Forecast Revenue:** Accurately predict daily and weekly branch revenue to optimize staffing, cash flow, and logistics.
+
+---
+
+## 🚀 Features
+
+### 📊 1. Advanced Analytics & Dashboards
+- **ABC Classification:** Segment 2,400+ products by sales volume and revenue.
+- **Branch Performance:** Compare KPIs across 13 retail branches.
+- **Anomaly Detection:** Automatically flag unusual stock-to-sales ratios.
+- **Interactive Visualizations:** Responsive HTML dashboards powered by Plotly.
+
+### 🧠 2. Machine Learning Suite (`/ML models/`)
+- **Demand Classification:** A Random Forest model predicting Fast/Medium/Slow moving items (Macro F1: ~0.90).
+- **Dead-Stock Predictor:** A Gradient Boosting model identifying static inventory with extreme precision (ROC-AUC: 0.998).
+- **Interactive UI:** Built-in Streamlit app (`port 8501`) for manual testing and batch inference.
+- **RESTful API:** FastAPI service (`port 8003`) serving live predictions.
+
+### 📈 3. Time-Series Forecasting (`/forecasting/`)
+Built on 144 days of POS data across 8 branches, handling Ramadan/Eid shocks, weekly cycles, and payday/school-holiday windows.
+- **Daily Forecasts (7-day horizon):** Prophet + LightGBM Ensemble (WAPE: 0.479).
+- **Weekly Forecasts (4-week horizon):** Ensemble3 (Prophet + LGBM + Naive Mean) for robust cash-flow planning (WAPE: 0.229).
+- **Forecasting API:** Dedicated FastAPI service (`port 8004`) for seamless integration.
+
+### 🤖 4. AI Assistant & Future Integrations
+- **Chatbot:** LangGraph-powered AI assistant (`port 8002`) for natural language querying.
+- **Database:** Supabase integration for normalized, cloud-based data storage.
+- **OCR Pipeline:** Processing of scanned invoices and receipts (`/ocr1/`).
+
+---
+
+## 🏗️ Architecture & Tech Stack
+
+| Domain | Technologies Used |
+| :--- | :--- |
+| **Core & Data Prep** | `Python`, `Pandas`, `NumPy`, `Scikit-learn` |
+| **Machine Learning** | `LightGBM`, `Random Forest`, `Gradient Boosting` |
+| **Time Series** | `Prophet`, `LightGBM (Recursive & Direct)` |
+| **APIs & Backend** | `FastAPI`, `Uvicorn`, `Pydantic`, `Supabase` |
+| **Frontend & BI** | `Streamlit`, `Plotly`, `Jupyter Notebooks` |
+
+---
+
+## 🏁 Quick Start
 
 ### Prerequisites
-- Python 3.8+
-- Pandas, NumPy, Plotly
-- Jupyter Notebook
+Make sure you have Python 3.8+ installed. 
 
-### Installation
+### 1. Clone & Install
 ```bash
+git clone https://github.com/mostafaeliwaa/inventory-management-system.git
+cd inventory-management-system
 pip install -r requirements.txt
 ```
 
-### Run Analysis
+### 2. Launch the ML Streamlit Interface
+```bash
+cd "ML models"
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+# The UI will open at http://localhost:8501
+```
+
+### 3. Start the Forecasting API
+```bash
+cd forecasting
+pip install -r requirements.txt
+uvicorn api:app --port 8004 --reload
+# Access the interactive API docs at http://localhost:8004/docs
+```
+
+### 4. Explore the Data Analytics
 ```bash
 cd analysis
 jupyter notebook EXP.ipynb
 ```
 
-## 📁 Project Structure
+---
 
+## 📁 Repository Structure
+
+```text
+📦 inventory-management-system
+ ┣ 📂 analysis/        # Jupyter notebooks & Plotly HTML dashboards
+ ┣ 📂 cleaning/        # ETL pipelines and data sanitization scripts
+ ┣ 📂 data/            # Cleaned CSV files and database schemas
+ ┣ 📂 ML models/       # Classification & Dead-Stock models (FastAPI + Streamlit)
+ ┣ 📂 forecasting/     # Time-Series revenue forecasting (Prophet + LGBM)
+ ┣ 📂 chatbot/         # LangGraph-based AI Chatbot
+ ┣ 📂 ocr1/            # OCR extraction and database matching scripts
+ ┣ 📜 main.py          # Main application entry point
+ ┗ 📜 requirements.txt # Global dependencies
 ```
-inventory-management-system/
-├── README.md                 # This file
-├── CLAUDE.md                 # Project documentation for AI assistant
-├── requirements.txt          # Python dependencies
-│
-├── data/                     # Cleaned CSV datasets (ready for analysis)
-│   ├── cleaned_sales_stock.csv      # 2,428 products with sales & stock by branch
-│   ├── cleaned_pricing.csv          # Product pricing and costs
-│   ├── cleaned_suppliers.csv        # Supplier information
-│   └── cleaned_warehouse.csv        # Warehouse inventory levels
-│
-├── analysis/                 # Jupyter notebooks and visualizations
-│   ├── README.md            # Analysis documentation
-│   ├── EXP.ipynb           # Main analysis notebook
-│   ├── output/
-│   │   ├── dashboard.html           # Master dashboard
-│   │   └── charts/
-│   │       ├── sales_by_branch.html
-│   │       ├── stock_by_branch.html
-│   │       ├── dead_stock.html
-│   │       ├── top_suppliers.html
-│   │       └── ... (more charts)
-│   └── .vscode/settings.json
-│
-├── cleaning/                # ETL scripts and data cleaning
-│   ├── README.md           # Cleaning pipeline documentation
-│   ├── output/             # Cleaned datasets (before final /data/)
-│   └── ...
-│
-├── ML models/               # Demand classifier + dead-stock predictor
-│   ├── README.md
-│   ├── streamlit_app.py    # Streamlit UI (port 8501) — manual testing
-│   ├── api.py              # FastAPI service (port 8003)
-│   ├── src/                # data loader (CSV or Supabase), training, evaluation, inference
-│   ├── notebooks/          # demo_and_evaluation.ipynb walkthrough
-│   ├── test_data/          # JSON payloads + API suite runner
-│   ├── artifacts/          # serialized .joblib models
-│   └── reports/            # JSON evaluation reports
-│
-├── forecasting/             # Time-series forecasting module
-│   ├── src/                 # ML pipeline: data prep, features, models (Prophet/LGBM)
-│   ├── reports/             # CV metrics and JSON forecast snapshots
-│   └── api.py               # FastAPI service (port 8004)
-│
-├── chatbot/                 # LangGraph chatbot + FastAPI (port 8002)
-│
-└── ocr/                     # ⚠️ Empty - OCR processing (future)
-```
-
-## 📊 Data Overview
-
-### Branches (13 total)
-- اسيوط, اكتوبر, العباسيه, معادى, تجمع
-- توى المعادى, توى التجمع, شيراتون, محرم
-- مدينتى, مينى ستور محرم, النخيل, الاداره
-
-### Product Categories
-- **العب** (Toys/Games) - Major category
-- **أدوات تجميل** (Cosmetics)
-- **شيفون**, **جرابات**, and others
-
-### Dataset Summary
-| File | Records | Description |
-|------|---------|-------------|
-| cleaned_sales_stock.csv | 2,428 | Product sales & stock per branch |
-| cleaned_pricing.csv | ~2,428 | Cost & retail prices by product |
-| cleaned_suppliers.csv | Varies | Supplier details & performance |
-| cleaned_warehouse.csv | Varies | Warehouse inventory snapshots |
-
-## ⚠️ Data Limitations & Time Series
-
-- **Initial Core Data**: Was aggregated snapshots WITHOUT timestamps.
-- **New Forecasting Data**: We have incorporated `merged_new_sales.csv` (144 days of POS data for 8 branches, from 2026-01-01 to 2026-05-24) to unlock branch-level forecasting.
-- **Still Blocked**: ❌ SKU/Product-level demand forecasting (receipts don't carry product codes).
-
-## ✅ Current Capabilities
-
-### Analytics Available
-- ✅ **ABC Classification** - Segment products by sales volume
-- ✅ **Dead Stock Detection** - Identify non-moving inventory
-- ✅ **Branch Performance** - Compare metrics across 13 branches
-- ✅ **Anomaly Detection** - Find unusual stock/sales ratios
-- ✅ **Product Clustering** - Group similar products
-- ✅ **Supplier Ranking** - Performance metrics by supplier
-
-### Machine Learning Models (`/ML models/`)
-- ✅ **Demand Classification** — Random Forest predicts fast / medium / slow movers
-  (robust macro F1 ≈ 0.87–0.91 with rule-defining features hidden)
-- ✅ **Dead-Stock Prediction** — Gradient Boosting predicts non-moving inventory
-  (robust F1 ≈ 0.95–0.97, ROC-AUC ≈ 0.998 with rule-defining features hidden)
-- ✅ **Streamlit UI** on port 8501 — pick a product, manual feature entry, batch test, eval reports
-- ✅ **FastAPI service** on port 8003 with `/predict/demand`, `/predict/dead-stock`,
-  `/predict/by-code/{code}`, `/predict/batch`, `/metrics`, `/health`
-- ✅ **Data source switch** — `DATA_SOURCE=csv` (default) or `DATA_SOURCE=supabase`
-  reads directly from the normalized Supabase schema in `data/schema.sql`
-
-### Time-Series Forecasting (`/forecasting/`)
-- ✅ **Daily Revenue Forecasts** — 7-day horizon using an Ensemble of Prophet and LightGBM (WAPE 0.479).
-- ✅ **Weekly Revenue Forecasts** — 4-week horizon using an Ensemble3 (Prophet + LGBM + Naive Mean4) trimming variance for high accuracy (WAPE 0.229).
-- ✅ Handles Ramadan/Eid shocks, weekly cycle, intra-week volatility, Egyptian holidays, and payday/school-holiday windows.
-- ✅ **FastAPI service** on port 8004 with `/forecast`, `/forecast/weekly`, `/metrics` endpoints.
-
-```bash
-cd "ML models"
-pip install -r requirements.txt
-python -m src.train_demand && python -m src.train_dead_stock && python -m src.evaluate
-
-# UI (recommended first step)
-streamlit run streamlit_app.py            # http://localhost:8501
-
-# API
-uvicorn api:app --port 8003 --reload      # http://localhost:8003/docs
-
-# Pull data from Supabase instead of the CSVs:
-DATA_SOURCE=supabase streamlit run streamlit_app.py
-```
-
-See [ML models/README.md](ML%20models/README.md) for full details.
-
-### Dashboards
-- Interactive Plotly visualizations in `/analysis/output/`
-- Responsive HTML dashboards
-- Multiple chart types: bars, heatmaps, treemaps, scatter plots
-
-## 📖 Documentation
-
-- **[CLAUDE.md](CLAUDE.md)** - Complete project documentation
-- **[analysis/README.md](analysis/README.md)** - Analysis & visualization guide
-- **[cleaning/README.md](cleaning/README.md)** - Data cleaning pipeline
-- **[analysis/EXP.ipynb](analysis/EXP.ipynb)** - Main analysis notebook with examples
-
-## 🛠️ Tech Stack
-
-| Component | Tools |
-|-----------|-------|
-| Language | Python 3.8+ |
-| Data Processing | Pandas, NumPy |
-| Visualization | Plotly |
-| Notebooks | Jupyter |
-| Data Format | CSV |
-
-## 📈 Next Steps
-
-### Priority 1: With Current Data
-1. Implement ABC classification
-2. Build dead stock dashboard
-3. Create anomaly detection alerts
-4. Supplier performance ranking
-
-### Priority 2: With Historical Data
-1. ✅ Collect transaction-level data with dates (Done for branch-level)
-2. ✅ Implement demand forecasting (Done via Prophet/LGBM ensemble)
-3. ✅ Build seasonal models (Done - captures weekly cycle & Ramadan/Eid)
-4. Predict SKU-level stock-outs (Blocked by lack of SKU keys in time-series)
-
-## 🔄 Data Flow
-
-```
-Raw Data → Cleaning Pipeline → /cleaning/output/ → Final /data/ → Analysis → Dashboards
-   ↓                                                                          ↓
-External                                                              HTML Visualizations
-Sources                                                              (Plotly Charts)
-```
-
-## 📝 Requirements
-
-```
-pandas>=2.0.0
-numpy>=1.24.0
-plotly>=5.0.0
-jupyter>=1.0.0
-xlrd>=2.0.0
-openpyxl>=3.0.0
-```
-
-## 🤝 Contributing
-
-When adding new analysis:
-1. Add notebooks to `/analysis/`
-2. Export visualizations to `/analysis/output/charts/`
-3. Document in this README
-4. Update CLAUDE.md if structure changes
-
-## 📞 Support
-
-- Check [CLAUDE.md](CLAUDE.md) for detailed project info
-- See [analysis/README.md](analysis/README.md) for notebook documentation
-- Review [cleaning/README.md](cleaning/README.md) for data pipeline info
 
 ---
 
-**Last Updated:** 2026-04-27  
-**Data Last Refreshed:** Single snapshot (No time dimension)  
-**Products:** 2,428  
-**Branches:** 13
+## 🤝 Contributing & Documentation
+
+Detailed documentation for each module can be found in their respective directories:
+- 📖 [Project Guidelines (CLAUDE.md)](CLAUDE.md)
+- 📊 [Analytics Documentation](analysis/README.md)
+- 🧠 [Machine Learning Documentation](ML%20models/README.md)
+- 📈 [Forecasting Documentation](forecasting/README.md)
+- 🧹 [Data Cleaning Pipeline](cleaning/README.md)
+
+---
+<div align="center">
+  <b>Built with ❤️ by the Graduation Project Team</b>
+  <br>
+  <i>Empowering Egyptian Retail with Data Intelligence</i>
+</div>
