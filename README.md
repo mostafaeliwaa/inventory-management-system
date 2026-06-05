@@ -1,138 +1,129 @@
 <div align="center">
 
-# 🚀 AI-Powered Retail Inventory Management System
+# 📊 Retail Intelligence & Inventory Management System
 
-**A next-generation, data-driven solution to revolutionize retail distribution across 13 branches in Egypt.**
+**An End-to-End AI and Data Analytics Platform for Modern Retail**
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
-[![LightGBM](https://img.shields.io/badge/LightGBM-Machine_Learning-orange?style=for-the-badge)](#)
-[![Prophet](https://img.shields.io/badge/Prophet-Time_Series-blue?style=for-the-badge)](#)
+![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
-*Transforming data into actionable insights, predicting revenue, and optimizing stock distribution with cutting-edge AI.*
+*Empowering 13 branches across Egypt with Machine Learning, Time-Series Forecasting, and Automated Data Pipelines.*
 
 </div>
 
 ---
 
-## 🌟 Overview
+## 📖 About the Project
 
-The **Inventory Management System** is an end-to-end robust platform engineered to solve real-world retail hurdles. By fusing **Advanced Data Analytics**, **Machine Learning**, **Time-Series Forecasting**, and **Generative AI**, this system transcends traditional inventory tracking. It provides predictive insights, optimizes stock levels, and empowers decision-makers to maximize profitability.
+Retail inventory management is traditionally reactive. This system transforms it into a **proactive, predictive, and intelligent** operation. By leveraging robust machine learning models and deep analytics, this project identifies exactly what stock is needed, where it should be, and when it should be replenished.
 
-### 🎯 Key Objectives
-- **📉 Minimize Dead Stock:** Proactively identify non-moving inventory before it erodes profit margins.
-- **🚚 Optimize Distribution:** Classify product demand (Fast/Medium/Slow) to align inventory with branch-specific needs.
-- **💸 Forecast Revenue:** Predict daily and weekly branch revenue accurately for smarter staffing, cash flow, and logistics planning.
-- **📄 Automate Invoicing:** Instantly digitize and process paper invoices using AI-driven OCR.
-
----
-
-## 🔥 Key Features
-
-### 📊 1. Advanced Analytics & Dashboards
-- **ABC Classification:** Intelligently segment 2,400+ products by sales volume and revenue.
-- **Branch Performance Tracking:** Compare and analyze KPIs across 13 distinct retail branches.
-- **Anomaly Detection:** Automatically flag unusual stock-to-sales ratios for rapid intervention.
-- **Interactive Visualizations:** Explore responsive, insight-rich dashboards powered by Plotly.
-
-### 🧠 2. Machine Learning Suite (`/ML models/`)
-- **Demand Classification:** A powerful Random Forest model predicting Fast/Medium/Slow moving items *(Macro F1: ~0.90)*.
-- **Dead-Stock Predictor:** A Gradient Boosting model pinpointing static inventory with extreme precision *(ROC-AUC: 0.998)*.
-- **Interactive UI:** Built-in Streamlit app (`port 8501`) for effortless manual testing and batch inference.
-
-### 📈 3. Time-Series Forecasting (`/forecasting/`)
-Built on 144 days of POS data across 8 branches, adeptly handling Ramadan/Eid shocks, weekly cycles, and payday windows.
-- **Daily Forecasts (7-day horizon):** Prophet + LightGBM Ensemble *(WAPE: 0.479)*.
-- **Weekly Forecasts (4-week horizon):** Ensemble (Prophet + LGBM + Naive Mean) for robust cash-flow planning *(WAPE: 0.229)*.
-
-### 🤖 4. AI Assistant & Smart OCR
-- **Smart OCR Pipeline (`/ocr1/`):** Digitize physical invoices and seamlessly match products against the Supabase database.
-- **AI Chatbot (`/chatbot/`):** LangGraph-powered virtual assistant ready to answer complex inventory queries in natural language.
-- **Unified API Gateway:** Everything is served elegantly through a single FastAPI application (`main.py`).
+**Core Capabilities:**
+1. **Demand Forecasting:** Anticipating weekly and daily revenue streams to streamline cash flow.
+2. **Inventory Optimization:** Classifying products dynamically to eliminate dead stock.
+3. **Automated Invoicing (OCR):** Digitizing paper trails instantly with AI.
+4. **Conversational AI:** Answering complex stock queries via a LangGraph-powered assistant.
 
 ---
 
-## 🏗️ Architecture & Tech Stack
+## ⚡ Key Modules
 
-| Domain | Technologies Used |
+### 1. 🧠 Machine Learning Engine (`/ML models/`)
+- **Demand Classifier:** Categorizes items into Fast, Medium, or Slow moving to optimize supply chain routing. *(Random Forest, F1: 0.90)*
+- **Dead-Stock Detector:** Accurately flags inventory at risk of becoming obsolete, saving thousands in holding costs. *(Gradient Boosting, ROC-AUC: 0.998)*
+- **Interactive UI:** A dedicated Streamlit interface on port `8501` for on-the-fly predictions.
+
+### 2. 📈 Time-Series Forecasting (`/forecasting/`)
+- Predicts revenue across 8 key branches utilizing 144 days of granular POS data.
+- **Ensemble Models:** Combines Prophet and LightGBM to gracefully handle holiday shocks (Ramadan/Eid) and weekly trends.
+- **Accuracy:** Achieves an impressive WAPE of `0.229` for 4-week horizon planning.
+
+### 3. 🧾 Smart OCR & Product Matching (`/ocr1/`)
+- Powered by Google Gemini and Supabase.
+- Automatically extracts line items from physical invoices.
+- Matches extracted items against a master product database (2,400+ SKUs) using fuzzy logic.
+
+### 4. 📊 Data Analytics (`/analysis/`)
+- Deep-dive Jupyter notebooks covering ABC Classification and Anomaly Detection.
+- Generates interactive Plotly dashboards for executive-level reporting.
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies |
 | :--- | :--- |
-| **Core & Data Prep** | `Python`, `Pandas`, `NumPy`, `Scikit-learn` |
-| **Machine Learning** | `LightGBM`, `Random Forest`, `Gradient Boosting` |
-| **Time Series** | `Prophet`, `LightGBM (Recursive & Direct)` |
-| **APIs & Backend** | `FastAPI`, `Uvicorn`, `Pydantic`, `Supabase` |
-| **Frontend & BI** | `Streamlit`, `Plotly`, `Jupyter Notebooks` |
-| **AI / NLP** | `LangGraph`, `Google Gemini API` |
+| **Backend & APIs** | `FastAPI`, `Uvicorn`, `Pydantic` |
+| **Data Science** | `Pandas`, `NumPy`, `Scikit-Learn`, `LightGBM`, `Prophet` |
+| **Generative AI & OCR**| `LangGraph`, `Google Gemini API` |
+| **Database** | `Supabase` (PostgreSQL) |
+| **Frontend** | `Streamlit`, `Plotly` |
 
 ---
 
-## 🏁 Quick Start
+## 🚀 Getting Started
 
 ### Prerequisites
-- Python 3.8+ installed.
-- Supabase credentials and Gemini API Key configured in `.env`.
+- **Python:** 3.8 or higher.
+- **Environment:** Supabase URL/Key and Gemini API Key configured in your `.env` file.
 
-### 1. Clone & Install
+### Installation
+
 ```bash
+# 1. Clone the repository
 git clone https://github.com/mostafaeliwaa/inventory-management-system.git
 cd inventory-management-system
+
+# 2. Install global requirements
 pip install -r requirements.txt
 ```
 
-### 2. Run the Unified Backend Server
-Launch the central FastAPI server that powers the OCR, Chatbot, and Forecasting modules.
+### Running the Services
+
+**A. Start the Unified Backend (API Gateway)**
+Serves OCR, Forecasting, and the AI Chatbot.
 ```bash
 uvicorn main:app --port 8000 --reload
-# Access the interactive API docs at http://localhost:8000/docs
+# View the API docs at http://localhost:8000/docs
 ```
 
-### 3. Launch the ML Streamlit Interface
+**B. Start the Machine Learning UI**
+Interact with the Demand Classifier and Dead-Stock predictor.
 ```bash
 cd "ML models"
 pip install -r requirements.txt
 streamlit run streamlit_app.py
-# The UI will open at http://localhost:8501
-```
-
-### 4. Explore the Data Analytics
-```bash
-cd analysis
-jupyter notebook EXP.ipynb
+# View the UI at http://localhost:8501
 ```
 
 ---
 
-## 📁 Repository Structure
+## 📁 Repository Map
 
 ```text
-📦 inventory-management-system
- ┣ 📂 analysis/        # Jupyter notebooks & Plotly HTML dashboards
- ┣ 📂 cleaning/        # ETL pipelines and data sanitization scripts
- ┣ 📂 data/            # Cleaned CSV files and database schemas
- ┣ 📂 ML models/       # Classification & Dead-Stock models (FastAPI + Streamlit)
- ┣ 📂 forecasting/     # Time-Series revenue forecasting (Prophet + LGBM)
- ┣ 📂 chatbot/         # LangGraph-based AI Chatbot
- ┣ 📂 ocr1/            # OCR extraction and database matching scripts
- ┣ 📂 routers/         # FastAPI routers for sub-services
- ┣ 📜 main.py          # Main Unified API application entry point
- ┗ 📜 requirements.txt # Global dependencies
+inventory-management-system/
+├── analysis/          # Exploratory Data Analysis & HTML Dashboards
+├── chatbot/           # LangGraph conversational agent
+├── cleaning/          # Data preprocessing pipelines
+├── data/              # Datasets and schemas
+├── forecasting/       # Time-Series prediction models & API
+├── ML models/         # Classification Streamlit app & models
+├── ocr1/              # Invoice digitization pipeline
+├── routers/           # FastAPI sub-routers
+└── main.py            # Unified API server
 ```
 
 ---
 
-## 🤝 Contributing & Documentation
+## 🤝 Documentation & Contribution
+For deeper technical dives, consult the module-specific documentation:
+- 📖 [System Architecture (CLAUDE.md)](CLAUDE.md)
+- 📊 [Analytics Engine](analysis/README.md)
+- 🧠 [Machine Learning Pipeline](ML%20models/README.md)
+- 📈 [Forecasting Module](forecasting/README.md)
 
-Detailed documentation for each module can be found in their respective directories:
-- 📖 [Project Guidelines (CLAUDE.md)](CLAUDE.md)
-- 📊 [Analytics Documentation](analysis/README.md)
-- 🧠 [Machine Learning Documentation](ML%20models/README.md)
-- 📈 [Forecasting Documentation](forecasting/README.md)
-- 🧹 [Data Cleaning Pipeline](cleaning/README.md)
-
----
 <div align="center">
-  <b>Built with ❤️ by the Graduation Project Team</b>
-  <br>
-  <i>Empowering Egyptian Retail with Data Intelligence</i>
+<br>
+<i>Engineered with precision to elevate Egyptian Retail.</i>
 </div>
