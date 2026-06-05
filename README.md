@@ -62,6 +62,11 @@ inventory-management-system/
 │   ├── artifacts/          # serialized .joblib models
 │   └── reports/            # JSON evaluation reports
 │
+├── forecasting/             # Time-series forecasting module
+│   ├── src/                 # ML pipeline: data prep, features, models (Prophet/LGBM)
+│   ├── reports/             # CV metrics and JSON forecast snapshots
+│   └── api.py               # FastAPI service (port 8004)
+│
 ├── chatbot/                 # LangGraph chatbot + FastAPI (port 8002)
 │
 └── ocr/                     # ⚠️ Empty - OCR processing (future)
@@ -87,19 +92,11 @@ inventory-management-system/
 | cleaned_suppliers.csv | Varies | Supplier details & performance |
 | cleaned_warehouse.csv | Varies | Warehouse inventory snapshots |
 
-## ⚠️ Critical Data Limitation
+## ⚠️ Data Limitations & Time Series
 
-**NO TIME SERIES DATA** - All datasets are aggregated snapshots WITHOUT timestamps.
-
-**Blocked Applications:**
-- ❌ Demand forecasting (ARIMA, Prophet, LSTM)
-- ❌ Trend analysis across time
-- ❌ Seasonality detection
-
-**Required for Forecasting:**
-- Daily/weekly transaction-level data with dates
-- 50-100+ observations per product per branch
-- Historical data spanning months/years
+- **Initial Core Data**: Was aggregated snapshots WITHOUT timestamps.
+- **New Forecasting Data**: We have incorporated `merged_new_sales.csv` (144 days of POS data for 8 branches, from 2026-01-01 to 2026-05-24) to unlock branch-level forecasting.
+- **Still Blocked**: ❌ SKU/Product-level demand forecasting (receipts don't carry product codes).
 
 ## ✅ Current Capabilities
 
@@ -121,6 +118,12 @@ inventory-management-system/
   `/predict/by-code/{code}`, `/predict/batch`, `/metrics`, `/health`
 - ✅ **Data source switch** — `DATA_SOURCE=csv` (default) or `DATA_SOURCE=supabase`
   reads directly from the normalized Supabase schema in `data/schema.sql`
+
+### Time-Series Forecasting (`/forecasting/`)
+- ✅ **Daily Revenue Forecasts** — 7-day horizon using an Ensemble of Prophet and LightGBM (WAPE 0.479).
+- ✅ **Weekly Revenue Forecasts** — 4-week horizon using an Ensemble3 (Prophet + LGBM + Naive Mean4) trimming variance for high accuracy (WAPE 0.229).
+- ✅ Handles Ramadan/Eid shocks, weekly cycle, intra-week volatility, Egyptian holidays, and payday/school-holiday windows.
+- ✅ **FastAPI service** on port 8004 with `/forecast`, `/forecast/weekly`, `/metrics` endpoints.
 
 ```bash
 cd "ML models"
@@ -170,10 +173,10 @@ See [ML models/README.md](ML%20models/README.md) for full details.
 4. Supplier performance ranking
 
 ### Priority 2: With Historical Data
-1. Collect transaction-level data with dates
-2. Implement demand forecasting
-3. Build seasonal models
-4. Predict stock-outs
+1. ✅ Collect transaction-level data with dates (Done for branch-level)
+2. ✅ Implement demand forecasting (Done via Prophet/LGBM ensemble)
+3. ✅ Build seasonal models (Done - captures weekly cycle & Ramadan/Eid)
+4. Predict SKU-level stock-outs (Blocked by lack of SKU keys in time-series)
 
 ## 🔄 Data Flow
 
