@@ -1,0 +1,76 @@
+{
+  "model_name": "global_lgbm_production",
+  "model_type": "LightGBM",
+  "architecture": "direct_multi_horizon_seed_bag",
+  "description": "Global LightGBM forecaster with 7-seed \u00d7 2-objective bagging and direct multi-horizon prediction. Predicts weekly branch revenue in log1p space.",
+  "horizon_weeks": 4,
+  "seeds": [
+    11,
+    23,
+    47,
+    89,
+    137,
+    211,
+    313
+  ],
+  "objectives": {
+    "l1": {
+      "objective": "regression_l1",
+      "metric": "mae",
+      "learning_rate": 0.03,
+      "num_leaves": 23,
+      "min_data_in_leaf": 12,
+      "feature_fraction": 0.85,
+      "bagging_fraction": 0.85,
+      "bagging_freq": 4,
+      "lambda_l1": 0.1,
+      "lambda_l2": 1.5,
+      "n_estimators": 2500
+    },
+    "q60": {
+      "objective": "quantile",
+      "metric": "quantile",
+      "learning_rate": 0.03,
+      "num_leaves": 23,
+      "min_data_in_leaf": 12,
+      "feature_fraction": 0.85,
+      "bagging_fraction": 0.85,
+      "bagging_freq": 4,
+      "lambda_l1": 0.1,
+      "lambda_l2": 1.5,
+      "n_estimators": 2500,
+      "alpha": 0.55
+    }
+  },
+  "categorical_features": [
+    "branch_code",
+    "month",
+    "week_of_year"
+  ],
+  "lags": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    13,
+    26,
+    52
+  ],
+  "rolling_windows": [
+    4,
+    8,
+    13,
+    26
+  ],
+  "fourier_yearly_k": 4,
+  "target_transform": "log1p",
+  "inverse_transform": "expm1",
+  "required_input_columns": [
+    "posting_date",
+    "branch_code",
+    "branch_name_en",
+    "total_value",
+    "cash_paid"
+  ]
+}

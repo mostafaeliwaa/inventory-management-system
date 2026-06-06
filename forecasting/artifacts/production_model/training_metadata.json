@@ -1,0 +1,437 @@
+{
+  "exported_at": "2026-06-06T16:59:50",
+  "data_date_range": {
+    "start": "2024-06-03",
+    "end": "2026-06-04",
+    "total_days": 731
+  },
+  "weekly_date_range": {
+    "start": "2024-06-03",
+    "end": "2026-05-25",
+    "total_weeks": 104
+  },
+  "branches": [
+    {
+      "code": 2,
+      "name": "Nakheel"
+    },
+    {
+      "code": 4,
+      "name": "Maadi"
+    },
+    {
+      "code": 5,
+      "name": "October"
+    },
+    {
+      "code": 6,
+      "name": "Sheraton"
+    },
+    {
+      "code": 7,
+      "name": "MiniStore_Mehrem"
+    },
+    {
+      "code": 8,
+      "name": "Mehrem"
+    },
+    {
+      "code": 9,
+      "name": "Asyut"
+    },
+    {
+      "code": 13,
+      "name": "Madinaty"
+    }
+  ],
+  "n_branches": 8,
+  "training_stats": {
+    "horizons": 4,
+    "seeds": [
+      11,
+      23,
+      47,
+      89,
+      137,
+      211,
+      313
+    ],
+    "objectives": [
+      "l1",
+      "q60"
+    ],
+    "models_per_horizon": 14,
+    "total_models": 56,
+    "per_horizon": {
+      "h1": {
+        "train_rows": 736,
+        "val_rows": 56,
+        "models": [
+          {
+            "seed": 11,
+            "objective": "l1",
+            "n_estimators_used": 342,
+            "path": "models_h1\\seed_11_l1.txt"
+          },
+          {
+            "seed": 11,
+            "objective": "q60",
+            "n_estimators_used": 116,
+            "path": "models_h1\\seed_11_q60.txt"
+          },
+          {
+            "seed": 23,
+            "objective": "l1",
+            "n_estimators_used": 133,
+            "path": "models_h1\\seed_23_l1.txt"
+          },
+          {
+            "seed": 23,
+            "objective": "q60",
+            "n_estimators_used": 113,
+            "path": "models_h1\\seed_23_q60.txt"
+          },
+          {
+            "seed": 47,
+            "objective": "l1",
+            "n_estimators_used": 761,
+            "path": "models_h1\\seed_47_l1.txt"
+          },
+          {
+            "seed": 47,
+            "objective": "q60",
+            "n_estimators_used": 195,
+            "path": "models_h1\\seed_47_q60.txt"
+          },
+          {
+            "seed": 89,
+            "objective": "l1",
+            "n_estimators_used": 797,
+            "path": "models_h1\\seed_89_l1.txt"
+          },
+          {
+            "seed": 89,
+            "objective": "q60",
+            "n_estimators_used": 234,
+            "path": "models_h1\\seed_89_q60.txt"
+          },
+          {
+            "seed": 137,
+            "objective": "l1",
+            "n_estimators_used": 295,
+            "path": "models_h1\\seed_137_l1.txt"
+          },
+          {
+            "seed": 137,
+            "objective": "q60",
+            "n_estimators_used": 401,
+            "path": "models_h1\\seed_137_q60.txt"
+          },
+          {
+            "seed": 211,
+            "objective": "l1",
+            "n_estimators_used": 134,
+            "path": "models_h1\\seed_211_l1.txt"
+          },
+          {
+            "seed": 211,
+            "objective": "q60",
+            "n_estimators_used": 386,
+            "path": "models_h1\\seed_211_q60.txt"
+          },
+          {
+            "seed": 313,
+            "objective": "l1",
+            "n_estimators_used": 213,
+            "path": "models_h1\\seed_313_l1.txt"
+          },
+          {
+            "seed": 313,
+            "objective": "q60",
+            "n_estimators_used": 470,
+            "path": "models_h1\\seed_313_q60.txt"
+          }
+        ]
+      },
+      "h2": {
+        "train_rows": 728,
+        "val_rows": 56,
+        "models": [
+          {
+            "seed": 11,
+            "objective": "l1",
+            "n_estimators_used": 777,
+            "path": "models_h2\\seed_11_l1.txt"
+          },
+          {
+            "seed": 11,
+            "objective": "q60",
+            "n_estimators_used": 209,
+            "path": "models_h2\\seed_11_q60.txt"
+          },
+          {
+            "seed": 23,
+            "objective": "l1",
+            "n_estimators_used": 365,
+            "path": "models_h2\\seed_23_l1.txt"
+          },
+          {
+            "seed": 23,
+            "objective": "q60",
+            "n_estimators_used": 305,
+            "path": "models_h2\\seed_23_q60.txt"
+          },
+          {
+            "seed": 47,
+            "objective": "l1",
+            "n_estimators_used": 187,
+            "path": "models_h2\\seed_47_l1.txt"
+          },
+          {
+            "seed": 47,
+            "objective": "q60",
+            "n_estimators_used": 220,
+            "path": "models_h2\\seed_47_q60.txt"
+          },
+          {
+            "seed": 89,
+            "objective": "l1",
+            "n_estimators_used": 250,
+            "path": "models_h2\\seed_89_l1.txt"
+          },
+          {
+            "seed": 89,
+            "objective": "q60",
+            "n_estimators_used": 161,
+            "path": "models_h2\\seed_89_q60.txt"
+          },
+          {
+            "seed": 137,
+            "objective": "l1",
+            "n_estimators_used": 274,
+            "path": "models_h2\\seed_137_l1.txt"
+          },
+          {
+            "seed": 137,
+            "objective": "q60",
+            "n_estimators_used": 234,
+            "path": "models_h2\\seed_137_q60.txt"
+          },
+          {
+            "seed": 211,
+            "objective": "l1",
+            "n_estimators_used": 358,
+            "path": "models_h2\\seed_211_l1.txt"
+          },
+          {
+            "seed": 211,
+            "objective": "q60",
+            "n_estimators_used": 112,
+            "path": "models_h2\\seed_211_q60.txt"
+          },
+          {
+            "seed": 313,
+            "objective": "l1",
+            "n_estimators_used": 313,
+            "path": "models_h2\\seed_313_l1.txt"
+          },
+          {
+            "seed": 313,
+            "objective": "q60",
+            "n_estimators_used": 384,
+            "path": "models_h2\\seed_313_q60.txt"
+          }
+        ]
+      },
+      "h3": {
+        "train_rows": 720,
+        "val_rows": 56,
+        "models": [
+          {
+            "seed": 11,
+            "objective": "l1",
+            "n_estimators_used": 87,
+            "path": "models_h3\\seed_11_l1.txt"
+          },
+          {
+            "seed": 11,
+            "objective": "q60",
+            "n_estimators_used": 86,
+            "path": "models_h3\\seed_11_q60.txt"
+          },
+          {
+            "seed": 23,
+            "objective": "l1",
+            "n_estimators_used": 230,
+            "path": "models_h3\\seed_23_l1.txt"
+          },
+          {
+            "seed": 23,
+            "objective": "q60",
+            "n_estimators_used": 118,
+            "path": "models_h3\\seed_23_q60.txt"
+          },
+          {
+            "seed": 47,
+            "objective": "l1",
+            "n_estimators_used": 111,
+            "path": "models_h3\\seed_47_l1.txt"
+          },
+          {
+            "seed": 47,
+            "objective": "q60",
+            "n_estimators_used": 118,
+            "path": "models_h3\\seed_47_q60.txt"
+          },
+          {
+            "seed": 89,
+            "objective": "l1",
+            "n_estimators_used": 127,
+            "path": "models_h3\\seed_89_l1.txt"
+          },
+          {
+            "seed": 89,
+            "objective": "q60",
+            "n_estimators_used": 90,
+            "path": "models_h3\\seed_89_q60.txt"
+          },
+          {
+            "seed": 137,
+            "objective": "l1",
+            "n_estimators_used": 184,
+            "path": "models_h3\\seed_137_l1.txt"
+          },
+          {
+            "seed": 137,
+            "objective": "q60",
+            "n_estimators_used": 130,
+            "path": "models_h3\\seed_137_q60.txt"
+          },
+          {
+            "seed": 211,
+            "objective": "l1",
+            "n_estimators_used": 104,
+            "path": "models_h3\\seed_211_l1.txt"
+          },
+          {
+            "seed": 211,
+            "objective": "q60",
+            "n_estimators_used": 194,
+            "path": "models_h3\\seed_211_q60.txt"
+          },
+          {
+            "seed": 313,
+            "objective": "l1",
+            "n_estimators_used": 77,
+            "path": "models_h3\\seed_313_l1.txt"
+          },
+          {
+            "seed": 313,
+            "objective": "q60",
+            "n_estimators_used": 175,
+            "path": "models_h3\\seed_313_q60.txt"
+          }
+        ]
+      },
+      "h4": {
+        "train_rows": 712,
+        "val_rows": 56,
+        "models": [
+          {
+            "seed": 11,
+            "objective": "l1",
+            "n_estimators_used": 113,
+            "path": "models_h4\\seed_11_l1.txt"
+          },
+          {
+            "seed": 11,
+            "objective": "q60",
+            "n_estimators_used": 68,
+            "path": "models_h4\\seed_11_q60.txt"
+          },
+          {
+            "seed": 23,
+            "objective": "l1",
+            "n_estimators_used": 276,
+            "path": "models_h4\\seed_23_l1.txt"
+          },
+          {
+            "seed": 23,
+            "objective": "q60",
+            "n_estimators_used": 168,
+            "path": "models_h4\\seed_23_q60.txt"
+          },
+          {
+            "seed": 47,
+            "objective": "l1",
+            "n_estimators_used": 98,
+            "path": "models_h4\\seed_47_l1.txt"
+          },
+          {
+            "seed": 47,
+            "objective": "q60",
+            "n_estimators_used": 235,
+            "path": "models_h4\\seed_47_q60.txt"
+          },
+          {
+            "seed": 89,
+            "objective": "l1",
+            "n_estimators_used": 114,
+            "path": "models_h4\\seed_89_l1.txt"
+          },
+          {
+            "seed": 89,
+            "objective": "q60",
+            "n_estimators_used": 126,
+            "path": "models_h4\\seed_89_q60.txt"
+          },
+          {
+            "seed": 137,
+            "objective": "l1",
+            "n_estimators_used": 80,
+            "path": "models_h4\\seed_137_l1.txt"
+          },
+          {
+            "seed": 137,
+            "objective": "q60",
+            "n_estimators_used": 96,
+            "path": "models_h4\\seed_137_q60.txt"
+          },
+          {
+            "seed": 211,
+            "objective": "l1",
+            "n_estimators_used": 441,
+            "path": "models_h4\\seed_211_l1.txt"
+          },
+          {
+            "seed": 211,
+            "objective": "q60",
+            "n_estimators_used": 364,
+            "path": "models_h4\\seed_211_q60.txt"
+          },
+          {
+            "seed": 313,
+            "objective": "l1",
+            "n_estimators_used": 109,
+            "path": "models_h4\\seed_313_l1.txt"
+          },
+          {
+            "seed": 313,
+            "objective": "q60",
+            "n_estimators_used": 230,
+            "path": "models_h4\\seed_313_q60.txt"
+          }
+        ]
+      }
+    }
+  },
+  "accuracy_reference": {
+    "source": "reports/accuracy_by_level.json",
+    "per_branch_weekly_wape": 0.279,
+    "per_branch_monthly_wape": 0.197,
+    "company_weekly_wape": 0.188,
+    "company_monthly_wape": 0.096,
+    "per_branch_monthly_accuracy": 0.803,
+    "company_monthly_accuracy": 0.904
+  }
+}
